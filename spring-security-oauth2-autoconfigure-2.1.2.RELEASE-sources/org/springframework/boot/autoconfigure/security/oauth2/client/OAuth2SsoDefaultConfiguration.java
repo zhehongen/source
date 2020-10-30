@@ -30,7 +30,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * Configuration for OAuth2 Single Sign On (SSO). If the user only has
  * {@code @EnableOAuth2Sso} but not on a {@code WebSecurityConfigurerAdapter} then one is
  * added with all paths secured.
- *
+ * OAuth2单点登录（SSO）的配置。 
+ * 如果用户仅具有@ EnableOAuth2Sso而不在WebSecurityConfigurerAdapter
+ * 上具有@ EnableOAuth2Sso，则将添加一个具有所有安全路径的用户。
  * @author Dave Syer
  * @since 1.3.0
  */

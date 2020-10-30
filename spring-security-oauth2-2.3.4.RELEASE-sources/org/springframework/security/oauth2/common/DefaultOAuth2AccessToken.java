@@ -11,6 +11,7 @@ import java.util.TreeSet;
 
 /**
  * Basic access token for OAuth 2.
+ * OAuth 2的基本访问令牌
  * 
  * @author Ryan Heaton
  * @author Dave Syer

@@ -81,7 +81,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
  * Configure the properties and enhanced functionality of the Authorization Server endpoints.
- * 
+ * 配置授权服务器端点的属性和增强的功能。
  * @author Rob Winch
  * @author Dave Syer
  * @since 2.0
@@ -127,7 +127,7 @@ public final class AuthorizationServerEndpointsConfigurer {
 	private boolean approvalStoreDisabled;
 
 	private List<Object> interceptors = new ArrayList<Object>();
-
+	//默认token服务
 	private DefaultTokenServices defaultTokenServices;
 
 	private UserDetailsService userDetailsService;
@@ -252,7 +252,7 @@ public final class AuthorizationServerEndpointsConfigurer {
 	 * Explicitly disable the approval store, even if one would normally be added automatically (usually when JWT is not
 	 * used). Without an approval store the user can only be asked to approve or deny a grant without any more granular
 	 * decisions.
-	 * 
+	 *
 	 * @return this for fluent builder
 	 */
 	public AuthorizationServerEndpointsConfigurer approvalStoreDisabled() {
@@ -287,7 +287,7 @@ public final class AuthorizationServerEndpointsConfigurer {
 
 	/**
 	 * The AuthenticationManager for the password grant.
-	 * 
+	 *
 	 * @param authenticationManager an AuthenticationManager, fully initialized
 	 * @return this for a fluent style
 	 */
@@ -417,7 +417,7 @@ public final class AuthorizationServerEndpointsConfigurer {
 		this.defaultTokenServices = createDefaultTokenServices();
 		return this.defaultTokenServices;
 	}
-
+	//创建默认token服务
 	private DefaultTokenServices createDefaultTokenServices() {
 		DefaultTokenServices tokenServices = new DefaultTokenServices();
 		tokenServices.setTokenStore(tokenStore());

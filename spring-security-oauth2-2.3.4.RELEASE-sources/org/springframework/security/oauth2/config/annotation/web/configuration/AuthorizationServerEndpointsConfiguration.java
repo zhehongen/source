@@ -58,7 +58,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author Dave Syer
- *
+ *居然没有注释
  */
 @Configuration
 @Import(TokenKeyEndpointRegistrar.class)
@@ -68,7 +68,7 @@ public class AuthorizationServerEndpointsConfiguration {
 
 	@Autowired
 	private ClientDetailsService clientDetailsService;
-
+	//继承AuthorizationServerConfigurerAdapter的个人配置注入进来
 	@Autowired
 	private List<AuthorizationServerConfigurer> configurers = Collections.emptyList();
 
@@ -159,7 +159,7 @@ public class AuthorizationServerEndpointsConfiguration {
 	 * {@link AuthorizationServerConfigurer} consider making it a
 	 * <code>@Bean</code> for the same reason (assuming you need transactions,
 	 * e.g. for a JDBC token store).
-	 * 
+	 *
 	 * @return an AuthorizationServerTokenServices
 	 */
 	@Bean
@@ -223,7 +223,7 @@ public class AuthorizationServerEndpointsConfiguration {
 			extends AbstractFactoryBean<AuthorizationServerTokenServices> {
 
 		private AuthorizationServerEndpointsConfigurer endpoints;
-		
+
 		protected AuthorizationServerTokenServicesFactoryBean() {
 		}
 

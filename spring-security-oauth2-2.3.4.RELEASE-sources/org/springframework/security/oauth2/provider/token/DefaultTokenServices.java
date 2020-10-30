@@ -47,7 +47,9 @@ import org.springframework.util.Assert;
  * <p>
  * Persistence is delegated to a {@code TokenStore} implementation and customization of the access token to a
  * {@link TokenEnhancer}.
- * 
+ * 使用随机UUID值作为访问令牌和刷新令牌值的令牌服务的基本实现。 定
+ * 制的主要扩展点是TokenEnhancer，将在生成访问令牌和刷新令牌之后但在存储它们之前调用它。
+ * 持久性委托给TokenStore实现，并将访问令牌自定义为TokenEnhancer。
  * @author Ryan Heaton
  * @author Luke Taylor
  * @author Dave Syer

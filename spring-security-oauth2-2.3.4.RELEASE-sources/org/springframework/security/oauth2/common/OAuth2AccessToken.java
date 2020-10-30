@@ -33,6 +33,7 @@ public interface OAuth2AccessToken {
 
 	/**
 	 * The access token issued by the authorization server. This value is REQUIRED.
+	 * 授权服务器发布的访问令牌。 此值是必需的。
 	 */
 	public static String ACCESS_TOKEN = "access_token";
 
@@ -40,18 +41,22 @@ public interface OAuth2AccessToken {
 	 * The type of the token issued as described in <a
 	 * href="http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-7.1">Section 7.1</a>. Value is case insensitive.
 	 * This value is REQUIRED.
+	 * 如7.1节所述发行的令牌类型。 值不区分大小写。 此值是必需的。
 	 */
 	public static String TOKEN_TYPE = "token_type";
 
 	/**
 	 * The lifetime in seconds of the access token. For example, the value "3600" denotes that the access token will
 	 * expire in one hour from the time the response was generated. This value is OPTIONAL.
+	 * 访问令牌的生存时间（以秒为单位）。
+	 * 例如，值“ 3600”表示访问令牌将在生成响应后的一小时内过期。 该值是可选的。
 	 */
 	public static String EXPIRES_IN = "expires_in";
 
 	/**
 	 * The refresh token which can be used to obtain new access tokens using the same authorization grant as described
 	 * in <a href="http://tools.ietf.org/html/draft-ietf-oauth-v2-22#section-6">Section 6</a>. This value is OPTIONAL.
+	 * 刷新令牌，可以使用第6节中所述的相同授权授权来获取新的访问令牌。 该值是可选的。
 	 */
 	public static String REFRESH_TOKEN = "refresh_token";
 
@@ -63,9 +68,15 @@ public interface OAuth2AccessToken {
 
 	/**
 	 * The additionalInformation map is used by the token serializers to export any fields used by extensions of OAuth.
-	 * @return a map from the field name in the serialized token to the value to be exported. The default serializers 
-	 * make use of Jackson's automatic JSON mapping for Java objects (for the Token Endpoint flows) or implicitly call 
+	 * @return a map from the field name in the serialized token to the value to be exported. The default serializers
+	 * make use of Jackson's automatic JSON mapping for Java objects (for the Token Endpoint flows) or implicitly call
 	 * .toString() on the "value" object (for the implicit flow) as part of the serialization process.
+	 *令牌序列化程序使用AdditionalInformation映射来导出OAuth扩展使用的任何字段。
+	 *
+	 * 返回值：
+	 * 从序列化令牌中的字段名称到要导出的值的映射。
+	 * 默认序列化程序对Java对象（针对令牌端点流）使用Jackson的自动JSON映射，
+	 * 或者在序列化过程中对“值”对象（对于隐式流）隐式调用.toString（）。
 	 */
 	Map<String, Object> getAdditionalInformation();
 

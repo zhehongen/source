@@ -27,7 +27,9 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 /**
  * Provides the ability to serialize an {@link org.springframework.security.oauth2.common.OAuth2AccessToken} with jackson2 by implementing {@link com.fasterxml.jackson.databind.JsonDeserializer}.
  * Refer to {@link org.springframework.security.oauth2.common.OAuth2AccessTokenJackson1Deserializer} to learn more about the JSON format that is used.
- *
+ *通过实现com.fasterxml.jackson.databind.JsonDeserializer，
+ * 提供使用jackson2序列化OAuth2AccessToken的功能。
+ * 请参阅OAuth2AccessTokenJackson1Deserializer，以了解有关使用的JSON格式的更多信息。
  * @author Rob Winch
  * @author Brian Clozel
  * @see org.springframework.security.oauth2.common.OAuth2AccessTokenJackson2Deserializer

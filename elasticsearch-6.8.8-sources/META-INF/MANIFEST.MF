@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Implementation-Title: org.elasticsearch#server;6.8.8
+Implementation-Version: 6.8.8
+Built-Status: integration
+Built-By: vagrant
+Built-OS: Linux
+Build-Date: 2020-03-18T23:22:18.622755Z
+Gradle-Version: 5.4.1
+Created-By: 12+33 (Oracle Corporation)
+Build-Java-Version: 12
+Module-Source: /server
+Module-Origin: git@github.com:elastic/elasticsearch.git
+Change: 2f4c224
+Branch: 2f4c2240ecfc520baef4353a726f13fc59c12066
+X-Compile-Target-JDK: 1.8
+X-Compile-Source-JDK: 1.8
+X-Compile-Elasticsearch-Version: 6.8.8
+X-Compile-Lucene-Version: 7.7.2
+X-Compile-Elasticsearch-Snapshot: false
+

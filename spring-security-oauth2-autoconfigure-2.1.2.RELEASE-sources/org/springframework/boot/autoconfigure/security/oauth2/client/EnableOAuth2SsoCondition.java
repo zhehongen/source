@@ -26,29 +26,30 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 /**
  * Condition that checks for {@link EnableOAuth2Sso} on a
  * {@link WebSecurityConfigurerAdapter}.
+ * 检查WebSecurityConfigurerAdapter上的EnableOAuth2Sso的条件
  *
  * @author Dave Syer
  */
 class EnableOAuth2SsoCondition extends SpringBootCondition {
 
-	@Override
-	public ConditionOutcome getMatchOutcome(ConditionContext context,
-			AnnotatedTypeMetadata metadata) {
-		String[] enablers = context.getBeanFactory()
-				.getBeanNamesForAnnotation(EnableOAuth2Sso.class);
-		ConditionMessage.Builder message = ConditionMessage
-				.forCondition("@EnableOAuth2Sso Condition");
-		for (String name : enablers) {
-			if (context.getBeanFactory().isTypeMatch(name,
-					WebSecurityConfigurerAdapter.class)) {
-				return ConditionOutcome.match(message
-						.found("@EnableOAuth2Sso annotation on WebSecurityConfigurerAdapter")
-						.items(name));
-			}
-		}
-		return ConditionOutcome.noMatch(message.didNotFind(
-				"@EnableOAuth2Sso annotation " + "on any WebSecurityConfigurerAdapter")
-				.atAll());
-	}
+    @Override
+    public ConditionOutcome getMatchOutcome(ConditionContext context,
+                                            AnnotatedTypeMetadata metadata) {
+        String[] enablers = context.getBeanFactory()
+                .getBeanNamesForAnnotation(EnableOAuth2Sso.class);
+        ConditionMessage.Builder message = ConditionMessage
+                .forCondition("@EnableOAuth2Sso Condition");
+        for (String name : enablers) {
+            if (context.getBeanFactory().isTypeMatch(name,
+                    WebSecurityConfigurerAdapter.class)) {
+                return ConditionOutcome.match(message
+                        .found("@EnableOAuth2Sso annotation on WebSecurityConfigurerAdapter")
+                        .items(name));
+            }
+        }
+        return ConditionOutcome.noMatch(message.didNotFind(
+                "@EnableOAuth2Sso annotation " + "on any WebSecurityConfigurerAdapter")
+                .atAll());
+    }
 
 }

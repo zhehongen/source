@@ -40,7 +40,9 @@ import org.springframework.util.ReflectionUtils;
  * {@link WebSecurityConfigurerAdapter} provided by the user and annotated with
  * {@code @EnableOAuth2Sso}. The user-provided configuration is enhanced by adding an
  * authentication filter and an authentication entry point.
- *
+ * 当用户提供了现有的WebSecurityConfigurerAdapter并用@ EnableOAuth2Sso进行注释时，
+ * OAuth2单点登录（SSO）的配置。
+ * 通过添加身份验证过滤器和身份验证入口点，可以增强用户提供的配置。
  * @author Dave Syer
  */
 @Configuration

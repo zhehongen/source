@@ -22,9 +22,10 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 /**
  * Convenient strategy for configuring an OAUth2 Authorization Server. Beans of this type are applied to the Spring
  * context automatically if you {@link EnableAuthorizationServer @EnableAuthorizationServer}.
- *
+ * 配置OAUth2授权服务器的便捷策略。 如果您@EnableAuthorizationServer，
+ * 则这种类型的Bean将自动应用于Spring上下文。
  * @author Dave Syer
- * 不行啊
+ *
  */
 public interface AuthorizationServerConfigurer {
 
