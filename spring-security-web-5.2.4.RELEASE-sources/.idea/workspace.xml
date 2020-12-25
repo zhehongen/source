@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="28aba2cc-ae06-43c1-bd8b-23c3085311f4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/filter/OAuth2ClientAuthenticationProcessingFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/filter/OAuth2ClientAuthenticationProcessingFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/resource/BaseOAuth2ProtectedResourceDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/resource/BaseOAuth2ProtectedResourceDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/resource/OAuth2ProtectedResourceDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/resource/OAuth2ProtectedResourceDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/token/grant/code/AuthorizationCodeResourceDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/token/grant/code/AuthorizationCodeResourceDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/token/grant/redirect/AbstractRedirectResourceDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/client/token/grant/redirect/AbstractRedirectResourceDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/common/AuthenticationScheme.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/common/AuthenticationScheme.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/common/OAuth2AccessToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/common/OAuth2AccessToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/common/util/OAuth2Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/common/util/OAuth2Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/common/util/RandomValueStringGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/common/util/RandomValueStringGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/config/annotation/builders/ClientDetailsServiceBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/config/annotation/builders/ClientDetailsServiceBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/config/annotation/configurers/ClientDetailsServiceConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/config/annotation/configurers/ClientDetailsServiceConfigurer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/config/annotation/web/configurers/AuthorizationServerEndpointsConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/config/annotation/web/configurers/AuthorizationServerEndpointsConfigurer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/AuthorizationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/AuthorizationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/BaseRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/BaseRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/ClientDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/ClientDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/CompositeTokenGranter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/CompositeTokenGranter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/OAuth2Authentication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/OAuth2Authentication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/OAuth2Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/OAuth2Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/OAuth2RequestFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/OAuth2RequestFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/OAuth2RequestValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/OAuth2RequestValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/TokenGranter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/TokenGranter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/TokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/TokenRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/approval/DefaultUserApprovalHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/approval/DefaultUserApprovalHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/approval/TokenStoreUserApprovalHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/approval/TokenStoreUserApprovalHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/approval/UserApprovalHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/approval/UserApprovalHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/code/AuthorizationCodeServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/code/AuthorizationCodeServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/code/InMemoryAuthorizationCodeServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/code/InMemoryAuthorizationCodeServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/code/RandomValueAuthorizationCodeServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/code/RandomValueAuthorizationCodeServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/DefaultRedirectResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/DefaultRedirectResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/FrameworkEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/FrameworkEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/RedirectResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/RedirectResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/TokenEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/TokenEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/WhitelabelApprovalEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/WhitelabelApprovalEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/WhitelabelErrorEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/endpoint/WhitelabelErrorEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/error/OAuth2AuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/error/OAuth2AuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/error/WebResponseExceptionTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/error/WebResponseExceptionTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/request/DefaultOAuth2RequestFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/request/DefaultOAuth2RequestFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/token/AccessTokenConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/token/AccessTokenConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/token/DefaultAccessTokenConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/token/DefaultAccessTokenConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/token/DefaultUserAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/token/DefaultUserAuthenticationConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/token/UserAuthenticationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-2.3.4.RELEASE-sources/org/springframework/security/oauth2/provider/token/UserAuthenticationConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-autoconfigure-2.1.2.RELEASE-sources/org/springframework/boot/autoconfigure/security/oauth2/OAuth2ClientProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-autoconfigure-2.1.2.RELEASE-sources/org/springframework/boot/autoconfigure/security/oauth2/OAuth2ClientProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-autoconfigure-2.1.2.RELEASE-sources/org/springframework/boot/autoconfigure/security/oauth2/client/OAuth2ProtectedResourceDetailsConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-autoconfigure-2.1.2.RELEASE-sources/org/springframework/boot/autoconfigure/security/oauth2/client/OAuth2ProtectedResourceDetailsConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spring-security-oauth2-autoconfigure-2.1.2.RELEASE-sources/org/springframework/boot/autoconfigure/security/oauth2/client/OAuth2RestOperationsConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../spring-security-oauth2-autoconfigure-2.1.2.RELEASE-sources/org/springframework/boot/autoconfigure/security/oauth2/client/OAuth2RestOperationsConfiguration.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="aae9a48a-6d4c-4280-9102-d6604d890b9d" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1lPQmYvP6o6JvKhuMlAWJr7JTNU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="28aba2cc-ae06-43c1-bd8b-23c3085311f4" name="Default Changelist" comment="" />
+      <created>1607496405305</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607496405305</updated>
+      <workItem from="1607496410024" duration="73000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>

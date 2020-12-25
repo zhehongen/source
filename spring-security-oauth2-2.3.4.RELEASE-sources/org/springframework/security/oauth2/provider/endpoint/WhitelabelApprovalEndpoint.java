@@ -15,8 +15,9 @@ import java.util.Map;
 
 /**
  * Controller for displaying the approval page for the authorization server.
- * 
+ *
  * @author Dave Syer
+ * 用于显示授权服务器批准页面的控制器。
  */
 @FrameworkEndpoint
 @SessionAttributes("authorizationRequest")

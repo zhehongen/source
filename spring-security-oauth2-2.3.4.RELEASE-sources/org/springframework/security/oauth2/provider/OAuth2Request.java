@@ -14,10 +14,11 @@ import org.springframework.security.oauth2.common.util.OAuth2Utils;
  * Represents a stored authorization or token request. Used as part of the OAuth2Authentication object to store a
  * request's authentication information. Does not expose public setters so that clients can not mutate state if they
  * respect the declared type of the request.
- * 
+ *
  * @author Amanda Anganes
  * @author Dave Syer
- * 
+ * 表示存储的授权或令牌请求。 用作OAuth2Authentication对象的一部分，以存储请求的身份验证信息。
+ * 不公开公共的setter，这样，如果客户端尊重请求的声明类型，则客户端无法更改状态。
  */
 public class OAuth2Request extends BaseRequest implements Serializable {
 
@@ -42,6 +43,7 @@ public class OAuth2Request extends BaseRequest implements Serializable {
 	/**
 	 * Will be non-null if the request is for a token to be refreshed (the original grant type might still be available
 	 * via {@link #getGrantType()}).
+	 * 如果请求刷新令牌的请求将为非null（原始授予类型可能仍可以通过getGrantType（）获得）。
 	 */
 	private TokenRequest refresh = null;
 
@@ -138,7 +140,7 @@ public class OAuth2Request extends BaseRequest implements Serializable {
 	/**
 	 * Update the scope and create a new request. All the other properties are the same (including the request
 	 * parameters).
-	 * 
+	 *
 	 * @param scope the new scope
 	 * @return a new request with the narrowed scope
 	 */
@@ -158,6 +160,7 @@ public class OAuth2Request extends BaseRequest implements Serializable {
 
 	/**
 	 * @return true if this request is known to be for a token to be refreshed
+	 * 如果已知此请求是要刷新令牌，则为true
 	 */
 	public boolean isRefresh() {
 		return refresh != null;
@@ -166,8 +169,12 @@ public class OAuth2Request extends BaseRequest implements Serializable {
 	/**
 	 * If this request was for an access token to be refreshed, then the {@link TokenRequest} that led to the refresh
 	 * <i>may</i> be available here if it is known.
-	 * 
+	 *
 	 * @return the refresh token request (may be null)
+	 * 如果此请求是要刷新访问令牌，则导致刷新的TokenRequest如果已知，则可能在此处可用。
+	 *
+	 * 返回值：
+	 * 刷新令牌请求（可以为null）
 	 */
 	public TokenRequest getRefreshTokenRequest() {
 		return refresh;
@@ -175,7 +182,7 @@ public class OAuth2Request extends BaseRequest implements Serializable {
 
 	/**
 	 * Tries to discover the grant type requested for the token associated with this request.
-	 * 
+	 *
 	 * @return the grant type if known, or null otherwise
 	 */
 	public String getGrantType() {

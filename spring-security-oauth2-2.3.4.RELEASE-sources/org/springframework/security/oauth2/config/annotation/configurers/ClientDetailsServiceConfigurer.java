@@ -25,7 +25,7 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 
 /**
  * @author Rob Winch
- * 
+ * 客户端详情服务配置；能够配置客户端详情服务；数据库去读或内存去读；
  */
 public class ClientDetailsServiceConfigurer extends
 		SecurityConfigurerAdapter<ClientDetailsService, ClientDetailsServiceBuilder<?>> {
@@ -49,7 +49,7 @@ public class ClientDetailsServiceConfigurer extends
 		setBuilder(next);
 		return next;
 	}
-	
+
 	@Override
 	public void init(ClientDetailsServiceBuilder<?> builder) throws Exception {
 	}

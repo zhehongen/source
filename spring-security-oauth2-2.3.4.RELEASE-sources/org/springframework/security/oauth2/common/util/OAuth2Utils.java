@@ -59,6 +59,7 @@ public abstract class OAuth2Utils {
 
 	/**
 	 * Constant to use while parsing and formatting parameter maps for OAuth2 requests
+	 * 在解析和格式化OAuth2请求的参数映射时使用的常量
 	 */
 	public static final String USER_OAUTH_APPROVAL = "user_oauth_approval";
 
@@ -74,7 +75,7 @@ public abstract class OAuth2Utils {
 
 	/**
 	 * Parses a string parameter value into a set of strings.
-	 * 
+	 *
 	 * @param values The values of the set.
 	 * @return The set.
 	 */
@@ -90,7 +91,7 @@ public abstract class OAuth2Utils {
 
 	/**
 	 * Formats a set of string values into a format appropriate for sending as a single-valued form value.
-	 * 
+	 *
 	 * @param value The value of the parameter.
 	 * @return The value formatted for form submission etc, or null if the input is empty
 	 */
@@ -100,7 +101,7 @@ public abstract class OAuth2Utils {
 
 	/**
 	 * Extract a map from a query string.
-	 * 
+	 *
 	 * @param query a query (or fragment) string from a URI
 	 * @return a Map of the values in the query
 	 */
@@ -118,7 +119,7 @@ public abstract class OAuth2Utils {
 
 	/**
 	 * Compare 2 sets and check that one contains all members of the other.
-	 * 
+	 *
 	 * @param target set of strings to check
 	 * @param members the members to compare to
 	 * @return true if all members are in the target

@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.client.token.grant.code.Authorization
 
 /**
  * Shared {@link AuthorizationCodeResourceDetails} configuration.
- *
+ *共享的AuthorizationCodeResourceDetails配置。
  * @author Stephane Nicoll
  */
 @Configuration

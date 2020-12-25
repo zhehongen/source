@@ -549,7 +549,7 @@ public final class AuthorizationServerEndpointsConfigurer {
 		requestValidator = new DefaultOAuth2RequestValidator();
 		return requestValidator;
 	}
-
+	//authenticationManager为空的话会构建CompositeTokenGranter对应的4个授权模式
 	private List<TokenGranter> getDefaultTokenGranters() {
 		ClientDetailsService clientDetails = clientDetailsService();
 		AuthorizationServerTokenServices tokenServices = tokenServices();

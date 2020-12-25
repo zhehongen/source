@@ -14,15 +14,15 @@ public class BaseOAuth2ProtectedResourceDetails implements OAuth2ProtectedResour
 
 	private String id;
 
-	private String grantType = "unsupported";
+	private String grantType = "unsupported";//授权类型
 
-	private String clientId;
+	private String clientId;//客户端id
 
-	private String accessTokenUri;
+	private String accessTokenUri;//用于获取OAuth2访问令牌的URL;;;先获取token,再拿着token去授权
 
 	private List<String> scope;
 
-	private String clientSecret;
+	private String clientSecret;//客户端秘钥
 
 	private AuthenticationScheme clientAuthenticationScheme = AuthenticationScheme.header;
 

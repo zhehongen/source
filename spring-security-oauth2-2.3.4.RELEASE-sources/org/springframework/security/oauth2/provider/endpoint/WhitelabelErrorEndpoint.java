@@ -15,6 +15,7 @@ import java.util.Map;
  * Controller for displaying the error page for the authorization server.
  *
  * @author Dave Syer
+ * 用于显示授权服务器错误页面的控制器。
  */
 @FrameworkEndpoint
 public class WhitelabelErrorEndpoint {

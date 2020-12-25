@@ -28,9 +28,9 @@ import org.springframework.util.StringUtils;
 /**
  * Default implementation of {@link UserAuthenticationConverter}. Converts to and from an Authentication using only its
  * name and authorities.
- * 
+ *
  * @author Dave Syer
- * 
+ * UserAuthenticationConverter的默认实现。 仅使用身份验证的名称和权限与身份验证进行转换。
  */
 public class DefaultUserAuthenticationConverter implements UserAuthenticationConverter {
 
@@ -40,8 +40,12 @@ public class DefaultUserAuthenticationConverter implements UserAuthenticationCon
 
 	/**
 	 * Optional {@link UserDetailsService} to use when extracting an {@link Authentication} from the incoming map.
-	 * 
+	 *
 	 * @param userDetailsService the userDetailsService to set
+	 * 从传入映射中提取身份验证时使用的可选UserDetailsService。
+	 *
+	 * 参数：
+	 * userDetailsService –要设置的userDetailsService
 	 */
 	public void setUserDetailsService(UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
@@ -51,8 +55,12 @@ public class DefaultUserAuthenticationConverter implements UserAuthenticationCon
 	 * Default value for authorities if an Authentication is being created and the input has no data for authorities.
 	 * Note that unless this property is set, the default Authentication created by {@link #extractAuthentication(Map)}
 	 * will be unauthenticated.
-	 * 
+	 *
 	 * @param defaultAuthorities the defaultAuthorities to set. Default null.
+	 *如果正在创建身份验证并且输入中没有有关授权机构的数据，那么授权机构的默认值。 请注意，除非设置了此属性，否则将不对由extractAuthentication（Map）创建的默认身份验证进行身份验证。
+	 *
+	 * 参数：
+	 * defaultAuthorities –要设置的defaultAuthorities。 默认为空。
 	 */
 	public void setDefaultAuthorities(String[] defaultAuthorities) {
 		this.defaultAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(StringUtils

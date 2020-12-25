@@ -57,19 +57,23 @@ import java.util.Set;
  * handled by the provided {@link #setTokenGranter(org.springframework.security.oauth2.provider.TokenGranter) token
  * granter}.
  * </p>
- * 
+ *
  * <p>
  * Clients must be authenticated using a Spring Security {@link Authentication} to access this endpoint, and the client
  * id is extracted from the authentication token. The best way to arrange this (as per the OAuth2 spec) is to use HTTP
  * basic authentication for this endpoint with standard Spring Security support.
  * </p>
- * 
+ *
  * @author Dave Syer
- * 
+ * 令牌请求的端点，如OAuth2规范中所述。 客户端发布带有Grant_type参数（例如“ authorization_code”）
+ * 和其他由Grant类型决定的参数的请求。 受支持的授予类型由提供的令牌授予者处理。
+ * 必须使用Spring Security Authentication对客户端进行身份验证才能访问此端点，
+ * 并且从身份验证令牌中提取客户端ID。 安排此操作的最佳方法（按照OAuth2规范）
+ * 是在具有标准Spring Security支持的情况下对此端点使用HTTP基本身份验证。
  */
 @FrameworkEndpoint
 public class TokenEndpoint extends AbstractEndpoint {
-
+	//主要验证scope
 	private OAuth2RequestValidator oAuth2RequestValidator = new DefaultOAuth2RequestValidator();
 
 	private Set<HttpMethod> allowedRequestMethods = new HashSet<HttpMethod>(Arrays.asList(HttpMethod.POST));
@@ -82,7 +86,7 @@ public class TokenEndpoint extends AbstractEndpoint {
 		}
 		return postAccessToken(principal, parameters);
 	}
-	
+
 	@RequestMapping(value = "/oauth/token", method=RequestMethod.POST)
 	public ResponseEntity<OAuth2AccessToken> postAccessToken(Principal principal, @RequestParam
 	Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
@@ -99,10 +103,10 @@ public class TokenEndpoint extends AbstractEndpoint {
 
 		if (clientId != null && !clientId.equals("")) {
 			// Only validate the client details if a client authenticated during this
-			// request.
+			// request.仅当客户端在此请求期间通过身份验证时，才验证客户端详细信息。
 			if (!clientId.equals(tokenRequest.getClientId())) {
 				// double check to make sure that the client ID in the token request is the same as that in the
-				// authenticated client
+				// authenticated client 仔细检查以确保令牌请求中的客户端ID与经过身份验证的客户端中的客户端ID相同
 				throw new InvalidClientException("Given client ID does not match authenticated client");
 			}
 		}
@@ -115,9 +119,9 @@ public class TokenEndpoint extends AbstractEndpoint {
 		if (tokenRequest.getGrantType().equals("implicit")) {
 			throw new InvalidGrantException("Implicit grant type not supported from token endpoint");
 		}
-
+		//授权码模式
 		if (isAuthCodeRequest(parameters)) {
-			// The scope was requested or determined during the authorization step
+			// The scope was requested or determined during the authorization step 在授权步骤中请求或确定范围
 			if (!tokenRequest.getScope().isEmpty()) {
 				logger.debug("Clearing scope of incoming token request");
 				tokenRequest.setScope(Collections.<String> emptySet());
@@ -126,6 +130,7 @@ public class TokenEndpoint extends AbstractEndpoint {
 
 		if (isRefreshTokenRequest(parameters)) {
 			// A refresh token has its own default scopes, so we should ignore any added by the factory here.
+			//刷新令牌具有其自己的默认范围，因此我们应在此处忽略工厂添加的任何范围。
 			tokenRequest.setScope(OAuth2Utils.parseParameterList(parameters.get(OAuth2Utils.SCOPE)));
 		}
 
@@ -141,15 +146,17 @@ public class TokenEndpoint extends AbstractEndpoint {
 	/**
 	 * @param principal the currently authentication principal
 	 * @return a client id if there is one in the principal
+	 * 能获取到用户吗
+	 *
 	 */
 	protected String getClientId(Principal principal) {
 		Authentication client = (Authentication) principal;
 		if (!client.isAuthenticated()) {
 			throw new InsufficientAuthenticationException("The client is not authenticated.");
 		}
-		String clientId = client.getName();
+		String clientId = client.getName();//登录用户信息？
 		if (client instanceof OAuth2Authentication) {
-			// Might be a client and user combined authentication
+			// Might be a client and user combined authentication可能是客户端和用户的组合身份验证
 			clientId = ((OAuth2Authentication) client).getOAuth2Request().getClientId();
 		}
 		return clientId;
@@ -162,7 +169,7 @@ public class TokenEndpoint extends AbstractEndpoint {
 		}
 	    return getExceptionTranslator().translate(e);
 	}
-	
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<OAuth2Exception> handleException(Exception e) throws Exception {
 		if (logger.isWarnEnabled()) {
@@ -170,7 +177,7 @@ public class TokenEndpoint extends AbstractEndpoint {
 		}
 		return getExceptionTranslator().translate(e);
 	}
-	
+
 	@ExceptionHandler(ClientRegistrationException.class)
 	public ResponseEntity<OAuth2Exception> handleClientRegistrationException(Exception e) throws Exception {
 		if (logger.isWarnEnabled()) {

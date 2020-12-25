@@ -25,14 +25,14 @@ import org.springframework.security.oauth2.provider.AuthorizationRequest;
 
 /**
  * A default user approval handler that doesn't remember any decisions.
- * 
+ *
  * @author Dave Syer
- * 
+ *
  */
 public class DefaultUserApprovalHandler implements UserApprovalHandler {
 
 	private String approvalParameter = OAuth2Utils.USER_OAUTH_APPROVAL;
-	
+
 	/**
 	 * @param approvalParameter the approvalParameter to set
 	 */
@@ -43,11 +43,20 @@ public class DefaultUserApprovalHandler implements UserApprovalHandler {
 	/**
 	 * Basic implementation just requires the authorization request to be explicitly approved and the user to be
 	 * authenticated.
-	 * 
+	 *
 	 * @param authorizationRequest The authorization request.
 	 * @param userAuthentication the current user authentication
-	 * 
+	 *
 	 * @return Whether the specified request has been approved by the current user.
+	 * 基本实现只要求明确批准授权请求并验证用户身份。
+	 *
+	 * 指定者：
+	 * 接口UserApprovalHandler中的isApproved
+	 * 参数：
+	 * authorizationRequest –授权请求。
+	 * userAuthentication –当前的用户身份验证
+	 * 返回值：
+	 * 指定的请求是否已被当前用户批准。
 	 */
 	public boolean isApproved(AuthorizationRequest authorizationRequest, Authentication userAuthentication) {
 		if (authorizationRequest.isApproved()) {
@@ -68,12 +77,13 @@ public class DefaultUserApprovalHandler implements UserApprovalHandler {
 		authorizationRequest.setApproved(approved);
 		return authorizationRequest;
 	}
-	
+
 	@Override
 	public Map<String, Object> getUserApprovalRequest(AuthorizationRequest authorizationRequest,
 			Authentication userAuthentication) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		// In case of a redirect we might want the request parameters to be included
+		// 在重定向的情况下，我们可能希望包含请求参数
 		model.putAll(authorizationRequest.getRequestParameters());
 		return model;
 	}

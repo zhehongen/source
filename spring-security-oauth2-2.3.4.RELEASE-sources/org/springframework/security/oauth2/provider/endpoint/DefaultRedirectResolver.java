@@ -32,7 +32,7 @@ import java.util.Set;
 
 /**
  * Default implementation for a redirect resolver.
- * 
+ *
  * @author Ryan Heaton
  * @author Dave Syer
  */
@@ -46,8 +46,9 @@ public class DefaultRedirectResolver implements RedirectResolver {
 
 	/**
 	 * Flag to indicate that requested URIs will match if they are a subdomain of the registered value.
-	 * 
+	 *
 	 * @param matchSubdomains the flag value to set (deafult true)
+	 * 如果请求的URI是注册值的子域，则该标志指示所请求的URI将匹配。
 	 */
 	public void setMatchSubdomains(boolean matchSubdomains) {
 		this.matchSubdomains = matchSubdomains;
@@ -64,7 +65,7 @@ public class DefaultRedirectResolver implements RedirectResolver {
 
 	/**
 	 * Grant types that are permitted to have a redirect uri.
-	 * 
+	 *
 	 * @param redirectGrantTypes the redirect grant types to set
 	 */
 	public void setRedirectGrantTypes(Collection<String> redirectGrantTypes) {
@@ -108,10 +109,19 @@ public class DefaultRedirectResolver implements RedirectResolver {
 	 * it is an HTTP URL. The port is also matched.
 	 * <p>
 	 * For other (non-URL) cases, such as for some implicit clients, the redirect_uri must be an exact match.
-	 * 
+	 *
 	 * @param requestedRedirect The requested redirect URI.
 	 * @param redirectUri The registered redirect URI.
 	 * @return Whether the requested redirect URI "matches" the specified redirect URI.
+	 * 请求的重定向URI是否“匹配”指定的重定向URI。 对于URL，此实现测试用户请求的重定向是否从注册的重定向开始，
+	 * 因此如果它是HTTP URL，则它将具有相同的主机和根路径。 端口也匹配。
+	 * 对于其他（非URL）情况，例如某些隐式客户端，redirect_uri必须完全匹配。
+	 *
+	 * 参数：
+	 * requestRedirect –请求的重定向URI。
+	 * redirectUri –注册的重定向URI。
+	 * 返回值：
+	 * 请求的重定向URI是否“匹配”指定的重定向URI。
 	 */
 	protected boolean redirectMatches(String requestedRedirect, String redirectUri) {
 		UriComponents requestedRedirectUri = UriComponentsBuilder.fromUriString(requestedRedirect).build();
@@ -135,10 +145,11 @@ public class DefaultRedirectResolver implements RedirectResolver {
 
 	/**
 	 * Check if host matches the registered value.
-	 * 
+	 *
 	 * @param registered the registered host
 	 * @param requested the requested host
 	 * @return true if they match
+	 * //什么玩意？是子域名就行
 	 */
 	protected boolean hostMatches(String registered, String requested) {
 		if (matchSubdomains) {
@@ -149,7 +160,7 @@ public class DefaultRedirectResolver implements RedirectResolver {
 
 	/**
 	 * Attempt to match one of the registered URIs to the that of the requested one.
-	 * 
+	 *
 	 * @param redirectUris the set of the registered URIs to try and find a match. This cannot be null or empty.
 	 * @param requestedRedirect the URI used as part of the request
 	 * @return the matching URI

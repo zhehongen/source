@@ -7,21 +7,23 @@ import org.springframework.security.core.CredentialsContainer;
 /**
  * An OAuth 2 authentication token can contain two authentications: one for the client and one for the user. Since some
  * OAuth authorization grants don't require user authentication, the user authentication may be null.
- * 
+ * OAuth 2身份验证令牌可以包含两种身份验证：一种用于客户端，一种用于用户。
+ * 由于某些OAuth授权授予不需要用户身份验证，因此用户身份验证可能为null。
  * @author Ryan Heaton
  */
 public class OAuth2Authentication extends AbstractAuthenticationToken {
 
 	private static final long serialVersionUID = -4809832298438307309L;
 
+	//请求
 	private final OAuth2Request storedRequest;
-
+	//用户认证信息
 	private final Authentication userAuthentication;
 
 	/**
 	 * Construct an OAuth 2 authentication. Since some grant types don't require user authentication, the user
 	 * authentication may be null.
-	 * 
+	 *
 	 * @param storedRequest The authorization request (must not be null).
 	 * @param userAuthentication The user authentication (possibly null).
 	 */
@@ -42,7 +44,7 @@ public class OAuth2Authentication extends AbstractAuthenticationToken {
 
 	/**
 	 * Convenience method to check if there is a user associated with this token, or just a client application.
-	 * 
+	 *
 	 * @return true if this token represents a client app not acting on behalf of a user
 	 */
 	public boolean isClientOnly() {
@@ -51,7 +53,7 @@ public class OAuth2Authentication extends AbstractAuthenticationToken {
 
 	/**
 	 * The authorization request containing details of the client application.
-	 * 
+	 *
 	 * @return The client authentication.
 	 */
 	public OAuth2Request getOAuth2Request() {
@@ -60,7 +62,7 @@ public class OAuth2Authentication extends AbstractAuthenticationToken {
 
 	/**
 	 * The user authentication.
-	 * 
+	 *
 	 * @return The user authentication.
 	 */
 	public Authentication getUserAuthentication() {
@@ -102,7 +104,7 @@ public class OAuth2Authentication extends AbstractAuthenticationToken {
 				: that.userAuthentication != null) {
 			return false;
 		}
-		
+
 		if (getDetails()!=null ? !getDetails().equals(that.getDetails()) : that.getDetails()!=null) {
 			// return false;
 		}

@@ -21,9 +21,11 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 /**
  * Interface for granters of access tokens. Various grant types are defined in the specification, and each of those has
  * an implementation, leaving room for extensions to the specification as needed.
- * 
+ *
  * @author Dave Syer
- * 
+ * 访问令牌授予者的接口。
+ * 规范中定义了各种授权类型，每种授权类型都有一个实现，
+ * 从而为按需扩展规范留有余地。
  */
 public interface TokenGranter {
 

@@ -61,6 +61,7 @@ import org.springframework.util.StringUtils;
  * @author Dave Syer
  * @author Madhura Bhave
  * @since 1.3.0
+ * OAuth2单点登录REST操作的配置。
  */
 @Configuration
 @ConditionalOnClass(EnableOAuth2Client.class)

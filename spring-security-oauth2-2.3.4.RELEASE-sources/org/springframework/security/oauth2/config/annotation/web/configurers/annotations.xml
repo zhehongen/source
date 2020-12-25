@@ -1,0 +1,5 @@
+<root>
+    <item name='org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

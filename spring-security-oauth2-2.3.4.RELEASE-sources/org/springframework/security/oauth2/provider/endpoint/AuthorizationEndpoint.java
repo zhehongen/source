@@ -1,11 +1,11 @@
 /*
  * Copyright 2002-2018 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
@@ -72,20 +72,20 @@ import java.util.Set;
 
 /**
  * <p>
- * Implementation of the Authorization Endpoint from the OAuth2 specification. Accepts authorization requests, and
- * handles user approval if the grant type is authorization code. The tokens themselves are obtained from the
- * {@link TokenEndpoint Token Endpoint}, except in the implicit grant type (where they come from the Authorization
+ * Implementation of the Authorization Endpoint from the OAuth2 specification. OAuth2规范中授权端点的实现。 接受授权请求，如果授权类型为授权码，则处理用户批准。令牌本身是从令牌端点获取的，但隐式授予类型除外 (隐式授予类型的令牌难道不是从令牌端点获取的？哦)（在隐式授予类型中，令牌本身是通过response_type = token来自授权端点的）。此端点应受到保护，以便只有经过完全身份验证的用户才能访问它（作为最低要求），因为它代表有效用户执行操作的请求。
+ * Accepts authorization requests, and
+ * handles user approval if the grant type is authorization code.
+ * The tokens themselves are obtained from the
+ * {@link TokenEndpoint Token Endpoint}, except in the implicit grant type
+ * (where they come from the Authorization
  * Endpoint via <code>response_type=token</code>.
  * </p>
- * 
  * <p>
  * This endpoint should be secured so that it is only accessible to fully authenticated users (as a minimum requirement)
  * since it represents a request from a valid user to act on his or her behalf.
  * </p>
- * 
  * @author Dave Syer
  * @author Vladimir Kryachko
- * 
  */
 @FrameworkEndpoint
 @SessionAttributes({AuthorizationEndpoint.AUTHORIZATION_REQUEST_ATTR_NAME, AuthorizationEndpoint.ORIGINAL_AUTHORIZATION_REQUEST_ATTR_NAME})
@@ -124,7 +124,7 @@ public class AuthorizationEndpoint extends AbstractEndpoint {
 
 		// Pull out the authorization request first, using the OAuth2RequestFactory. All further logic should
 		// query off of the authorization request instead of referring back to the parameters map. The contents of the
-		// parameters map will be stored without change in the AuthorizationRequest object once it is created.
+		// parameters map will be stored without change in the AuthorizationRequest object once it is created.首先使用OAuth2RequestFactory提取授权请求。 所有其他逻辑都应从授权请求中查询，而不要返回参数映射。 一旦创建，参数映射的内容将被存储而不会在AuthorizationRequest对象中进行更改。
 		AuthorizationRequest authorizationRequest = getOAuth2RequestFactory().createAuthorizationRequest(parameters);
 
 		Set<String> responseTypes = authorizationRequest.getResponseTypes();
@@ -180,7 +180,7 @@ public class AuthorizationEndpoint extends AbstractEndpoint {
 			}
 
 			// Store authorizationRequest AND an immutable Map of authorizationRequest in session
-			// which will be used to validate against in approveOrDeny()
+			// which will be used to validate against in approveOrDeny()在会话中存储authorizationRequest和一个不变的authorizationRequest映射，用于在approveOrDeny（）中进行验证
 			model.put(AUTHORIZATION_REQUEST_ATTR_NAME, authorizationRequest);
 			model.put(ORIGINAL_AUTHORIZATION_REQUEST_ATTR_NAME, unmodifiableMap(authorizationRequest));
 
@@ -355,7 +355,7 @@ public class AuthorizationEndpoint extends AbstractEndpoint {
 			OAuth2Request storedOAuth2Request) {
 		OAuth2AccessToken accessToken = null;
 		// These 1 method calls have to be atomic, otherwise the ImplicitGrantService can have a race condition where
-		// one thread removes the token request before another has a chance to redeem it.
+		// one thread removes the token request before another has a chance to redeem it.这1个方法调用必须是原子的，否则ImplicitGrantService可能具有竞争条件，其中一个线程在另一个线程有机会兑现令牌请求之前将其删除了令牌请求。
 		synchronized (this.implicitLock) {
 			accessToken = getTokenGranter().grant("implicit",
 					new ImplicitTokenRequest(tokenRequest, storedOAuth2Request));
@@ -477,7 +477,7 @@ public class AuthorizationEndpoint extends AbstractEndpoint {
 		return append(authorizationRequest.getRedirectUri(), query, fragment);
 
 	}
-
+                                                                      //分段
 	private String append(String base, Map<String, ?> query, boolean fragment) {
 		return append(base, query, null, fragment);
 	}
@@ -489,6 +489,7 @@ public class AuthorizationEndpoint extends AbstractEndpoint {
 		URI redirectUri;
 		try {
 			// assume it's encoded to start with (if it came in over the wire)
+			// 假设它是从编码开始的（如果它是通过电线传入的）
 			redirectUri = builder.build(true).toUri();
 		}
 		catch (Exception e) {
@@ -614,7 +615,7 @@ public class AuthorizationEndpoint extends AbstractEndpoint {
 
 	private AuthorizationRequest getAuthorizationRequestForError(ServletWebRequest webRequest) {
 
-		// If it's already there then we are in the approveOrDeny phase and we can use the saved request
+		// If it's already there then we are in the approveOrDeny phase and we can use the saved request如果已经存在，则我们处于approveOrDeny阶段，我们可以使用保存的请求
 		AuthorizationRequest authorizationRequest = (AuthorizationRequest) sessionAttributeStore.retrieveAttribute(
 				webRequest, AUTHORIZATION_REQUEST_ATTR_NAME);
 		if (authorizationRequest != null) {

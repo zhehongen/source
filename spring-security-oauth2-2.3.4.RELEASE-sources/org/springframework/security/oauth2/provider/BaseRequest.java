@@ -28,14 +28,15 @@ import java.util.Set;
 import org.springframework.security.oauth2.common.util.OAuth2Utils;
 
 /**
- * 
+ *
  * A base class for the three "*Request" classes used in processing OAuth 2
  * authorizations. This class should <strong>never</strong> be used directly,
  * and it should <strong>never</strong> be used as the type for a local or other
  * variable.
- * 
+ *
  * @author Dave Syer
- * 
+ * 在处理OAuth 2授权中使用的三个“ * Request”类的基类。
+ * 切勿直接使用此类，也不应将其用作局部变量或其他变量的类型。
  */
 @SuppressWarnings("serial")
 abstract class BaseRequest implements Serializable {
@@ -44,6 +45,7 @@ abstract class BaseRequest implements Serializable {
 	 * Resolved client ID. This may be present in the original request
 	 * parameters, or in some cases may be inferred by a processing class and
 	 * inserted here.
+	 * 已解决的客户ID。 这可能存在于原始请求参数中，或者在某些情况下可能由处理类推断并插入此处。
 	 */
 	private String clientId;
 
@@ -52,6 +54,8 @@ abstract class BaseRequest implements Serializable {
 	 * scopes originally requested. Further processing and user interaction may
 	 * alter the set of scopes that is finally granted and stored when the
 	 * request processing is complete.
+	 * 解析的范围集，使用原始请求的范围初始化（由OAuth2RequestFactory初始化）。
+	 * 进一步的处理和用户交互可以更改在请求处理完成时最终授予并存储的范围集。
 	 */
 	private Set<String> scope = new HashSet<String>();
 
@@ -61,11 +65,13 @@ abstract class BaseRequest implements Serializable {
 	 * not be modified after initialization. In general, classes should not
 	 * retrieve values from this map directly, and should instead use the
 	 * individual members on this class.
-	 * 
+	 *
 	 * The OAuth2RequestFactory is responsible for initializing all members of
 	 * this class, usually by parsing the values inside the requestParmaeters
 	 * map.
-	 * 
+	 *	传递到授权端点或令牌端点的参数映射，与原始请求保持不变。 初始化后不应修改此映射。
+	 *  通常，类不应直接从此映射检索值，而应使用此类的单个成员。
+	 *  OAuth2RequestFactory通常负责解析此类中的所有成员，方法是解析requestParmaeters映射中的值。
 	 */
 	private Map<String, String> requestParameters = Collections
 			.unmodifiableMap(new HashMap<String, String>());
@@ -82,7 +88,7 @@ abstract class BaseRequest implements Serializable {
 	 * Warning: most clients should use the individual properties of this class,
 	 * such as {{@link #getScope()} or { {@link #getClientId()}, rather than
 	 * retrieving values from this map.
-	 * 
+	 *
 	 * @return the original, unchanged set of request parameters
 	 */
 	public Map<String, String> getRequestParameters() {
@@ -138,6 +144,8 @@ abstract class BaseRequest implements Serializable {
 			 * and it's easy to fix. It happens when an AuthorizationRequest
 			 * gets bound accidentally from request parameters using
 			 * @ModelAttribute.
+			 * 这确实是一个错误，但是它可以找出毫无疑问的用户，并且很容易修复。 
+			 * 当使用@ModelAttribute从请求参数中意外绑定AuthorizationRequest时，会发生这种情况。
 			 */
 			if (value.contains(" ") || value.contains(",")) {
 				scope = OAuth2Utils.parseParameterList(value);

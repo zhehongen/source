@@ -5,6 +5,7 @@ import org.springframework.security.oauth2.client.token.grant.redirect.AbstractR
 /**
  * @author Ryan Heaton
  * @author Dave Syer
+ * 这尼玛咋初始化的？ 在OAuth2ProtectedResourceDetailsConfiguration里面
  */
 public class AuthorizationCodeResourceDetails extends AbstractRedirectResourceDetails {
 

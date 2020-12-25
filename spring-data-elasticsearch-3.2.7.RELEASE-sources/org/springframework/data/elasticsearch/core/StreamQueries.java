@@ -1,0 +1,105 @@
+/*
+ * Copyright 2019-2020 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.springframework.data.elasticsearch.core;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+import org.springframework.data.util.CloseableIterator;
+import org.springframework.util.Assert;
+
+/**
+ * Utility to support streaming queries.
+ *
+ * @author Mark Paluch
+ * @author Sascha Woo
+ * @since 3.2
+ */
+abstract class StreamQueries {
+
+	/**
+	 * Stream query results using {@link ScrolledPage}.
+	 *
+	 * @param page the initial scrolled page.
+	 * @param continueScrollFunction function to continue scrolling applies to the current scrollId.
+	 * @param clearScrollConsumer consumer to clear the scroll context by accepting the current scrollId.
+	 * @param <T>
+	 * @return the {@link CloseableIterator}.
+	 */
+	static <T> CloseableIterator<T> streamResults(ScrolledPage<T> page,
+			Function<String, ScrolledPage<T>> continueScrollFunction, Consumer<String> clearScrollConsumer) {
+
+		Assert.notNull(page, "page must not be null.");
+		Assert.notNull(page.getScrollId(), "scrollId must not be null.");
+		Assert.notNull(continueScrollFunction, "continueScrollFunction must not be null.");
+		Assert.notNull(clearScrollConsumer, "clearScrollConsumer must not be null.");
+
+		return new CloseableIterator<T>() {
+
+			// As we couldn't retrieve single result with scroll, store current hits.
+			private volatile Iterator<T> scrollHits = page.iterator();
+			private volatile String scrollId = page.getScrollId();
+			private volatile boolean continueScroll = scrollHits.hasNext();
+
+			@Override
+			public void close() {
+
+				try {
+					clearScrollConsumer.accept(scrollId);
+				} finally {
+					scrollHits = null;
+					scrollId = null;
+				}
+			}
+
+			@Override
+			public boolean hasNext() {
+
+				if (!continueScroll) {
+					return false;
+				}
+
+				if (!scrollHits.hasNext()) {
+					ScrolledPage<T> nextPage = continueScrollFunction.apply(scrollId);
+					scrollHits = nextPage.iterator();
+					scrollId = nextPage.getScrollId();
+					continueScroll = scrollHits.hasNext();
+				}
+
+				return scrollHits.hasNext();
+			}
+
+			@Override
+			public T next() {
+				if (hasNext()) {
+					return scrollHits.next();
+				}
+				throw new NoSuchElementException();
+			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();
+			}
+		};
+	}
+
+	// utility constructor
+	private StreamQueries() {
+	}
+}

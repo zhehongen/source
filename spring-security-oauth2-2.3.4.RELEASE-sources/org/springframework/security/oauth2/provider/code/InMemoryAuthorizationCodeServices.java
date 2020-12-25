@@ -6,9 +6,10 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 /**
  * Implementation of authorization code services that stores the codes and authentication in memory.
- * 
+ *
  * @author Ryan Heaton
  * @author Dave Syer
+ * code和OAuth2Authentication做一个映射表
  */
 public class InMemoryAuthorizationCodeServices extends RandomValueAuthorizationCodeServices {
 

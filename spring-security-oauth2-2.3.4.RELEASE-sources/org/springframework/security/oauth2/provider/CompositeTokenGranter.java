@@ -23,7 +23,7 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 
 /**
  * @author Dave Syer
- * 
+ * authenticationManager为空的话会构建CompositeTokenGranter对应的4个授权模式
  */
 public class CompositeTokenGranter implements TokenGranter {
 
@@ -32,7 +32,7 @@ public class CompositeTokenGranter implements TokenGranter {
 	public CompositeTokenGranter(List<TokenGranter> tokenGranters) {
 		this.tokenGranters = new ArrayList<TokenGranter>(tokenGranters);
 	}
-	
+
 	public OAuth2AccessToken grant(String grantType, TokenRequest tokenRequest) {
 		for (TokenGranter granter : tokenGranters) {
 			OAuth2AccessToken grant = granter.grant(grantType, tokenRequest);
@@ -42,7 +42,7 @@ public class CompositeTokenGranter implements TokenGranter {
 		}
 		return null;
 	}
-	
+
 	public void addTokenGranter(TokenGranter tokenGranter) {
 		if (tokenGranter == null) {
 			throw new IllegalArgumentException("Token granter is null");

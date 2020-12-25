@@ -36,7 +36,9 @@ import org.springframework.security.oauth2.provider.client.BaseClientDetails;
  * the {@link ClientDetailsService} and populate it with data.
  * 
  * @author Dave Syer
- * 
+ * OAuth2客户端详细信息服务生成器。 可用于构造ClientDetailsService的内存中或JDBC实现，并用数据填充它。
+ * 类型参数：
+ * <B> –由B构建的对象
  */
 public class ClientDetailsServiceBuilder<B extends ClientDetailsServiceBuilder<B>> extends
 		SecurityConfigurerAdapter<ClientDetailsService, B> implements SecurityBuilder<ClientDetailsService> {

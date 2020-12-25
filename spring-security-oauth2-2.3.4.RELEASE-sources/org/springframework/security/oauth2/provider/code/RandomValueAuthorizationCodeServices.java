@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 /**
  * Base implementation for authorization code services that generates a random-value authorization code.
- * 
+ * 随机值
  * @author Ryan Heaton
  * @author Dave Syer
  */

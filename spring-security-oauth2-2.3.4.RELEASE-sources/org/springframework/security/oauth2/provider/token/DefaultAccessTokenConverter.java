@@ -31,15 +31,15 @@ import org.springframework.security.oauth2.provider.OAuth2Request;
 
 /**
  * Default implementation of {@link AccessTokenConverter}.
- * 
+ *
  * @author Dave Syer
  * @author Vedran Pavic
  */
 public class DefaultAccessTokenConverter implements AccessTokenConverter {
 
 	private UserAuthenticationConverter userTokenConverter = new DefaultUserAuthenticationConverter();
-	
-	private boolean includeGrantType;
+
+	private boolean includeGrantType;//?在令牌中是否包含授权类型
 
 	private String scopeAttribute = SCOPE;
 
@@ -47,7 +47,7 @@ public class DefaultAccessTokenConverter implements AccessTokenConverter {
 
 	/**
 	 * Converter for the part of the data in the token representing a user.
-	 * 
+	 * 令牌中代表用户的数据部分的转换器。
 	 * @param userTokenConverter the userTokenConverter to set
 	 */
 	public void setUserTokenConverter(UserAuthenticationConverter userTokenConverter) {
@@ -56,11 +56,11 @@ public class DefaultAccessTokenConverter implements AccessTokenConverter {
 
 	/**
 	 * Flag to indicate the the grant type should be included in the converted token.
-	 * 
+	 * 指示授予类型的标志应包含在转换后的令牌中。
 	 * @param includeGrantType the flag value (default false)
 	 */
 	public void setIncludeGrantType(boolean includeGrantType) {
-		this.includeGrantType = includeGrantType;	
+		this.includeGrantType = includeGrantType;
 	}
 
 	/**
@@ -68,6 +68,10 @@ public class DefaultAccessTokenConverter implements AccessTokenConverter {
 	 * {@link AccessTokenConverter#SCOPE}.
 	 *
 	 * @param scopeAttribute the scope attribute name to use
+	 * 设置要在转换后的令牌中使用的范围属性名称。 默认为AccessTokenConverter.SCOPE。
+	 *
+	 * 参数：
+	 * scopeAttribute –要使用的范围属性名称
 	 */
 	public void setScopeAttribute(String scopeAttribute) {
 		this.scopeAttribute = scopeAttribute;
@@ -106,7 +110,7 @@ public class DefaultAccessTokenConverter implements AccessTokenConverter {
 		if (token.getExpiration() != null) {
 			response.put(EXP, token.getExpiration().getTime() / 1000);
 		}
-		
+
 		if (includeGrantType && authentication.getOAuth2Request().getGrantType()!=null) {
 			response.put(GRANT_TYPE, authentication.getOAuth2Request().getGrantType());
 		}
@@ -149,7 +153,7 @@ public class DefaultAccessTokenConverter implements AccessTokenConverter {
 		}
 		Set<String> resourceIds = new LinkedHashSet<String>(map.containsKey(AUD) ? getAudience(map)
 				: Collections.<String>emptySet());
-		
+
 		Collection<? extends GrantedAuthority> authorities = null;
 		if (user==null && map.containsKey(AUTHORITIES)) {
 			@SuppressWarnings("unchecked")
@@ -163,7 +167,7 @@ public class DefaultAccessTokenConverter implements AccessTokenConverter {
 
 	private Collection<String> getAudience(Map<String, ?> map) {
 		Object auds = map.get(AUD);
-		if (auds instanceof Collection) {			
+		if (auds instanceof Collection) {
 			@SuppressWarnings("unchecked")
 			Collection<String> result = (Collection<String>) auds;
 			return result;

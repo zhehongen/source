@@ -71,7 +71,7 @@ public interface OAuth2AccessToken {
 	 * @return a map from the field name in the serialized token to the value to be exported. The default serializers
 	 * make use of Jackson's automatic JSON mapping for Java objects (for the Token Endpoint flows) or implicitly call
 	 * .toString() on the "value" object (for the implicit flow) as part of the serialization process.
-	 *令牌序列化程序使用AdditionalInformation映射来导出OAuth扩展使用的任何字段。
+	 *令牌序列化程序使用AdditionalInformation map来导出OAuth扩展使用的任何字段。
 	 *
 	 * 返回值：
 	 * 从序列化令牌中的字段名称到要导出的值的映射。

@@ -11,24 +11,28 @@ public abstract class AbstractRedirectResourceDetails extends BaseOAuth2Protecte
 
 	private String preEstablishedRedirectUri;
 
-	private String userAuthorizationUri;
+	private String userAuthorizationUri;//
 
-	private boolean useCurrentUri = true;
+	private boolean useCurrentUri = true;//?
 
 	/**
 	 * Flag to signal that the current URI (if set) in the request should be used in preference to the pre-established
 	 * redirect URI.
-	 * 
+	 *
 	 * @param useCurrentUri the flag value to set (default true)
+	 * 标志，用于指示应优先使用请求中的当前URI（如果已设置），而不是预先建立的重定向URI。
+	 *
+	 * 参数：
+	 * useCurrentUri –要设置的标志值（默认为true）
 	 */
 	public void setUseCurrentUri(boolean useCurrentUri) {
 		this.useCurrentUri = useCurrentUri;
 	}
-	
+
 	/**
 	 * Flag to signal that the current URI (if set) in the request should be used in preference to the pre-established
 	 * redirect URI.
-	 * 
+	 *
 	 * @return the flag value
 	 */
 	public boolean isUseCurrentUri() {
@@ -37,8 +41,12 @@ public abstract class AbstractRedirectResourceDetails extends BaseOAuth2Protecte
 
 	/**
 	 * The URI to which the user is to be redirected to authorize an access token.
-	 * 
+	 *
 	 * @return The URI to which the user is to be redirected to authorize an access token.
+	 * 要将用户重定向到的URI，以授权访问令牌。
+	 *
+	 * 返回值：
+	 * 要将用户重定向到的URI，以授权访问令牌。
 	 */
 	public String getUserAuthorizationUri() {
 		return userAuthorizationUri;
@@ -46,7 +54,7 @@ public abstract class AbstractRedirectResourceDetails extends BaseOAuth2Protecte
 
 	/**
 	 * The URI to which the user is to be redirected to authorize an access token.
-	 * 
+	 *
 	 * @param userAuthorizationUri The URI to which the user is to be redirected to authorize an access token.
 	 */
 	public void setUserAuthorizationUri(String userAuthorizationUri) {
@@ -56,7 +64,7 @@ public abstract class AbstractRedirectResourceDetails extends BaseOAuth2Protecte
 	/**
 	 * The redirect URI that has been pre-established with the server. If present, the redirect URI will be omitted from
 	 * the user authorization request because the server doesn't need to know it.
-	 * 
+	 *
 	 * @return The redirect URI that has been pre-established with the server.
 	 */
 	public String getPreEstablishedRedirectUri() {
@@ -66,7 +74,10 @@ public abstract class AbstractRedirectResourceDetails extends BaseOAuth2Protecte
 	/**
 	 * The redirect URI that has been pre-established with the server. If present, the redirect URI will be omitted from
 	 * the user authorization request because the server doesn't need to know it.
-	 * 
+	 *与服务器一起预先建立的重定向URI。 如果存在，则重定向URI将从用户授权请求中省略，因为服务器不需要知道它。
+	 *
+	 * 参数：
+	 * prebuiltedRedirectUri –已与服务器预先建立的重定向URI
 	 * @param preEstablishedRedirectUri The redirect URI that has been pre-established with the server.
 	 */
 	public void setPreEstablishedRedirectUri(String preEstablishedRedirectUri) {
@@ -75,7 +86,7 @@ public abstract class AbstractRedirectResourceDetails extends BaseOAuth2Protecte
 
 	/**
 	 * Extract a redirect uri from the resource and/or the current request.
-	 * 
+	 *
 	 * @param request the current {@link DefaultAccessTokenRequest}
 	 * @return a redirect uri if one can be established
 	 */

@@ -38,23 +38,23 @@ import org.springframework.util.Assert;
 
 /**
  * A user approval handler that remembers approval decisions by consulting existing tokens.
- * 
+ *
  * @author Dave Syer
- * 
+ * 用户批准处理程序，通过查询现有令牌来记住批准决定。
  */
 public class TokenStoreUserApprovalHandler implements UserApprovalHandler, InitializingBean {
 
 	private static Log logger = LogFactory.getLog(TokenStoreUserApprovalHandler.class);
 
 	private String approvalParameter = OAuth2Utils.USER_OAUTH_APPROVAL;
-	
+
 	private TokenStore tokenStore;
-	
+
 	private ClientDetailsService clientDetailsService;
-	
+
 	/**
 	 * Service to load client details (optional) for auto approval checks.
-	 * 
+	 *
 	 * @param clientDetailsService a client details service
 	 */
 	public void setClientDetailsService(ClientDetailsService clientDetailsService) {
@@ -76,24 +76,24 @@ public class TokenStoreUserApprovalHandler implements UserApprovalHandler, Initi
 	}
 
 	private OAuth2RequestFactory requestFactory;
-	
+
 	public void setRequestFactory(OAuth2RequestFactory requestFactory) {
 		this.requestFactory = requestFactory;
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() {
 		Assert.state(tokenStore != null, "TokenStore must be provided");
 		Assert.state(requestFactory != null, "OAuth2RequestFactory must be provided");
 	}
-	
+
 	/**
 	 * Basic implementation just requires the authorization request to be explicitly approved and the user to be
 	 * authenticated.
-	 * 
+	 *
 	 * @param authorizationRequest The authorization request.
 	 * @param userAuthentication the current user authentication
-	 * 
+	 *
 	 * @return Whether the specified request has been approved by the current user.
 	 */
 	@Override
@@ -103,9 +103,9 @@ public class TokenStoreUserApprovalHandler implements UserApprovalHandler, Initi
 
 	@Override
 	public AuthorizationRequest checkForPreApproval(AuthorizationRequest authorizationRequest, Authentication userAuthentication) {
-		
+
 		boolean approved = false;
-		
+
 		String clientId = authorizationRequest.getClientId();
 		Set<String> scopes = authorizationRequest.getScope();
 		if (clientDetailsService!=null) {
@@ -124,11 +124,11 @@ public class TokenStoreUserApprovalHandler implements UserApprovalHandler, Initi
 			}
 			catch (ClientRegistrationException e) {
 				logger.warn("Client registration problem prevent autoapproval check for client=" + clientId);
-			}		
+			}
 		}
-		
+
 		OAuth2Request storedOAuth2Request = requestFactory.createOAuth2Request(authorizationRequest);
-		
+
 		OAuth2Authentication authentication = new OAuth2Authentication(storedOAuth2Request, userAuthentication);
 		if (logger.isDebugEnabled()) {
 			StringBuilder builder = new StringBuilder("Looking up existing token for ");
@@ -153,7 +153,7 @@ public class TokenStoreUserApprovalHandler implements UserApprovalHandler, Initi
 			logger.debug("Checking explicit approval");
 			approved = userAuthentication.isAuthenticated() && approved;
 		}
-		
+
 		authorizationRequest.setApproved(approved);
 
 		return authorizationRequest;

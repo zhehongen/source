@@ -1,11 +1,11 @@
 /*
  * Copyright 2006-2011 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
@@ -29,9 +29,10 @@ import org.springframework.util.StringUtils;
  * If authentication fails and the caller has asked for a specific content type response, this entry point can send one,
  * along with a standard 401 status. Add to the Spring Security configuration as an {@link AuthenticationEntryPoint} in
  * the usual way.
- * 
+ *
  * @author Dave Syer
- * 
+ * 如果身份验证失败，并且呼叫者已请求特定的内容类型响应，则此入口点可以发送一个消息以及标准401状态。
+ * 以通常的方式将其作为AuthenticationEntryPoint添加到Spring Security配置中。
  */
 public class OAuth2AuthenticationEntryPoint extends AbstractOAuth2SecurityExceptionHandler implements
 		AuthenticationEntryPoint {

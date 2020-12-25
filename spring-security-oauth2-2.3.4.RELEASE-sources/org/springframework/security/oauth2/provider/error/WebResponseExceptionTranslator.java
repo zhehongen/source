@@ -21,6 +21,9 @@ import org.springframework.http.ResponseEntity;
  * Translates exceptions into HTTP Responses.
  * 
  * @param <T> The error model that will be used as the HTTP Response body.
+ * 将异常转换为HTTP响应。
+ * 类型参数：
+ * <T> –将用作HTTP响应正文的错误模型。          
  */
 public interface WebResponseExceptionTranslator<T> {
 	

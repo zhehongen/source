@@ -18,22 +18,29 @@ import org.springframework.web.bind.annotation.SessionAttributes;
  * throughout the authorization process, and is therefore treated as ephemeral
  * and not to be stored long term. For long term storage, use the read-only
  * {@link OAuth2Request} class.
- * 
+ *
  * HTTP request parameters are stored in the parameters map, and any processing
  * the server makes throughout the lifecycle of a request are stored on
  * individual properties. The original request parameters will remain available
  * through the parameters map. For convenience, constants are defined in order
  * to get at those original values. However, the parameters map is unmodifiable
  * so that processing cannot drop the original values.
- * 
+ *
  * This class is {@link Serializable} in order to support storage of the
  * authorization request as a {@link SessionAttributes} member while the end
  * user through the authorization process (which may span several page
  * requests).
- * 
+ *
  * @author Ryan Heaton
  * @author Dave Syer
  * @author Amanda Anganes
+ * OAuth 2客户端的授权请求，通常由AuthorizationEndpoint接收和处理。
+ * 此类打算在整个授权过程中进行操作，因此被视为短暂的，不应长期保存。
+ * 对于长期存储，请使用只读的OAuth2Request类。
+ * HTTP请求参数存储在参数映射中，服务器在请求的整个生命周期中进行的任何处理都存储在各个属性中。
+ * 原始请求参数将通过参数映射保持可用。为了方便起见，定义了常数以便获得这些原始值。
+ * 但是，参数映射不可修改，因此处理无法删除原始值。
+ * 此类是可序列化的，以便在最终用户通过授权过程（可能跨越多个页面请求）时支持将授权请求存储为SessionAttributes成员。
  */
 @SuppressWarnings("serial")
 public class AuthorizationRequest extends BaseRequest implements Serializable {
@@ -42,6 +49,7 @@ public class AuthorizationRequest extends BaseRequest implements Serializable {
 	 * Map to hold the original, unchanged parameter set submitted by a user to
 	 * signal approval of the token grant approval. Once set this should not be
 	 * modified.
+	 * 映射以保留用户提交的原始，不变的参数集，以表示对令牌授予批准的批准。 设置后，不得修改。
 	 */
 	private Map<String, String> approvalParameters = Collections.unmodifiableMap(new HashMap<String, String>());
 
@@ -55,6 +63,7 @@ public class AuthorizationRequest extends BaseRequest implements Serializable {
 	/**
 	 * Resolved requested response types initialized (by the
 	 * OAuth2RequestFactory) with the response types originally requested.
+	 * 已解析的请求响应类型（由OAuth2RequestFactory初始化）为原始请求的响应类型。啥玩意儿？code? token之类？
 	 */
 	private Set<String> responseTypes = new HashSet<String>();
 
@@ -73,6 +82,8 @@ public class AuthorizationRequest extends BaseRequest implements Serializable {
 	 * Whether the request has been approved by the end user (or other process).
 	 * This will be altered by the User Approval Endpoint and/or the
 	 * UserApprovalHandler as appropriate.
+	 * 该请求是否已被最终用户批准（或其他过程）。
+	 * 用户批准端点和/或UserApprovalHandler将对此进行适当的更改。
 	 */
 	private boolean approved = false;
 
@@ -89,6 +100,8 @@ public class AuthorizationRequest extends BaseRequest implements Serializable {
 	 * additional information about the OAuth2 request. Since this class will
 	 * create a serializable OAuth2Request, all members of this extension map
 	 * must be serializable.
+	 * 自定义处理类的扩展点，它们可能希望存储有关OAuth2请求的其他信息。
+	 * 由于此类将创建可序列化的OAuth2Request，因此此扩展名映射的所有成员必须可序列化。
 	 */
 	private Map<String, Serializable> extensions = new HashMap<String, Serializable>();
 
@@ -129,7 +142,7 @@ public class AuthorizationRequest extends BaseRequest implements Serializable {
 	/**
 	 * Convenience constructor for unit tests, where client ID and scope are
 	 * often the only needed fields.
-	 * 
+	 *
 	 * @param clientId
 	 * @param scopes
 	 */
@@ -141,7 +154,7 @@ public class AuthorizationRequest extends BaseRequest implements Serializable {
 	/**
 	 * Convenience method to set resourceIds and authorities on this request by
 	 * inheriting from a ClientDetails object.
-	 * 
+	 *
 	 * @param clientDetails
 	 */
 	public void setResourceIdsAndAuthoritiesFromClientDetails(ClientDetails clientDetails) {
@@ -210,9 +223,9 @@ public class AuthorizationRequest extends BaseRequest implements Serializable {
 	 * Set the scope value. If the collection contains only a single scope
 	 * value, this method will parse that value into a collection using
 	 * {@link OAuth2Utils#parseParameterList}.
-	 * 
+	 *
 	 * @see TokenRequest#setScope
-	 * 
+	 *
 	 * @param scope
 	 */
 	public void setScope(Collection<String> scope) {
@@ -220,12 +233,12 @@ public class AuthorizationRequest extends BaseRequest implements Serializable {
 	}
 
 	/**
-	 * Set the Request Parameters on this authorization request, which represent
+	 * Set the Request Parameters on this authorization request, which represent代表
 	 * the original request parameters and should never be changed during
 	 * processing. The map passed in is wrapped in an unmodifiable map instance.
-	 * 
+	 *
 	 * @see TokenRequest#setRequestParameters
-	 * 
+	 *
 	 * @param requestParameters
 	 */
 	public void setRequestParameters(Map<String, String> requestParameters) {

@@ -5,7 +5,7 @@ import java.util.Random;
 
 /**
  * Utility that generates a random-value ASCII string.
- * 
+ *
  * @author Ryan Heaton
  * @author Dave Syer
  */
@@ -27,7 +27,7 @@ public class RandomValueStringGenerator {
 
 	/**
 	 * Create a generator of random strings of the length provided
-	 * 
+	 *
 	 * @param length the length of the strings generated
 	 */
 	public RandomValueStringGenerator(int length) {
@@ -44,9 +44,15 @@ public class RandomValueStringGenerator {
 	 * Convert these random bytes to a verifier string. The length of the byte array can be
 	 * {@link #setLength(int) configured}. The default implementation mods the bytes to fit into the
 	 * ASCII letters 1-9, A-Z, a-z .
-	 * 
+	 *
 	 * @param verifierBytes The bytes.
 	 * @return The string.
+	 * 将这些随机字节转换为验证字符串。 字节数组的长度可以配置。 默认实现会修改字节以适合ASCII字母1-9，A-Z，a-z。
+	 *
+	 * 参数：
+	 * verifierBytes –字节。
+	 * 返回值：
+	 * 字符串。
 	 */
 	protected String getAuthorizationCodeString(byte[] verifierBytes) {
 		char[] chars = new char[verifierBytes.length];
@@ -58,16 +64,16 @@ public class RandomValueStringGenerator {
 
 	/**
 	 * The random value generator used to create token secrets.
-	 * 
+	 *
 	 * @param random The random value generator used to create token secrets.
 	 */
 	public void setRandom(Random random) {
 		this.random = random;
 	}
-	
+
 	/**
 	 * The length of string to generate.
-	 * 
+	 *
 	 * @param length the length to set
 	 */
 	public void setLength(int length) {

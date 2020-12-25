@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
  * Validation interface for OAuth2 requests to the {@link AuthorizationEndpoint} and {@link TokenEndpoint}.
  * 
  * @author Amanda Anganes
- *
+ * OAuth2向AuthorizationEndpoint和TokenEndpoint请求的验证接口。
  */
 public interface OAuth2RequestValidator {
 

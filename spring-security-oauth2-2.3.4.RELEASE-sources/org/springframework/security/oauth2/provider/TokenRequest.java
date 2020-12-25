@@ -11,14 +11,15 @@ import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 /**
  * Represents an OAuth2 token request, made at the {@link TokenEndpoint}. The requestParameters map should contain the
  * original, unmodified parameters from the original OAuth2 request.
- * 
+ *
  * In the implicit flow, a token is requested through the {@link AuthorizationEndpoint} directly, and in that case the
  * {@link AuthorizationRequest} is converted into a {@link TokenRequest} for processing through the token granting
  * chain.
- * 
+ *
  * @author Amanda Anganes
  * @author Dave Syer
- * 
+ * 表示在TokenEndpoint发出的OAuth2令牌请求。 requestParameters映射应包含原始OAuth2请求中未经修改的原始参数。
+ * 在隐式流中，直接通过AuthorizationEndpoint请求令牌，在这种情况下，将AuthorizationRequest转换为TokenRequest以通过令牌授予链进行处理。
  */
 @SuppressWarnings("serial")
 public class TokenRequest extends BaseRequest {
@@ -33,11 +34,18 @@ public class TokenRequest extends BaseRequest {
 
 	/**
 	 * Full constructor. Sets this TokenRequest's requestParameters map to an unmodifiable version of the one provided.
-	 * 
+	 *
 	 * @param requestParameters
 	 * @param clientId
 	 * @param scope
 	 * @param grantType
+	 * 完整的构造函数。 将此TokenRequest的requestParameters映射设置为所提供的Token的不可修改版本。
+	 *
+	 * 参数：
+	 * requestParameters –
+	 * clientId –
+	 * scope -
+	 * grantType –
 	 */
 	public TokenRequest(Map<String, String> requestParameters, String clientId, Collection<String> scope,
 			String grantType) {
@@ -62,9 +70,9 @@ public class TokenRequest extends BaseRequest {
 	/**
 	 * Set the scope value. If the collection contains only a single scope value, this method will parse that value into
 	 * a collection using {@link OAuth2Utils#parseParameterList}.
-	 * 
+	 *
 	 * @see AuthorizationRequest#setScope
-	 * 
+	 *
 	 * @param scope
 	 */
 	public void setScope(Collection<String> scope) {
@@ -74,9 +82,9 @@ public class TokenRequest extends BaseRequest {
 	/**
 	 * Set the Request Parameters on this authorization request, which represent the original request parameters and
 	 * should never be changed during processing. The map passed in is wrapped in an unmodifiable map instance.
-	 * 
+	 *
 	 * @see AuthorizationRequest#setRequestParameters
-	 * 
+	 *
 	 * @param requestParameters
 	 */
 	public void setRequestParameters(Map<String, String> requestParameters) {
