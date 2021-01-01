@@ -142,12 +142,12 @@ public class LockSupport {
     }
 
     /**
-     * Disables the current thread for thread scheduling purposes unless the
-     * permit is available.
-     *
-     * <p>If the permit is available then it is consumed and the call returns
-     * immediately; otherwise
-     * the current thread becomes disabled for thread scheduling
+     * Disables the current thread for thread scheduling purposes unless the除非有许可，否则出于线程调度目的禁用当前线程。
+     * permit is available.如果许可证可用，则将其消耗掉，并立即返回呼叫； 否则，出于线程调度目的，当前线程将被禁用，并在发生以下三种情况之一之前处于休眠状态：
+     *    其他一些线程以当前线程为目标调用unpark； 要么
+     * <p>If the permit is available then it is consumed and the call returns其他一些线程中断当前线程。 要么
+     * immediately; otherwise虚假地（即，无故）调用返回。
+     * the current thread becomes disabled for thread scheduling此方法不报告其中哪一个导致方法返回。 调用者应重新检查导致线程首先停滞的条件。 调用者还可以确定例如返回时线程的中断状态。
      * purposes and lies dormant until one of three things happens:
      *
      * <ul>
@@ -166,7 +166,7 @@ public class LockSupport {
      * for example, the interrupt status of the thread upon return.
      *
      * @param blocker the synchronization object responsible for this
-     *        thread parking
+     *        thread parking 阻止程序–负责此线程驻留的同步对象
      * @since 1.6
      */
     public static void park(Object blocker) {
@@ -177,17 +177,17 @@ public class LockSupport {
     }
 
     /**
-     * Disables the current thread for thread scheduling purposes, for up to
-     * the specified waiting time, unless the permit is available.
+     * Disables the current thread for thread scheduling purposes, for up to除非允许使用许可，否则在指定的等待时间内禁用用于线程调度目的的当前线程。
+     * the specified waiting time, unless the permit is available.         如果许可证可用，则将其消耗掉，并立即返回呼叫；否则，呼叫将立即返回。否则，出于线程调度的目的，当前线程将被禁用，并处于休眠状态，直到发生以下四种情况之一：
+     *                                                                   其他一些线程以当前线程为目标调用unpark；要么
+     * <p>If the permit is available then it is consumed and the call     其他一些线程中断当前线程。要么
+     * returns immediately; otherwise the current thread becomes disabled 经过指定的等待时间；要么
+     * for thread scheduling purposes and lies dormant until one of four 虚假地（即，无故）调用返回。
+     * things happens:                                                   此方法不报告其中哪一个导致方法返回。调用者应重新检查导致线程首先停滞的条件。调用方还可以确定例如线程的中断状态或返回时所经过的时间。
      *
-     * <p>If the permit is available then it is consumed and the call
-     * returns immediately; otherwise the current thread becomes disabled
-     * for thread scheduling purposes and lies dormant until one of four
-     * things happens:
-     *
-     * <ul>
-     * <li>Some other thread invokes {@link #unpark unpark} with the
-     * current thread as the target; or
+     * <ul>                                                              参数：
+     * <li>Some other thread invokes {@link #unpark unpark} with the     阻止程序–负责此线程驻留的同步对象
+     * current thread as the target; or                                  纳秒–等待的最大纳秒数
      *
      * <li>Some other thread {@linkplain Thread#interrupt interrupts}
      * the current thread; or

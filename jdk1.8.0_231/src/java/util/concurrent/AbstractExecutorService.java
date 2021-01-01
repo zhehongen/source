@@ -73,14 +73,14 @@ public abstract class AbstractExecutorService implements ExecutorService {
     /**
      * Returns a {@code RunnableFuture} for the given runnable and default
      * value.
-     *返回给定可运行值和默认值的RunnableFuture。
+     * 返回给定可运行值和默认值的RunnableFuture。
      * @param runnable the runnable task being wrapped
      * @param value the default value for the returned future
      * @param <T> the type of the given value
      * @return a {@code RunnableFuture} which, when run, will run the
      * underlying runnable and which, as a {@code Future}, will yield
      * the given value as its result and provide for cancellation of
-     * the underlying task RunnableFuture，它在运行时将运行基础可运行对象，并且作为Future会产生给定值作为结果，并提供取消基础任务的功能
+     * the underlying task RunnableFuture，它在运行时将运行基础callable对象，并且作为Future会产生给定值作为结果，并提供取消基础任务的功能
      * @since 1.6
      */
     protected <T> RunnableFuture<T> newTaskFor(Runnable runnable, T value) {
@@ -89,7 +89,7 @@ public abstract class AbstractExecutorService implements ExecutorService {
 
     /**
      * Returns a {@code RunnableFuture} for the given callable task.
-     *返回给定可调用任务的RunnableFuture。
+     *返回给定callable任务的RunnableFuture。
      * @param callable the callable task being wrapped
      * @param <T> the type of the callable's result
      * @return a {@code RunnableFuture} which, when run, will call the
@@ -109,7 +109,7 @@ public abstract class AbstractExecutorService implements ExecutorService {
     public Future<?> submit(Runnable task) {
         if (task == null) throw new NullPointerException();
         RunnableFuture<Void> ftask = newTaskFor(task, null);
-        execute(ftask);
+        execute(ftask);//执行futureTask中的run方法
         return ftask;
     }
 
