@@ -138,7 +138,7 @@ import java.util.stream.StreamSupport;
  * @see     Collections
  * @see     Arrays
  * @see     AbstractCollection
- * @since 1.2
+ * @since 1.2 zhe
  */
 
 public interface Collection<E> extends Iterable<E> {
@@ -148,7 +148,7 @@ public interface Collection<E> extends Iterable<E> {
      * Returns the number of elements in this collection.  If this collection
      * contains more than <tt>Integer.MAX_VALUE</tt> elements, returns
      * <tt>Integer.MAX_VALUE</tt>.
-     *
+     *返回此集合中的元素数。 如果此集合包含多个Integer.MAX_VALUE元素，则返回Integer.MAX_VALUE。
      * @return the number of elements in this collection
      */
     int size();
@@ -165,7 +165,7 @@ public interface Collection<E> extends Iterable<E> {
      * More formally, returns <tt>true</tt> if and only if this collection
      * contains at least one element <tt>e</tt> such that
      * <tt>(o==null&nbsp;?&nbsp;e==null&nbsp;:&nbsp;o.equals(e))</tt>.
-     *
+     *如果此集合包含指定的元素，则返回true。 更正式地讲，当且仅当此集合包含至少一个元素（e == null？e == null：o.equals（e））时，返回true。
      * @param o element whose presence in this collection is to be tested
      * @return <tt>true</tt> if this collection contains the specified
      *         element
@@ -183,7 +183,7 @@ public interface Collection<E> extends Iterable<E> {
      * guarantees concerning the order in which the elements are returned
      * (unless this collection is an instance of some class that provides a
      * guarantee).
-     *
+     *返回对此集合中的元素进行迭代的迭代器。 没有关于元素返回顺序的保证（除非此集合是某个提供保证的类的实例）。
      * @return an <tt>Iterator</tt> over the elements in this collection
      */
     Iterator<E> iterator();
@@ -192,8 +192,8 @@ public interface Collection<E> extends Iterable<E> {
      * Returns an array containing all of the elements in this collection.
      * If this collection makes any guarantees as to what order its elements
      * are returned by its iterator, this method must return the elements in
-     * the same order.
-     *
+     * the same order.返回一个包含此集合中所有元素的数组。 如果此集合对由其迭代器返回其元素的顺序做出任何保证，则此方法必须按相同顺序返回元素。
+     *返回的数组将是“安全的”，因为此集合不维护对其的引用。 （换句话说，即使此集合由数组支持，此方法也必须分配一个新数组）。 因此，调用者可以自由修改返回的数组。
      * <p>The returned array will be "safe" in that no references to it are
      * maintained by this collection.  (In other words, this method must
      * allocate a new array even if this collection is backed by an array).
@@ -207,13 +207,13 @@ public interface Collection<E> extends Iterable<E> {
     Object[] toArray();
 
     /**
-     * Returns an array containing all of the elements in this collection;
-     * the runtime type of the returned array is that of the specified array.
-     * If the collection fits in the specified array, it is returned therein.
-     * Otherwise, a new array is allocated with the runtime type of the
-     * specified array and the size of this collection.
-     *
-     * <p>If this collection fits in the specified array with room to spare
+     * Returns an array containing all of the elements in this collection;    返回一个包含此集合中所有元素的数组；返回数组的运行时类型是指定数组的运行时类型。如果集合适合指定的数组，则将其返回。否则，将使用指定数组的运行时类型和此集合的大小分配一个新数组。
+     * the runtime type of the returned array is that of the specified array.  如果此集合适合指定的数组并有剩余空间（即，数组比该集合具有更多的元素），则紧接集合结束后的数组中的元素将设置为null。 （仅当调用者知道此集合不包含任何null元素时，此方法才可用于确定此集合的长度。）
+     * If the collection fits in the specified array, it is returned therein.  如果此集合对由其迭代器返回其元素的顺序做出任何保证，则此方法必须按相同顺序返回元素。
+     * Otherwise, a new array is allocated with the runtime type of the        与toArray（）方法一样，此方法充当基于数组的API和基于集合的API之间的桥梁。此外，此方法允许对输出数组的运行时类型进行精确控制，并且在某些情况下可以用来节省分配成本。
+     * specified array and the size of this collection.                    假设x是一个已知仅包含字符串的集合。以下代码可用于将集合转储到新分配的String数组中：
+     *                                                                      String [] y = x.toArray（new String [0]）;
+     * <p>If this collection fits in the specified array with room to spare  注意，toArray（new Object [0]）在功能上与toArray（）相同。
      * (i.e., the array has more elements than this collection), the element
      * in the array immediately following the end of the collection is set to
      * <tt>null</tt>.  (This is useful in determining the length of this
@@ -254,9 +254,9 @@ public interface Collection<E> extends Iterable<E> {
     // Modification Operations
 
     /**
-     * Ensures that this collection contains the specified element (optional
-     * operation).  Returns <tt>true</tt> if this collection changed as a
-     * result of the call.  (Returns <tt>false</tt> if this collection does
+     * Ensures that this collection contains the specified element (optional   确保此集合包含指定的元素（可选操作）。如果此集合由于调用而更改，则返回true。 （如果此集合不允许重复并且已经包含指定的元素，则返回false。）
+     * operation).  Returns <tt>true</tt> if this collection changed as a   支持此操作的集合可能会对可以添加到此集合的元素施加限制。特别是，某些集合将拒绝添加null元素，而其他集合将对可能添加的元素类型施加限制。集合类应在其文档中明确指定对可以添加哪些元素的任何限制。
+     * result of the call.  (Returns <tt>false</tt> if this collection does   如果某个集合由于已经包含该元素以外的其他原因拒绝添加该元素，则它必须引发异常（而不是返回false）。这保留了不变，即在此调用返回之后，集合始终包含指定的元素。
      * not permit duplicates and already contains the specified element.)<p>
      *
      * Collections that support this operation may place limitations on what
@@ -296,7 +296,7 @@ public interface Collection<E> extends Iterable<E> {
      * this collection contains one or more such elements.  Returns
      * <tt>true</tt> if this collection contained the specified element (or
      * equivalently, if this collection changed as a result of the call).
-     *
+     *如果存在，则从此集合中删除指定元素的单个实例（可选操作）。更正式地讲，如果此集合包含一个或多个这样的元素，则删除使其（o == null？e == null：o.equals（e））的元素。如果此集合包含指定的元素（或者等效地，如果此集合由于调用而更改），则返回true。
      * @param o element to be removed from this collection, if present
      * @return <tt>true</tt> if an element was removed as a result of this call
      * @throws ClassCastException if the type of the specified element
@@ -326,7 +326,7 @@ public interface Collection<E> extends Iterable<E> {
      *         (<a href="#optional-restrictions">optional</a>)
      * @throws NullPointerException if the specified collection contains one
      *         or more null elements and this collection does not permit null
-     *         elements
+     *         elements如果此集合包含指定集合中的所有元素，则返回true。
      *         (<a href="#optional-restrictions">optional</a>),
      *         or if the specified collection is null.
      * @see    #contains(Object)
@@ -340,7 +340,7 @@ public interface Collection<E> extends Iterable<E> {
      * (This implies that the behavior of this call is undefined if the
      * specified collection is this collection, and this collection is
      * nonempty.)
-     *
+     *将指定集合中的所有元素添加到此集合中（可选操作）。如果在操作进行过程中修改了指定的集合，则此操作的行为是不确定的。 （这意味着如果指定的集合是此集合，并且此集合是非空的，则此调用的行为是不确定的。）
      * @param c collection containing elements to be added to this collection
      * @return <tt>true</tt> if this collection changed as a result of the call
      * @throws UnsupportedOperationException if the <tt>addAll</tt> operation
@@ -364,7 +364,7 @@ public interface Collection<E> extends Iterable<E> {
      * specified collection (optional operation).  After this call returns,
      * this collection will contain no elements in common with the specified
      * collection.
-     *
+     *删除也包含在指定集合中的所有此集合的元素（可选操作）。在此调用返回之后，此集合将不包含与指定集合相同的元素。
      * @param c collection containing elements to be removed from this collection
      * @return <tt>true</tt> if this collection changed as a result of the
      *         call
@@ -388,14 +388,14 @@ public interface Collection<E> extends Iterable<E> {
      * Removes all of the elements of this collection that satisfy the given
      * predicate.  Errors or runtime exceptions thrown during iteration or by
      * the predicate are relayed to the caller.
-     *
+     *默认实现使用其迭代器遍历集合的所有元素。使用Iterator.remove（）删除每个匹配的元素。如果集合的迭代器不支持移除，则将在第一个匹配的元素上抛出UnsupportedOperationException。
      * @implSpec
      * The default implementation traverses all elements of the collection using
      * its {@link #iterator}.  Each matching element is removed using
      * {@link Iterator#remove()}.  If the collection's iterator does not
      * support removal then an {@code UnsupportedOperationException} will be
      * thrown on the first matching element.
-     *
+     *删除此集合中满足给定谓词的所有元素。在迭代过程中或谓词中引发的错误或运行时异常将中继给调用方。
      * @param filter a predicate which returns {@code true} for elements to be
      *        removed
      * @return {@code true} if any elements were removed
@@ -424,7 +424,7 @@ public interface Collection<E> extends Iterable<E> {
      * specified collection (optional operation).  In other words, removes from
      * this collection all of its elements that are not contained in the
      * specified collection.
-     *
+     *仅保留此集合中包含在指定集合中的元素（可选操作）。换句话说，从此集合中删除所有未包含在指定集合中的元素。
      * @param c collection containing elements to be retained in this collection
      * @return <tt>true</tt> if this collection changed as a result of the call
      * @throws UnsupportedOperationException if the <tt>retainAll</tt> operation
@@ -446,7 +446,7 @@ public interface Collection<E> extends Iterable<E> {
     /**
      * Removes all of the elements from this collection (optional operation).
      * The collection will be empty after this method returns.
-     *
+     *从此集合中删除所有元素（可选操作）。 此方法返回后，集合将为空。
      * @throws UnsupportedOperationException if the <tt>clear</tt> operation
      *         is not supported by this collection
      */
@@ -457,7 +457,7 @@ public interface Collection<E> extends Iterable<E> {
 
     /**
      * Compares the specified object with this collection for equality. <p>
-     *
+     *尽管Collection接口没有为Object.equals的常规合同增加任何规定，但是“直接”实现Collection接口（换句话说，创建一个不是Collection而不是Set或List的类）的程序员必须小心如果他们选择覆盖Object.equals。不必这样做，最简单的方法是依靠Object的实现，但是实现者可能希望实现“值比较”来代替默认的“引用比较”。 （List和Set接口要求进行这种值比较。）
      * While the <tt>Collection</tt> interface adds no stipulations to the
      * general contract for the <tt>Object.equals</tt>, programmers who
      * implement the <tt>Collection</tt> interface "directly" (in other words,
@@ -468,7 +468,7 @@ public interface Collection<E> extends Iterable<E> {
      * the implementor may wish to implement a "value comparison" in place of
      * the default "reference comparison."  (The <tt>List</tt> and
      * <tt>Set</tt> interfaces mandate such value comparisons.)<p>
-     *
+     *Object.equals方法的常规协定规定，equals必须是对称的（换句话说，当且仅当b.equals（a）时，a.equals（b））。 List.equals和Set.equals的合同规定，列表仅等于其他列表，集合仅等于其他集合。 因此，当将此集合与任何列表或集合进行比较时，既不实现List也不实现Set接口的集合类的自定义equals方法必须返回false。 （按照相同的逻辑，不可能编写正确实现Set和List接口的类。）
      * The general contract for the <tt>Object.equals</tt> method states that
      * equals must be symmetric (in other words, <tt>a.equals(b)</tt> if and
      * only if <tt>b.equals(a)</tt>).  The contracts for <tt>List.equals</tt>
@@ -499,7 +499,7 @@ public interface Collection<E> extends Iterable<E> {
      * to satisfy the general contract for the <tt>Object.hashCode</tt> method.
      * In particular, <tt>c1.equals(c2)</tt> implies that
      * <tt>c1.hashCode()==c2.hashCode()</tt>.
-     *
+     *返回此集合的哈希码值。 尽管Collection接口没有为Object.hashCode方法的常规协定添加任何规定，但程序员应注意，重写Object.equals方法的任何类也必须重写Object.hashCode方法，以满足Object.hashCode方法的常规协定。 特别地，c1.equals（c2）暗示c1.hashCode（）== c2.hashCode（）。
      * @return the hash code value for this collection
      *
      * @see Object#hashCode()
@@ -555,7 +555,7 @@ public interface Collection<E> extends Iterable<E> {
      * covers no elements.
      *
      * @return a {@code Spliterator} over the elements in this collection
-     * @since 1.8
+     * @since 1.8 zhe
      */
     @Override
     default Spliterator<E> spliterator() {
@@ -568,8 +568,8 @@ public interface Collection<E> extends Iterable<E> {
      * <p>This method should be overridden when the {@link #spliterator()}
      * method cannot return a spliterator that is {@code IMMUTABLE},
      * {@code CONCURRENT}, or <em>late-binding</em>. (See {@link #spliterator()}
-     * for details.)
-     *
+     * for details.)返回以此集合为源的顺序Stream。
+     *当spliterator（）方法无法返回IMMUTABLE，CONCURRENT或后期绑定的分隔符时，应重写此方法。 （有关详细信息，请参见spliterator（）。）
      * @implSpec
      * The default implementation creates a sequential {@code Stream} from the
      * collection's {@code Spliterator}.
@@ -588,8 +588,8 @@ public interface Collection<E> extends Iterable<E> {
      * <p>This method should be overridden when the {@link #spliterator()}
      * method cannot return a spliterator that is {@code IMMUTABLE},
      * {@code CONCURRENT}, or <em>late-binding</em>. (See {@link #spliterator()}
-     * for details.)
-     *
+     * for details.)返回一个可能与此流作为其源的并行Stream。 此方法允许返回顺序流。
+     *当spliterator（）方法无法返回IMMUTABLE，CONCURRENT或后期绑定的分隔符时，应重写此方法。 （有关详细信息，请参见spliterator（）。）
      * @implSpec
      * The default implementation creates a parallel {@code Stream} from the
      * collection's {@code Spliterator}.
@@ -602,3 +602,45 @@ public interface Collection<E> extends Iterable<E> {
         return StreamSupport.stream(spliterator(), true);
     }
 }
+
+/**
+ * 集合层次结构中的根接口。集合表示一组对象，称为其元素。一些集合允许重复的元素，而另一些则不允许。一些是有序的，而其他则是无序的。 JDK不提供此接口的任何直接实现：它提供更特定的子接口（如Set和List）的实现。该接口通常用于传递集合，并在需要最大通用性的地方操作它们。
+ * Bag或多集（可能包含重复元素的无序集合）应直接实现此接口。
+ * 所有通用的Collection实现类（通常通过其子接口之一间接实现Collection）都应提供两个“标准”构造函数：一个void（无参数）构造函数，用于创建一个空集合，以及一个类型为单个参数的构造函数集合，它将创建一个新集合，其元素与其参数相同。实际上，后一个构造函数允许用户复制任何集合，从而生成所需实现类型的等效集合。没有强制执行此约定的方法（因为接口不能包含构造函数），但是Java平台库中的所有通用Collection实现都遵从。
+ * 如果此集合不支持该操作，则指定该接口中包含的“破坏性”方法（即，修改其操作的集合的方法）以引发UnsupportedOperationException。在这种情况下，如果调用对集合没有影响，则这些方法可能会（但不是必需）引发UnsupportedOperationException。例如，如果要添加的集合为空，则对一个不可修改的集合调用addAll（Collection）方法可能（但并非必须）引发异常。
+ *
+ * 一些集合实现对它们可能包含的元素有限制。例如，某些实现禁止使用null元素，而某些实现对其元素类型进行限制。尝试添加不合格元素会引发未经检查的异常，通常为NullPointerException或ClassCastException。尝试查询不合格元素的存在可能会引发异常，或者可能仅返回false；否则，可能会返回false。一些实现将表现出前一种行为，而某些将表现出后者。更一般地，尝试对不合格元素进行操作，该操作的完成不会导致将不合格元素插入集合中，这可能会导致异常或成功实现，具体取决于实现方式。此类异常在此接口的规范中标记为“可选”。
+ * 由每个集合决定自己的同步策略。在实现没有更强有力的保证的情况下，未定义的行为可能是由于调用另一个线程正在变异的集合上的任何方法而导致的；这包括直接调用，将​​集合传递给可能执行调用的方法，以及使用现有的迭代器检查集合。
+ * Collections Framework接口中的许多方法都是根据equals方法定义的。例如，contains（Object o）方法的规范说：“当且仅当此集合包含至少一个元素e使得（o == null？e == null：o.equals（e））时，返回true。 。”此规范不应解释为暗示使用非空参数o调用Collection.contains会导致对任何元素e调用o.equals（e）。实现可以自由地进行优化，从而避免了等号调用，例如，首先比较两个元素的哈希码。 （Object.hashCode（）规范保证了具有不相等哈希码的两个对象不能相等。）更一般而言，各种Collections Framework接口的实现都可以在实现者认为合适的地方随意利用底层Object方法的指定行为。 。
+ * 对于集合直接或间接包含自身的自引用实例，某些执行集合的递归遍历的集合操作可能会失败。这包括clone（），equals（），hashCode（）和toString（）方法。实现可以有选择地处理自引用场景，但是大多数当前实现不这样做。
+ *
+ * 实施要求：
+ * 默认方法实现（继承或以其他方式）不应用任何同步协议。如果Collection实现具有特定的同步协议，则它必须覆盖默认实现以应用该协议。
+ *
+ *
+ *
+ *
+ *
+ *
+ * 在此集合中的元素上创建拆分器。实现应记录分隔器报告的特征值。如果拆分器报告Spliterator.SIZED并且此集合不包含任何元素，则不需要报告此类特征值。
+ * 子类可以覆盖默认实现，该子类可以返回更有效的分隔符。为了保留stream（）和parallelStream（）}方法的预期懒惰行为，分隔符应具有IMMUTABLE或CONCURRENT的特性，或者具有后期绑定特性。如果这些都不可行，则覆盖的类应描述分隔符记录的绑定和结构干扰策略，并应覆盖stream（）和parallelStream（）方法以使用分隔符的Supplier创建流，如下所示：
+ *
+ *      Stream <E> s = StreamSupport.stream（（）-> spliterator（），spliteratorCharacteristics）
+ *
+ * 这些要求确保从stream（）和parallelStream（）方法产生的流在终端流操作启动时将反映集合的内容。
+ *
+ * 返回值：
+ * 该集合中元素的分隔符
+ * 实施要求：
+ * 默认实现从集合的Iterator创建后绑定分离器。分隔器继承了集合的迭代器的快速失败属性。
+ * 创建的Spliterator报告Spliterator.SIZED。
+ * 实施说明：
+ * 创建的Spliterator还将报告Spliterator.SUBSIZED。
+ * 如果分隔符不包含任何元素，则报告除SIZED和SUBSIZED之外的其他特征值，将无助于客户控制，专门化或简化计算。但是，这确实允许为空集合共享使用不可变且为空的分隔符实例（请参见Spliterators.emptySpliterator（）），并使客户端能够确定此类分隔符是否不包含任何元素。
+ *
+ *
+ *
+ *
+ *
+ *
+ */

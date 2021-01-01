@@ -147,7 +147,7 @@ public interface Queue<E> extends Collection<E> {
      * immediately without violating capacity restrictions, returning
      * {@code true} upon success and throwing an {@code IllegalStateException}
      * if no space is currently available.
-     *
+     *如果可以立即将指定的元素插入此队列，而不会违反容量限制，则在成功时返回true，如果当前没有可用空间，则抛出IllegalStateException。
      * @param e the element to add
      * @return {@code true} (as specified by {@link Collection#add})
      * @throws IllegalStateException if the element cannot be added at this
@@ -167,7 +167,7 @@ public interface Queue<E> extends Collection<E> {
      * When using a capacity-restricted queue, this method is generally
      * preferable to {@link #add}, which can fail to insert an element only
      * by throwing an exception.
-     *
+     *如果可以在不违反容量限制的情况下立即将指定的元素插入此队列。当使用容量受限的队列时，这种方法通常比add更可取，add只能通过抛出异常来插入元素。
      * @param e the element to add
      * @return {@code true} if the element was added to this queue, else
      *         {@code false}
@@ -184,7 +184,7 @@ public interface Queue<E> extends Collection<E> {
      * Retrieves and removes the head of this queue.  This method differs
      * from {@link #poll poll} only in that it throws an exception if this
      * queue is empty.
-     *
+     *检索并删除此队列的头。 此方法与poll的不同之处仅在于，如果此队列为空，它将引发异常。
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
@@ -193,7 +193,7 @@ public interface Queue<E> extends Collection<E> {
     /**
      * Retrieves and removes the head of this queue,
      * or returns {@code null} if this queue is empty.
-     *
+     *检索并删除此队列的头，如果此队列为空，则返回null。
      * @return the head of this queue, or {@code null} if this queue is empty
      */
     E poll();
@@ -202,7 +202,7 @@ public interface Queue<E> extends Collection<E> {
      * Retrieves, but does not remove, the head of this queue.  This method
      * differs from {@link #peek peek} only in that it throws an exception
      * if this queue is empty.
-     *
+     *检索但不删除此队列的头。 此方法与peek的不同之处仅在于，如果此队列为空，它将引发异常。
      * @return the head of this queue
      * @throws NoSuchElementException if this queue is empty
      */
@@ -211,8 +211,19 @@ public interface Queue<E> extends Collection<E> {
     /**
      * Retrieves, but does not remove, the head of this queue,
      * or returns {@code null} if this queue is empty.
-     *
+     *检索但不删除此队列的头，如果此队列为空，则返回null。
      * @return the head of this queue, or {@code null} if this queue is empty
      */
     E peek();
 }
+
+/**
+ *设计用于在处理之前容纳元素的集合。除了基本的收集操作外，队列还提供其他插入，提取和检查操作。这些方法中的每一种都以两种形式存在：一种在操作失败时引发异常，另一种返回一个特殊值（根据操作而为null或false）。插入操作的后一种形式是专门为与容量受限的Queue实现一起使用而设计的；在大多数实现中，插入操作不会失败。
+ * 队列通常但不一定以FIFO（先进先出）的方式对元素进行排序。例外情况包括优先级队列（根据提供的比较器对元素进行排序或元素的自然排序）和LIFO队列（或堆栈），对LIFO进行排序（后进先出）。无论使用哪种顺序，队列的开头都是该元素，可以通过调用remove（）或poll（）将其删除。在FIFO队列中，所有新元素都插入队列的尾部。其他种类的队列可能使用不同的放置规则。每个Queue实现必须指定其排序属性。
+ * offer方法在可能的情况下插入一个元素，否则返回false。这不同于Collection.add方法，后者只能通过抛出未经检查的异常来添加元素。 offer方法设计用于在正常情况下（而不是在例外情况下）发生故障时，例如在固定容量（或“有界”）队列中使用。
+ * remove（）和poll（）方法将删除并返回队列的头部。确切地说，从队列中删除了哪个元素是队列的排序策略的函数，每个实现的实现方法不同。仅当队列为空时，remove（）和poll（）方法的行为不同：remove（）方法引发异常，而poll（）方法返回null。
+ * element（）和peek（）方法返回但不删除队列的头部。
+ * 队列接口没有定义并发编程中常见的阻塞队列方法。这些方法等待元素出现或空间可用，这些方法在java.util.concurrent.BlockingQueue接口中定义，该接口扩展了该接口。
+ * 队列实现通常不允许插入null元素，尽管某些实现（例如LinkedList）不允许插入null。即使在允许的实现中，也不应将null插入到队列中，因为poll方法还将null用作特殊的返回值，以指示该队列不包含任何元素。
+ * 队列实现通常不定义方法equals和hashCode的基于元素的版本，而是从Object类继承基于身份的版本，因为对于具有相同元素但顺序属性不同的队列，基于元素的相等性并不总是很好定义的。
+ */
