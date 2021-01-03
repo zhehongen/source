@@ -72,9 +72,9 @@ import java.util.function.Consumer;
  * <p>This class is a member of the
  * <a href="{@docRoot}/../technotes/guides/collections/index.html">
  * Java Collections Framework</a>.
- *
- * @since 1.5
- * @author Doug Lea
+ *                 基于链接节点的可选绑定的阻塞队列。该队列对元素FIFO（先进先出）进行排序。队列的开头是已在队列中停留最长时间的元素。队列的尾部是最短时间位于队列中的元素。新元素插入到队列的尾部，并且队列检索操作在队列的开头获取元素。链接队列通常比基于阵列的队列具有更高的吞吐量，但是在大多数并发应用程序中，可预测的性能较差。
+ * @since 1.5      可选的容量绑定构造函数参数是一种防止过多队列扩展的方法。该容量（如果未指定）等于Integer.MAX_VALUE。除非每次插入都会使队列超出容量，否则将在每次插入时动态创建链接节点。
+ * @author Doug Lea此类及其迭代器实现Collection和Iterator接口的所有可选方法。
  * @param <E> the type of elements held in this collection
  */
 public class LinkedBlockingQueue<E> extends AbstractQueue<E>
@@ -82,23 +82,23 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
     private static final long serialVersionUID = -6903933977591709194L;
 
     /*
-     * A variant of the "two lock queue" algorithm.  The putLock gates
-     * entry to put (and offer), and has an associated condition for
-     * waiting puts.  Similarly for the takeLock.  The "count" field
-     * that they both rely on is maintained as an atomic to avoid
-     * needing to get both locks in most cases. Also, to minimize need
-     * for puts to get takeLock and vice-versa, cascading notifies are
-     * used. When a put notices that it has enabled at least one take,
-     * it signals taker. That taker in turn signals others if more
-     * items have been entered since the signal. And symmetrically for
-     * takes signalling puts. Operations such as remove(Object) and
-     * iterators acquire both locks.
-     *
-     * Visibility between writers and readers is provided as follows:
-     *
-     * Whenever an element is enqueued, the putLock is acquired and
-     * count updated.  A subsequent reader guarantees visibility to the
-     * enqueued Node by either acquiring the putLock (via fullyLock)
+     * A variant of the "two lock queue" algorithm.  The putLock gates  “两个锁队列”算法的一种变体。
+     * entry to put (and offer), and has an associated condition for     putLock设置了看跌期权（和卖出价）的入口，并具有等待看跌期权的相关条件。
+     * waiting puts.  Similarly for the takeLock.  The "count" field    对于takeLock同样。
+     * that they both rely on is maintained as an atomic to avoid       他们俩都依赖的“ count”字段作为原子进行维护，以避免在大多数情况下需要获得两个锁。
+     * needing to get both locks in most cases. Also, to minimize need  同样，为了最大程度地减少获取putLock的需求，反之亦然，使用了级联通知。
+     * for puts to get takeLock and vice-versa, cascading notifies are  当认沽权通知其至少启用了一个卖空时，它将向买受人发出信号。
+     * used. When a put notices that it has enabled at least one take,  如果自信号发出后输入了更多项目，则该接收者又会向其他人发出信号。
+     * it signals taker. That taker in turn signals others if more      并对称地用于信令放置。
+     * items have been entered since the signal. And symmetrically for  诸如remove（Object）和迭代器之类的操作均获得这两个锁。
+     * takes signalling puts. Operations such as remove(Object) and     提供了作者与读者之间的可见性，如下所示：每当将元素放入队列时，都会获取putLock并更新计数。
+     * iterators acquire both locks.                                    后续的读取器通过获取putLock（通过fullyLock）或通过获取takeLock，然后读取n = count.get（）来保证对排队的节点的可见性。
+     *                                                                  这样就可以看到前n个项目。
+     * Visibility between writers and readers is provided as follows:   为了实现弱一致性的迭代器，看来我们需要使所有节点都可以从先前的出队节点GC到达。
+     *                                                                  这将导致两个问题：-允许恶意的Iterator导致无限制的内存保留-如果某个节点在使用期间处于使用期，则导致旧节点到新节点的跨代链接，这代的GC很难处理，从而导致重复的大集合。
+     * Whenever an element is enqueued, the putLock is acquired and     但是，只有未删除的节点可以从出队节点到达，并且可达性不必一定是GC理解的那种。
+     * count updated.  A subsequent reader guarantees visibility to the 我们使用链接刚刚退出队列的Node的技巧。
+     * enqueued Node by either acquiring the putLock (via fullyLock)    这样的自链接意味着前进到head.next。
      * or by acquiring the takeLock, and then reading n = count.get();
      * this gives visibility to the first n items.
      *
@@ -122,7 +122,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
     static class Node<E> {
         E item;
 
-        /**
+        /** 以下之一：-真正的后继节点-此节点，表示后继节点是head.next-空，表示没有后继节点（这是最后一个节点）
          * One of:
          * - the real successor Node
          * - this Node, meaning the successor is head.next
@@ -139,7 +139,7 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
     /** Current number of elements */
     private final AtomicInteger count = new AtomicInteger();
 
-    /**
+    /**链表头。 不变的：head.item == null
      * Head of linked list.
      * Invariant: head.item == null
      */
@@ -151,10 +151,10 @@ public class LinkedBlockingQueue<E> extends AbstractQueue<E>
      */
     private transient Node<E> last;
 
-    /** Lock held by take, poll, etc */
+    /** Lock held by take, poll, etc 通过取，投票等方式持有的锁*/
     private final ReentrantLock takeLock = new ReentrantLock();
 
-    /** Wait queue for waiting takes */
+    /** Wait queue for waiting takes 等待队列等待时间*/
     private final Condition notEmpty = takeLock.newCondition();
 
     /** Lock held by put, offer, etc */

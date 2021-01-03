@@ -34,10 +34,10 @@ package java.util;
  * <tt>size</tt> methods.  (The iterator returned by the <tt>iterator</tt>
  * method must implement <tt>hasNext</tt> and <tt>next</tt>.)<p>
  *
- * To implement a modifiable collection, the programmer must additionally
- * override this class's <tt>add</tt> method (which otherwise throws an
- * <tt>UnsupportedOperationException</tt>), and the iterator returned by the
- * <tt>iterator</tt> method must additionally implement its <tt>remove</tt>
+ * To implement a modifiable collection, the programmer must additionally   此类提供了Collection接口的基本实现，以最大程度地减少实现此接口所需的工作。
+ * override this class's <tt>add</tt> method (which otherwise throws an     要实现不可修改的集合，程序员只需扩展此类并为iterator和size方法提供实现。 （由iterator方法返回的迭代器必须实现hasNext和next。）
+ * <tt>UnsupportedOperationException</tt>), and the iterator returned by the要实现可修改的集合，程序员必须另外重写此类的add方法（否则将引发UnsupportedOperationException），并且iterator方法返回的迭代器必须另外实现其remove方法。
+ * <tt>iterator</tt> method must additionally implement its <tt>remove</tt> 根据Collection接口规范中的建议，程序员通常应提供一个void（无参数）和Collection构造函数。
  * method.<p>
  *
  * The programmer should generally provide a void (no argument) and
@@ -70,7 +70,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
 
     /**
      * Returns an iterator over the elements contained in this collection.
-     *
+     *返回此集合中包含的元素的迭代器。
      * @return an iterator over the elements contained in this collection
      */
     public abstract Iterator<E> iterator();
@@ -91,7 +91,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      *
      * <p>This implementation iterates over the elements in the collection,
      * checking each element in turn for equality with the specified element.
-     *
+     *此实现对集合中的元素进行迭代，依次检查每个元素是否与指定的元素相等。
      * @throws ClassCastException   {@inheritDoc}
      * @throws NullPointerException {@inheritDoc}
      */
@@ -121,7 +121,7 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * concurrent modification during iteration.  The {@code size} method is
      * called only as an optimization hint; the correct result is returned
      * even if the iterator returns a different number of elements.
-     *
+     *此实现返回一个数组，其中包含此集合的迭代器以相同顺序返回的所有元素，这些元素存储在数组的连续元素中，从索引0开始。返回数组的长度等于迭代器返回的元素数，即使此集合的大小在迭代过程中发生更改（如果集合允许在迭代过程中进行并发修改，则可能发生这种情况）。size方法仅作为优化提示调用；即使迭代器返回不同数量的元素，也会返回正确的结果。
      * <p>This method is equivalent to:
      *
      *  <pre> {@code
@@ -132,11 +132,11 @@ public abstract class AbstractCollection<E> implements Collection<E> {
      * }</pre>
      */
     public Object[] toArray() {
-        // Estimate size of array; be prepared to see more or fewer elements
+        // Estimate size of array; be prepared to see more or fewer elements估计数组的大小； 准备看到更多或更少的元素
         Object[] r = new Object[size()];
         Iterator<E> it = iterator();
         for (int i = 0; i < r.length; i++) {
-            if (! it.hasNext()) // fewer elements than expected
+            if (! it.hasNext()) // fewer elements than expected元素少于预期
                 return Arrays.copyOf(r, i);
             r[i] = it.next();
         }

@@ -19,12 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dea75211-3381-4533-a4be-34691517081f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jdk1.8.0_231/src/java/lang/Iterable.java" beforeDir="false" afterPath="$PROJECT_DIR$/jdk1.8.0_231/src/java/lang/Iterable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jdk1.8.0_231/src/java/util/Collection.java" beforeDir="false" afterPath="$PROJECT_DIR$/jdk1.8.0_231/src/java/util/Collection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jdk1.8.0_231/src/java/util/Queue.java" beforeDir="false" afterPath="$PROJECT_DIR$/jdk1.8.0_231/src/java/util/Queue.java" afterDir="false" />
-    </list>
+    <list default="true" id="dea75211-3381-4533-a4be-34691517081f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +35,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="aae9a48a-6d4c-4280-9102-d6604d890b9d" />
+    <option name="defaultAccountId" value="d072a0b6-ac3a-4a71-ae19-b6cffa70049b" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -83,7 +78,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608888156798</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="collection">
+      <created>1609514386497</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1609514386497</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,13 +104,19 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="你好" />
-    <option name="LAST_COMMIT_MESSAGE" value="你好" />
+    <MESSAGE value="collection" />
+    <option name="LAST_COMMIT_MESSAGE" value="collection" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="100" key="CommitChangelistDialog2" timestamp="1608887980535">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="289" y="0" key="CommitChangelistDialog2" timestamp="1609514382401">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="289" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1609514382401" />
     <state x="361" y="100" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608887980535" />
+    <state x="618" y="324" key="Github.Dialog.Accounts.Choose" timestamp="1609514397628">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="618" y="324" key="Github.Dialog.Accounts.Choose/0.0.1536.824@0.0.1536.824" timestamp="1609514397628" />
     <state x="790" y="399" key="Github.ShareDialog" timestamp="1604022205166">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -117,21 +125,19 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="219" key="Github.UntrackedFilesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604022214650" />
-    <state x="0" y="0" key="Vcs.Push.Dialog.v2" timestamp="1608888789017">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="0" y="0" key="Vcs.Push.Dialog.v2" timestamp="1609514389407">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="0" y="0" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1609514389407" />
     <state x="0" y="0" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608888789017" />
     <state x="851" y="254" width="743" height="532" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1608887655208">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="851" y="254" width="743" height="532" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608887655208" />
-    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1608949691677">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608949691677" />
     <state x="573" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1609512472721">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="573" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1609512472721" />
+    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1608949691677" />
   </component>
 </project>
