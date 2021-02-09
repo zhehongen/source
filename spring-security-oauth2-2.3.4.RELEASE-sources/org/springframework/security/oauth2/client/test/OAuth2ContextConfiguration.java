@@ -30,7 +30,7 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
  * Annotation to signal that an OAuth2 authentication should be created and and provided to the enclosing scope (method
  * or class). Used at the class level it will apply to all test methods (and {@link BeforeOAuth2Context} initializers).
  * Used at the method level it will apply only to the method, overriding any value found on the enclosing class.
- * 
+ * 发出信号以指示应该创建OAuth2身份验证并将其提供给封闭范围（方法或类）的注释。 在类级别使用，它将应用于所有测试方法（和BeforeOAuth2Context初始化程序）。 在方法级别使用，它将仅应用于方法，并覆盖在封闭类中找到的所有值。
  * @author Dave Syer
  * 
  */
@@ -47,7 +47,7 @@ public @interface OAuth2ContextConfiguration {
 	 * @see Password
 	 * @see Implicit
 	 * @see ClientCredentials
-	 * 
+	 * OAuth2ProtectedResourceDetails的具体实现。 测试框架将构建一个实例，并将其用于设置OAuth2身份验证上下文。 用于实例化提供的值的策略可能会因消费者而异。 如果未提供，则默认为resource（）的值。
 	 * @return the resource type to use
 	 */
 	Class<? extends OAuth2ProtectedResourceDetails> value() default OAuth2ProtectedResourceDetails.class;
@@ -55,7 +55,7 @@ public @interface OAuth2ContextConfiguration {
 	/**
 	 * The resource type to use when obtaining an access token. Defaults to {@link Password}. Intended to be used as an
 	 * alias for {@link #value()}.
-	 * 
+	 * 获取访问令牌时要使用的资源类型。 默认为OAuth2ContextConfiguration.Password。 旨在用作value（）的别名。
 	 * @return the resource type to use
 	 */
 	Class<? extends OAuth2ProtectedResourceDetails> resource() default Password.class;

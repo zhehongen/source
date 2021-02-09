@@ -51,25 +51,21 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>
+ * <p>令牌请求的端点，如OAuth2规范中所述。 客户端发布带有Grant_type参数（例如“ authorization_code”）
  * Endpoint for token requests as described in the OAuth2 spec. Clients post requests with a <code>grant_type</code>
  * parameter (e.g. "authorization_code") and other parameters as determined by the grant type. Supported grant types are
  * handled by the provided {@link #setTokenGranter(org.springframework.security.oauth2.provider.TokenGranter) token
- * granter}.
- * </p>
- *
+ * granter}.和其他由Grant类型决定的参数的请求。 受支持的授予类型由提供的令牌授予者处理。
+ * </p>必须使用Spring Security Authentication对客户端进行身份验证才能访问此端点，
+ *并且从身份验证令牌中提取客户端ID。 安排此操作的最佳方法（按照OAuth2规范）
  * <p>
  * Clients must be authenticated using a Spring Security {@link Authentication} to access this endpoint, and the client
  * id is extracted from the authentication token. The best way to arrange this (as per the OAuth2 spec) is to use HTTP
  * basic authentication for this endpoint with standard Spring Security support.
  * </p>
- *
+ *是在具有标准Spring Security支持的情况下对此端点使用HTTP基本身份验证。
  * @author Dave Syer
- * 令牌请求的端点，如OAuth2规范中所述。 客户端发布带有Grant_type参数（例如“ authorization_code”）
- * 和其他由Grant类型决定的参数的请求。 受支持的授予类型由提供的令牌授予者处理。
- * 必须使用Spring Security Authentication对客户端进行身份验证才能访问此端点，
- * 并且从身份验证令牌中提取客户端ID。 安排此操作的最佳方法（按照OAuth2规范）
- * 是在具有标准Spring Security支持的情况下对此端点使用HTTP基本身份验证。
+ *
  */
 @FrameworkEndpoint
 public class TokenEndpoint extends AbstractEndpoint {
@@ -127,10 +123,9 @@ public class TokenEndpoint extends AbstractEndpoint {
 				tokenRequest.setScope(Collections.<String> emptySet());
 			}
 		}
-
-		if (isRefreshTokenRequest(parameters)) {
+		
+		if (isRefreshTokenRequest(parameters)) {//刷新令牌具有其自己的默认范围，因此我们应在此处忽略工厂添加的任何范围。
 			// A refresh token has its own default scopes, so we should ignore any added by the factory here.
-			//刷新令牌具有其自己的默认范围，因此我们应在此处忽略工厂添加的任何范围。
 			tokenRequest.setScope(OAuth2Utils.parseParameterList(parameters.get(OAuth2Utils.SCOPE)));
 		}
 
@@ -145,9 +140,7 @@ public class TokenEndpoint extends AbstractEndpoint {
 
 	/**
 	 * @param principal the currently authentication principal
-	 * @return a client id if there is one in the principal
-	 * 能获取到用户吗
-	 *
+	 * @return a client id if there is one in the principal 能获取到用户吗
 	 */
 	protected String getClientId(Principal principal) {
 		Authentication client = (Authentication) principal;

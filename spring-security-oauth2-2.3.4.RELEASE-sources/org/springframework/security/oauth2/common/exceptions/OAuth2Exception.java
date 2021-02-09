@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 /**
  * Base exception for OAuth 2 exceptions.
- * 
+ *
  * @author Ryan Heaton
  * @author Rob Winch
  * @author Dave Syer
@@ -45,7 +45,7 @@ public class OAuth2Exception extends RuntimeException {
 
 	/**
 	 * The OAuth2 error code.
-	 * 
+	 * 批
 	 * @return The OAuth2 error code.
 	 */
 	public String getOAuth2ErrorCode() {
@@ -54,7 +54,7 @@ public class OAuth2Exception extends RuntimeException {
 
 	/**
 	 * The HTTP error code associated with this error.
-	 * 
+	 *
 	 * @return The HTTP error code associated with this error.
 	 */
 	public int getHttpErrorCode() {
@@ -63,7 +63,7 @@ public class OAuth2Exception extends RuntimeException {
 
 	/**
 	 * Get any additional information associated with this error.
-	 * 
+	 *
 	 * @return Additional information, or null if none.
 	 */
 	public Map<String, String> getAdditionalInformation() {
@@ -72,7 +72,7 @@ public class OAuth2Exception extends RuntimeException {
 
 	/**
 	 * Add some additional information with this OAuth error.
-	 * 
+	 *
 	 * @param key The key.
 	 * @param value The value.
 	 */
@@ -93,37 +93,37 @@ public class OAuth2Exception extends RuntimeException {
 	 */
 	public static OAuth2Exception create(String errorCode, String errorMessage) {
 		if (errorMessage == null) {
-			errorMessage = errorCode == null ? "OAuth Error" : errorCode;
+			errorMessage = errorCode == null ? "OAuth Error" : errorCode;//错误消息就是错误码
 		}
 		if (INVALID_CLIENT.equals(errorCode)) {
-			return new InvalidClientException(errorMessage);
+			return new InvalidClientException(errorMessage);//客户端不合法
 		}
 		else if (UNAUTHORIZED_CLIENT.equals(errorCode)) {
-			return new UnauthorizedClientException(errorMessage);
+			return new UnauthorizedClientException(errorMessage);//客户端未认证
 		}
 		else if (INVALID_GRANT.equals(errorCode)) {
-			return new InvalidGrantException(errorMessage);
+			return new InvalidGrantException(errorMessage);//授权类型错误
 		}
 		else if (INVALID_SCOPE.equals(errorCode)) {
-			return new InvalidScopeException(errorMessage);
+			return new InvalidScopeException(errorMessage);//域错误
 		}
 		else if (INVALID_TOKEN.equals(errorCode)) {
-			return new InvalidTokenException(errorMessage);
+			return new InvalidTokenException(errorMessage);//token不合法
 		}
 		else if (INVALID_REQUEST.equals(errorCode)) {
-			return new InvalidRequestException(errorMessage);
+			return new InvalidRequestException(errorMessage);//请求不合法
 		}
 		else if (REDIRECT_URI_MISMATCH.equals(errorCode)) {
-			return new RedirectMismatchException(errorMessage);
+			return new RedirectMismatchException(errorMessage);//重定向不匹配
 		}
 		else if (UNSUPPORTED_GRANT_TYPE.equals(errorCode)) {
-			return new UnsupportedGrantTypeException(errorMessage);
+			return new UnsupportedGrantTypeException(errorMessage);//不支持的授权类型
 		}
 		else if (UNSUPPORTED_RESPONSE_TYPE.equals(errorCode)) {
-			return new UnsupportedResponseTypeException(errorMessage);
+			return new UnsupportedResponseTypeException(errorMessage);//不支持的响应类型
 		}
 		else if (ACCESS_DENIED.equals(errorCode)) {
-			return new UserDeniedAuthorizationException(errorMessage);
+			return new UserDeniedAuthorizationException(errorMessage);//用户拒绝授权
 		}
 		else {
 			return new OAuth2Exception(errorMessage);
@@ -132,7 +132,7 @@ public class OAuth2Exception extends RuntimeException {
 
 	/**
 	 * Creates an {@link OAuth2Exception} from a Map&lt;String,String&gt;.
-	 * 
+	 *
 	 * @param errorParams
 	 * @return
 	 */
@@ -151,7 +151,7 @@ public class OAuth2Exception extends RuntimeException {
 
 		return ex;
 	}
-	
+
 	@Override
 	public String toString() {
 		return getSummary();
@@ -161,7 +161,7 @@ public class OAuth2Exception extends RuntimeException {
 	 * @return a comma-delimited list of details (key=value pairs)
 	 */
 	public String getSummary() {
-		
+
 		StringBuilder builder = new StringBuilder();
 
 		String delim = "";
@@ -185,7 +185,7 @@ public class OAuth2Exception extends RuntimeException {
 				delim = ", ";
 			}
 		}
-		
+
 		return builder.toString();
 
 	}

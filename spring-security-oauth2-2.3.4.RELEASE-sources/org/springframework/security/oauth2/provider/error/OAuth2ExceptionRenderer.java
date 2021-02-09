@@ -19,7 +19,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 /**
  * Strategy for rendering a {@link OAuth2Exception} in cases where they cannot be rendered by the Spring dispatcher
  * servlet (i.e. usually in a filter chain).
- * 
+ * 在Spring dispatcher Servlet无法呈现OAuth2Exception的情况下（即通常在过滤器链中）呈现OAuth2Exception的策略。
  * @author Dave Syer
  * 
  */

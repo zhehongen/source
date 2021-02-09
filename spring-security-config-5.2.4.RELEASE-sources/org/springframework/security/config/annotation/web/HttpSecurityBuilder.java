@@ -51,7 +51,7 @@ import org.springframework.security.web.session.SessionManagementFilter;
  * 模板 -父子关系、层级关系。实际是一种语法约束，和运行时无关。
  * 编译时H必须确定下来，比如说H是对象B,而B肯定是HttpSecurityBuilder的一个实现类。
  * HttpSecurityBuilder里面的所有和H有关的参数，它的具体类都是HttpSecurityBuilder的一个实现类而已
- * 
+ *
  * 结合SecurityBuilder的说明，可以知道最终构建的是一个DefaultSecurityFilterChain对象
  */
 public interface HttpSecurityBuilder<H extends HttpSecurityBuilder<H>> extends
@@ -115,7 +115,7 @@ public interface HttpSecurityBuilder<H extends HttpSecurityBuilder<H>> extends
 
 	/**
 	 * Allows adding an additional {@link AuthenticationProvider} to be used
-	 *
+	 * 允许添加一个额外的AuthenticationProvider来使用
 	 * @param authenticationProvider the {@link AuthenticationProvider} to be added
 	 * @return the {@link HttpSecurity} for further customizations
 	 */
@@ -123,7 +123,7 @@ public interface HttpSecurityBuilder<H extends HttpSecurityBuilder<H>> extends
 
 	/**
 	 * Allows adding an additional {@link UserDetailsService} to be used
-	 *
+	 * 批
 	 * @param userDetailsService the {@link UserDetailsService} to be added
 	 * @return the {@link HttpSecurity} for further customizations
 	 */
@@ -134,7 +134,7 @@ public interface HttpSecurityBuilder<H extends HttpSecurityBuilder<H>> extends
 	 * known {@link Filter} instances are either a {@link Filter} listed in
 	 * {@link #addFilter(Filter)} or a {@link Filter} that has already been added using
 	 * {@link #addFilterAfter(Filter, Class)} or {@link #addFilterBefore(Filter, Class)}.
-	 *
+	 * 允许在一个已知的过滤器类之后添加过滤器。 已知的Filter实例是addFilter（Filter）中列出的Filter或已经使用addFilterAfter（Filter，Class）或addFilterBefore（Filter，Class）添加的Filter。
 	 * @param filter the {@link Filter} to register after the type {@code afterFilter}
 	 * @param afterFilter the Class of the known {@link Filter}.
 	 * @return the {@link HttpSecurity} for further customizations
@@ -146,7 +146,7 @@ public interface HttpSecurityBuilder<H extends HttpSecurityBuilder<H>> extends
 	 * known {@link Filter} instances are either a {@link Filter} listed in
 	 * {@link #addFilter(Filter)} or a {@link Filter} that has already been added using
 	 * {@link #addFilterAfter(Filter, Class)} or {@link #addFilterBefore(Filter, Class)}.
-	 *
+	 * 批
 	 * @param filter the {@link Filter} to register before the type {@code beforeFilter}
 	 * @param beforeFilter the Class of the known {@link Filter}.
 	 * @return the {@link HttpSecurity} for further customizations
@@ -157,7 +157,7 @@ public interface HttpSecurityBuilder<H extends HttpSecurityBuilder<H>> extends
 	 * Adds a {@link Filter} that must be an instance of or extend one of the Filters
 	 * provided within the Security framework. The method ensures that the ordering of the
 	 * Filters is automatically taken care of.
-	 *
+	 * 添加必须是Security框架中提供的Filter的实例或扩展其中之一的Filter。该方法确保自动处理过滤器的顺序。过滤器的顺序为：
 	 * The ordering of the Filters is:
 	 *
 	 * <ul>

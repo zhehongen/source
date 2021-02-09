@@ -28,7 +28,7 @@ import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolv
 /**
  * Convenient base class containing utility methods and dependency setters for security error handling concerns specific
  * to OAuth2 resources.
- * 
+ * 方便的基类，包含实用程序方法和依赖项设置程序，用于处理OAuth2资源特有的安全错误。
  * @author Dave Syer
  * 
  */

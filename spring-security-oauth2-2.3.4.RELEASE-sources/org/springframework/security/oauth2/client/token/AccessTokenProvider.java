@@ -22,9 +22,9 @@ import org.springframework.security.oauth2.client.resource.UserRedirectRequiredE
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 
-/**
+/**知道如何获取特定资源访问令牌的策略。
  * A strategy which knows how to obtain an access token for a specific resource.
- * 
+ *
  * @author Ryan Heaton
  * @author Dave Syer
  */
@@ -32,7 +32,7 @@ public interface AccessTokenProvider {
 
 	/**
 	 * Obtain a new access token for the specified protected resource.
-	 * 
+	 *
 	 * @param details The protected resource for which this provider is to obtain an access token.
 	 * @param parameters The parameters of the request giving context for the token details if any.
 	 * @return The access token for the specified protected resource. The return value may NOT be null.
@@ -46,7 +46,7 @@ public interface AccessTokenProvider {
 
 	/**
 	 * Whether this provider supports the specified resource.
-	 * 
+	 *
 	 * @param resource The resource.
 	 * @return Whether this provider supports the specified resource.
 	 */
@@ -60,7 +60,7 @@ public interface AccessTokenProvider {
 	OAuth2AccessToken refreshAccessToken(OAuth2ProtectedResourceDetails resource, OAuth2RefreshToken refreshToken,
 			AccessTokenRequest request) throws UserRedirectRequiredException;
 
-	/**
+	/**如果此提供程序可以刷新访问令牌，则为true
 	 * @param resource The resource to check
 	 * @return true if this provider can refresh an access token
 	 */

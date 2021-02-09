@@ -97,7 +97,7 @@ public abstract class WebSecurityConfigurerAdapter implements
 	private ApplicationContext context;
 
 	private ContentNegotiationStrategy contentNegotiationStrategy = new HeaderContentNegotiationStrategy();
-
+	//坑，意思是必须另行赋值？
 	private ObjectPostProcessor<Object> objectPostProcessor = new ObjectPostProcessor<Object>() {
 		public <T> T postProcess(T object) {
 			throw new IllegalStateException(
@@ -395,7 +395,7 @@ public abstract class WebSecurityConfigurerAdapter implements
 			ContentNegotiationStrategy contentNegotiationStrategy) {
 		this.contentNegotiationStrategy = contentNegotiationStrategy;
 	}
-
+	//意思会自动注入？
 	@Autowired
 	public void setObjectPostProcessor(ObjectPostProcessor<Object> objectPostProcessor) {
 		this.objectPostProcessor = objectPostProcessor;

@@ -1,11 +1,11 @@
 /*
  * Copyright 2006-2011 the original author or authors.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
@@ -33,14 +33,14 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
-/**
+/** 鸡毛
  * A filter and authentication endpoint for the OAuth2 Token Endpoint. Allows clients to authenticate using request
  * parameters if included as a security filter, as permitted by the specification (but not recommended). It is
  * recommended by the specification that you permit HTTP basic authentication for clients, and not use this filter at
  * all.
- * 
+ *OAuth2令牌端点的过滤器和身份验证端点。 如果规范允许（但不建议），则允许客户端使用请求参数（如果作为安全过滤器包含在内）进行身份验证。 规范建议您允许客户端进行HTTP基本身份验证，并且完全不使用此过滤器。
  * @author Dave Syer
- * 
+ *
  */
 public class ClientCredentialsTokenEndpointFilter extends AbstractAuthenticationProcessingFilter {
 

@@ -25,9 +25,9 @@ import java.util.*;
 /**
  * Local context for an access token request encapsulating the parameters that are sent by the client requesting the
  * token, as opposed to the more static variables representing the client itself and the resource being targeted.
- * 
+ *
  * @author Dave Syer
- * 
+ * 访问令牌请求的本地上下文封装了由请求令牌的客户端发送的参数，与代表客户端本身和目标资源的更多静态变量相反。
  */
 public class DefaultAccessTokenRequest implements AccessTokenRequest, Serializable {
 
@@ -73,12 +73,12 @@ public class DefaultAccessTokenRequest implements AccessTokenRequest, Serializab
 	}
 
 	public void setStateKey(String state) {
-		parameters.set("state", state);
+		parameters.set("state", state);//啥用的
 	}
 
 	/**
 	 * The current URI that is being handled on the client.
-	 * 
+	 * 客户端的当前url。前后端分离模式下这玩意没啥用
 	 * @return The URI.
 	 */
 
@@ -92,7 +92,7 @@ public class DefaultAccessTokenRequest implements AccessTokenRequest, Serializab
 
 	/**
 	 * The authorization code for this context.
-	 * 
+	 *
 	 * @return The authorization code, or null if none.
 	 */
 
@@ -106,15 +106,15 @@ public class DefaultAccessTokenRequest implements AccessTokenRequest, Serializab
 
 	public void setCookie(String cookie) {
 		this.cookie = cookie;	}
-	
+
 	public String getCookie() {
 		return cookie;
 	}
-	
+
 	public void setHeaders(Map<? extends String, ? extends List<String>> headers) {
 		this.headers = headers;
 	}
-	
+
 	public Map<? extends String, ? extends List<String>> getHeaders() {
 		return headers;
 	}
@@ -214,7 +214,7 @@ public class DefaultAccessTokenRequest implements AccessTokenRequest, Serializab
 	public int hashCode() {
 		return parameters.hashCode();
 	}
-	
+
 	public String toString() {
 		return parameters.toString();
 	}

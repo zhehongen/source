@@ -379,7 +379,7 @@ public interface ServletRequest {
      * 返回一个布尔值，指示此请求是否使用安全通道（例如HTTPS）发出。
      *
      * 返回值：
-     * 指示是否使用安全通道发出请求的布尔值        
+     * 指示是否使用安全通道发出请求的布尔值
      */
     public boolean isSecure();
 
@@ -459,7 +459,7 @@ public interface ServletRequest {
     public int getLocalPort();
 
     /**
-     * @return TODO
+     * @return TODO 啥鬼东西，也没个注释
      * @since Servlet 3.0 TODO SERVLET3 - Add comments
      */
     public ServletContext getServletContext();

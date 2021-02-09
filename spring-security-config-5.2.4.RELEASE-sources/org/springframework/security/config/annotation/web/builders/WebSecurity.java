@@ -63,8 +63,8 @@ import org.springframework.web.filter.DelegatingFilterProxy;
  * (springSecurityFilterChain). The springSecurityFilterChain is the {@link Filter} that
  * the {@link DelegatingFilterProxy} delegates to.
  * </p>
- *
- * <p>
+ * WebSecurity由WebSecurityConfiguration创建，以创建称为Spring Security筛选器链（springSecurityFilterChain）的FilterChainProxy。 springSecurityFilterChain是DelegatingFilterProxy委托给的过滤器。
+ * <p> 可以通过创建WebSecurityConfigurer或更简单地通过重写WebSecurityConfigurerAdapter来对WebSecurity进行自定义。
  * Customizations to the {@link WebSecurity} can be made by creating a
  * {@link WebSecurityConfigurer} or more likely by overriding
  * {@link WebSecurityConfigurerAdapter}.

@@ -47,7 +47,7 @@ import org.springframework.web.accept.ContentNegotiationStrategy;
 import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 
 /**
- * 
+ * 本质就是一个配置类
  * @author Rob Winch
  * @author Dave Syer
  * @since 2.0
@@ -55,7 +55,7 @@ import org.springframework.web.accept.HeaderContentNegotiationStrategy;
 public final class AuthorizationServerSecurityConfigurer extends
 		SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
-	private AuthenticationEntryPoint authenticationEntryPoint;
+	private AuthenticationEntryPoint authenticationEntryPoint;//此处可以自定义认证失败处理
 
 	private AccessDeniedHandler accessDeniedHandler = new OAuth2AccessDeniedHandler();
 
@@ -71,7 +71,7 @@ public final class AuthorizationServerSecurityConfigurer extends
 
 	private boolean sslOnly = false;
 
-	/**
+	/** TokenEndpoint的自定义身份验证筛选器。 过滤器将设置为默认BasicAuthenticationFilter的上游。
 	 * Custom authentication filters for the TokenEndpoint. Filters will be set upstream of the default
 	 * BasicAuthenticationFilter.
 	 */
@@ -189,7 +189,7 @@ public final class AuthorizationServerSecurityConfigurer extends
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		
+
 		// ensure this is initialized
 		frameworkEndpointHandlerMapping();
 		if (allowFormAuthenticationForClients) {
@@ -228,7 +228,7 @@ public final class AuthorizationServerSecurityConfigurer extends
 	/**
 	 * Adds a new custom authentication filter for the TokenEndpoint. Filters will be set upstream of the default
 	 * BasicAuthenticationFilter.
-	 * 
+	 * 为TokenEndpoint添加新的自定义身份验证筛选器。 过滤器将设置为默认BasicAuthenticationFilter的上游。
 	 * @param filter
 	 */
 	public void addTokenEndpointAuthenticationFilter(Filter filter) {
@@ -238,7 +238,7 @@ public final class AuthorizationServerSecurityConfigurer extends
 	/**
 	 * Sets a new list of custom authentication filters for the TokenEndpoint. Filters will be set upstream of the
 	 * default BasicAuthenticationFilter.
-	 * 
+	 * 为TokenEndpoint设置新的自定义身份验证筛选器列表。 过滤器将设置为默认BasicAuthenticationFilter的上游。
 	 * @param filters The authentication filters to set.
 	 */
 	public void tokenEndpointAuthenticationFilters(List<Filter> filters) {

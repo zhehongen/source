@@ -66,12 +66,8 @@ public class DefaultAccessTokenConverter implements AccessTokenConverter {
 	/**
 	 * Set scope attribute name to be used in the converted token. Defaults to
 	 * {@link AccessTokenConverter#SCOPE}.
-	 *
-	 * @param scopeAttribute the scope attribute name to use
-	 * 设置要在转换后的令牌中使用的范围属性名称。 默认为AccessTokenConverter.SCOPE。
-	 *
-	 * 参数：
-	 * scopeAttribute –要使用的范围属性名称
+	 *设置要在转换后的令牌中使用的范围属性名称。 默认为AccessTokenConverter.SCOPE。
+	 * @param scopeAttribute the scope attribute name to use要使用的范围属性名称
 	 */
 	public void setScopeAttribute(String scopeAttribute) {
 		this.scopeAttribute = scopeAttribute;

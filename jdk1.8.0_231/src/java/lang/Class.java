@@ -493,18 +493,18 @@ public final class Class<T> implements java.io.Serializable,
      * {@code true} if the specified {@code Class} parameter is
      * exactly this {@code Class} object; otherwise it returns
      * {@code false}.
-     *
+     * 确定由此Class对象表示的类或接口是否与指定的Class参数表示的类或接口相同，或者是该类或接口的超类或超接口。如果是，则返回true；否则返回false。如果此Class对象表示原始类型，则如果指定的Class参数正是此Class对象，则此方法返回true；否则，此方法返回true。否则返回false。
      * <p> Specifically, this method tests whether the type represented by the
      * specified {@code Class} parameter can be converted to the type
      * represented by this {@code Class} object via an identity conversion
      * or via a widening reference conversion. See <em>The Java Language
      * Specification</em>, sections 5.1.1 and 5.1.4 , for details.
-     *
+     * 具体来说，此方法测试是否可以通过标识转换或扩展引用转换将指定Class参数表示的类型转换为此Class对象表示的类型。有关详细信息，请参见Java语言规范的5.1.1和5.1.4节。
      * @param cls the {@code Class} object to be checked
      * @return the {@code boolean} value indicating whether objects of the
      * type {@code cls} can be assigned to objects of this class
      * @exception NullPointerException if the specified Class parameter is
-     *            null.
+     *            null.指示是否可以将cls类型的对象分配给此类的对象
      * @since JDK1.1
      */
     public native boolean isAssignableFrom(Class<?> cls);

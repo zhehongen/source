@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * A base {@link SecurityBuilder} that ensures the object being built is only built one
  * time.
- *
+ * 确保一次构建对象的基础SecurityBuilder仅构建一次。
  * @param <O> the type of Object that is being built
  *
  * @author Rob Winch
@@ -47,7 +47,7 @@ public abstract class AbstractSecurityBuilder<O> implements SecurityBuilder<O> {
 	/**
 	 * Gets the object that was built. If it has not been built yet an Exception is
 	 * thrown.
-	 *
+	 * 批
 	 * @return the Object that was built
 	 */
 	public final O getObject() {
@@ -59,7 +59,7 @@ public abstract class AbstractSecurityBuilder<O> implements SecurityBuilder<O> {
 
 	/**
 	 * Subclasses should implement this to perform the build.
-	 *
+	 * 批
 	 * @return the object that should be returned by {@link #build()}.
 	 *
 	 * @throws Exception if an error occurs

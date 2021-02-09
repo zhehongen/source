@@ -17,7 +17,7 @@ package org.springframework.security.web.util;
 
 /**
  * Interface for handlers extracting the cause out of a specific {@link Throwable} type.
- *
+ * 处理程序从特定Throwable类型提取原因的接口。
  * @author Andreas Senft
  * @since 2.0
  *
@@ -30,7 +30,7 @@ public interface ThrowableCauseExtractor {
 	 *
 	 * @param throwable the <code>Throwable</code>
 	 * @return the extracted cause (maybe <code>null</code>)
-	 *
+	 *从提供的Throwable中提取原因。
 	 * @throws IllegalArgumentException if <code>throwable</code> is <code>null</code> or
 	 * otherwise considered invalid for the implementation
 	 */

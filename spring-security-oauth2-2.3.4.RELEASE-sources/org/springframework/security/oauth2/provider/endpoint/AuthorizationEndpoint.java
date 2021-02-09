@@ -488,8 +488,7 @@ public class AuthorizationEndpoint extends AbstractEndpoint {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(base);
 		URI redirectUri;
 		try {
-			// assume it's encoded to start with (if it came in over the wire)
-			// 假设它是从编码开始的（如果它是通过电线传入的）
+			// assume it's encoded to start with (if it came in over the wire)假设它是从编码开始的（如果它是通过电线传入的）
 			redirectUri = builder.build(true).toUri();
 		}
 		catch (Exception e) {

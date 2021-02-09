@@ -154,20 +154,13 @@ public class RedirectView extends AbstractUrlBasedView implements SmartView {
 	}
 
 	/**
-	 * Create a new RedirectView with the given URL.
-	 * @param url the URL to redirect to
-	 * @param contextRelative whether to interpret the given URL as
+	 * Create a new RedirectView with the given URL.使用给定的URL创建一个新的RedirectView。
+	 * @param url the URL to redirect to    url –重定向到的URL
+	 * @param contextRelative whether to interpret the given URL as是否将给定的URL相对于当前ServletContext进行解释
 	 * relative to the current ServletContext
-	 * @param http10Compatible whether to stay compatible with HTTP 1.0 clients
+	 * @param http10Compatible whether to stay compatible with HTTP 1.0 clients是否与HTTP 1.0客户端保持兼容
 	 * @param exposeModelAttributes whether or not model attributes should be
-	 * exposed as query parameters
-	 * 使用给定的URL创建一个新的RedirectView。
-	 *
-	 * 参数：
-	 * url –重定向到的URL
-	 * contextRelative –是否将给定的URL相对于当前ServletContext进行解释
-	 * http10Compatible –是否与HTTP 1.0客户端保持兼容
-	 * excludeModelAttributes –是否应将模型属性作为查询参数公开
+	 * exposed as query parameters是否应将模型属性作为查询参数公开
 	 */
 	public RedirectView(String url, boolean contextRelative, boolean http10Compatible, boolean exposeModelAttributes) {
 		super(url);

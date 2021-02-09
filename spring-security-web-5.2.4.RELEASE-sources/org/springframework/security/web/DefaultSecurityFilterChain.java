@@ -23,17 +23,12 @@ import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
-/**
+/**只有一个matcher,却有多个filter,如何做匹配？
  * Standard implementation of {@code SecurityFilterChain}.
- *
- * @author Luke Taylor
- *
- * @since 3.1
- * 只有一个matcher,却有多个filter,如何做匹配？
- * 难道是对某个request只做一次matcher匹配比较（实际上这个matcher可以配置为匹配很多种请求），如果能够匹配就去执行过滤器链？
- * 过滤器链中的每个过滤器还有一个matcher,然后再去match来决定是否执行过滤器链中的某个过滤器？
- * 但是filter中似乎没有match方法啊。
- * AbstractAuthenticationProcessingFilter中的requiresAuthentication似乎扮演了这个功能
+ *难道是对某个request只做一次matcher匹配比较（实际上这个matcher可以配置为匹配很多种请求），如果能够匹配就去执行过滤器链？
+ * @author Luke Taylor过滤器链中的每个过滤器还有一个matcher,然后再去match来决定是否执行过滤器链中的某个过滤器？
+ *但是filter中似乎没有match方法啊。
+ * @since 3.1AbstractAuthenticationProcessingFilter中的requiresAuthentication似乎扮演了这个功能
  */
 public final class DefaultSecurityFilterChain implements SecurityFilterChain {
 	private static final Log logger = LogFactory.getLog(DefaultSecurityFilterChain.class);

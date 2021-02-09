@@ -26,17 +26,17 @@ import org.springframework.http.HttpRequest;
  * with the {@link org.springframework.web.client.RestTemplate RestTemplate},
  * as to modify the outgoing {@link ClientHttpRequest} and/or the incoming
  * {@link ClientHttpResponse}.
- *
+ * 拦截客户端HTTP请求。 可以向RestTemplate注册此接口的实现，以修改传出的ClientHttpRequest和/或传入的ClientHttpResponse。
  * <p>The main entry point for interceptors is
  * {@link #intercept(HttpRequest, byte[], ClientHttpRequestExecution)}.
- *
+ * 拦截器的主要入口点是intercept（HttpRequest，byte []，ClientHttpRequestExecution）。
  * @author Arjen Poutsma
  * @since 3.1
  */
 @FunctionalInterface
 public interface ClientHttpRequestInterceptor {
 
-	/**
+	/**拦截给定的请求，并返回响应。给定的ClientHttpRequestExecution允许拦截器将请求和响应传递给链中的下一个实体。
 	 * Intercept the given request, and return a response. The given
 	 * {@link ClientHttpRequestExecution} allows the interceptor to pass on the
 	 * request and response to the next entity in the chain.
@@ -65,3 +65,19 @@ public interface ClientHttpRequestInterceptor {
 			throws IOException;
 
 }
+/**
+ * 此方法的典型实现将遵循以下模式：
+ * 检查请求和正文
+ * （可选）包装请求以过滤HTTP属性。
+ * （可选）修改请求的主体。
+ * 要么
+ * 使用ClientHttpRequestExecution.execute（HttpRequest，byte []）执行请求，
+ * 要么
+ * 不要执行请求以完全阻止执行。
+ * （可选）包装响应以过滤HTTP属性。
+ *
+ * 参数：
+ * request –请求，包含方法，URI和标头
+ * 正文–请求的正文
+ * 执行–请求执行
+ */

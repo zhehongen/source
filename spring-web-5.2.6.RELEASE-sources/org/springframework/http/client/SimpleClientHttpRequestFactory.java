@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
 
 /**
  * {@link ClientHttpRequestFactory} implementation that uses standard JDK facilities.
- *
+ * 使用标准JDK工具的ClientHttpRequestFactory实现。
  * @author Arjen Poutsma
  * @author Juergen Hoeller
  * @since 3.0

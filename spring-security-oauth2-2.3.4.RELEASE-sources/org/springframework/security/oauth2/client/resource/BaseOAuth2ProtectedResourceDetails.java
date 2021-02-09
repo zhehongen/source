@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.common.AuthenticationScheme;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.util.StringUtils;
 
-/**
+/**这玩意一般是通过yaml文件配置的吧
  * @author Ryan Heaton
  * @author Dave Syer
  */

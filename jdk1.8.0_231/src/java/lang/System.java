@@ -340,12 +340,12 @@ public final class System {
      * the granularity of the value depends on the underlying
      * operating system and may be larger.  For example, many
      * operating systems measure time in units of tens of
-     * milliseconds.
-     *
+     * milliseconds.返回当前时间（以毫秒为单位）。 请注意，虽然返回值的时间单位为毫秒，但该值的粒度取决于基础操作系统，并且可能更大。 例如，许多操作系统以几十毫秒为单位测量时间。
+     *有关“计算机时间”与协调世界时（UTC）之间可能出现的细微差异的讨论，请参见日期类的描述。
      * <p> See the description of the class <code>Date</code> for
      * a discussion of slight discrepancies that may arise between
      * "computer time" and coordinated universal time (UTC).
-     *
+     *当前时间与UTC 1970年1月1日午夜之间的差（以毫秒为单位）。
      * @return  the difference, measured in milliseconds, between
      *          the current time and midnight, January 1, 1970 UTC.
      * @see     java.util.Date

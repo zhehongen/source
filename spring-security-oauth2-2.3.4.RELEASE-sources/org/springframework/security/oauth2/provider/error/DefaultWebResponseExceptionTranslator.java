@@ -32,7 +32,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 /**
  * Default translator that converts exceptions into {@link OAuth2Exception}s. The output matches the OAuth 2.0
  * specification in terms of error response format and HTTP status code.
- * 
+ * 将异常转换为OAuth2Exceptions的默认转换器。 输出在错误响应格式和HTTP状态代码方面与OAuth 2.0规范匹配。
  * @author Dave Syer
  * 
  */

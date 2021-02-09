@@ -29,7 +29,7 @@ import org.springframework.util.Assert;
  * Handler for analyzing {@link Throwable} instances.
  *
  * Can be subclassed to customize its behavior.
- *
+ * 用于分析Throwable实例的处理程序。 可以子类化以自定义其行为。
  * @author Andreas Senft
  * @since 2.0
  */
@@ -52,7 +52,7 @@ public class ThrowableAnalyzer {
 		return ((InvocationTargetException) throwable).getTargetException();
 	};
 
-	/**
+	/**比较器根据类的层次关系对类进行升序排序。 如果两个类具有层次关系，则此比较器认为“较高”的类较大。 对于层次无关的类，将对它们的完全限定名称进行比较。
 	 * Comparator to order classes ascending according to their hierarchy relation. If two
 	 * classes have a hierarchical relation, the "higher" class is considered to be
 	 * greater by this comparator.<br>
@@ -81,7 +81,7 @@ public class ThrowableAnalyzer {
 	 */
 	public ThrowableAnalyzer() {
 		this.extractorMap = new TreeMap<>(
-				CLASS_HIERARCHY_COMPARATOR);
+				CLASS_HIERARCHY_COMPARATOR);//排序了
 
 		initExtractorMap();
 	}
@@ -89,7 +89,7 @@ public class ThrowableAnalyzer {
 	/**
 	 * Registers a <code>ThrowableCauseExtractor</code> for the specified type. <i>Can be
 	 * used in subclasses overriding {@link #initExtractorMap()}.</i>
-	 *
+	 * 注册指定类型的ThrowableCauseExtractor。 可以在重写initExtractorMap（）的子类中使用。
 	 * @param throwableType the type (has to be a subclass of <code>Throwable</code>)
 	 * @param extractor the associated <code>ThrowableCauseExtractor</code> (not
 	 * <code>null</code>)
@@ -155,7 +155,7 @@ public class ThrowableAnalyzer {
 	 * @return an array of all determined throwables from the stacktrace
 	 *
 	 * @throws IllegalArgumentException if the throwable is <code>null</code>
-	 *
+	 * 这吊毛是关键
 	 * @see #initExtractorMap()
 	 */
 	public final Throwable[] determineCauseChain(Throwable throwable) {
@@ -198,7 +198,7 @@ public class ThrowableAnalyzer {
 	 * provided type. A returned instance is safe to be cast to the specified type.
 	 * <p>
 	 * If the passed in array is null or empty this method returns <code>null</code>.
-	 *
+	 * 批
 	 * @param throwableType the type to look for
 	 * @param chain the array (will be processed in element order)
 	 * @return the found <code>Throwable</code>, <code>null</code> if not found
@@ -223,7 +223,7 @@ public class ThrowableAnalyzer {
 	 * Verifies that the provided throwable is a valid subclass of the provided type (or
 	 * of the type itself). If <code>expectdBaseType</code> is <code>null</code>, no check
 	 * will be performed.
-	 * <p>
+	 * <p> 批
 	 * Can be used for verification purposes in implementations of
 	 * {@link ThrowableCauseExtractor extractors}.
 	 *

@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.common.util.OAuth2Utils;
 /**
  * Exception representing insufficient scope in a token when a request is handled by a Resource Server. It is akin to an
  * {@link AccessDeniedException} and should result in a 403 (FORBIDDEN) HTTP status.
- * 
+ * 异常表示资源服务器处理请求时令牌中的作用域不足。 它类似于AccessDeniedException，并且应导致403（FORBIDDEN）HTTP状态。
  * @author Dave Syer
  */
 @SuppressWarnings("serial")
@@ -30,7 +30,7 @@ public class InsufficientScopeException extends OAuth2Exception {
 
 	@Override
 	public String getOAuth2ErrorCode() {
-		// Not defined in the spec, so not really an OAuth2Exception
+		// Not defined in the spec, so not really an OAuth2Exception 在规范中未定义，因此实际上不是OAuth2Exception
 		return "insufficient_scope";
 	}
 

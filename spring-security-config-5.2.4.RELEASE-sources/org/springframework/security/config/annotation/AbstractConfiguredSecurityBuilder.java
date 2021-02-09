@@ -36,14 +36,14 @@ import org.springframework.web.filter.DelegatingFilterProxy;
  * it. This makes modifying the {@link SecurityBuilder} a strategy that can be customized
  * and broken up into a number of {@link SecurityConfigurer} objects that have more
  * specific goals than that of the {@link SecurityBuilder}.
- * </p>
- *
+ * </p>一个基础SecurityBuilder，允许将SecurityConfigurer应用于它。
+ *这使修改SecurityBuilder成为一种策略，可以对其进行自定义并将其分解为多个SecurityConfigurer对象，这些对象的目标比SecurityBuilder更为具体。
  * <p>
  * For example, a {@link SecurityBuilder} may build an {@link DelegatingFilterProxy}, but
  * a {@link SecurityConfigurer} might populate the {@link SecurityBuilder} with the
  * filters necessary for session management, form based login, authorization, etc.
  * </p>
- *
+ *例如，SecurityBuilder可以构建DelegatingFilterProxy，但是SecurityConfigurer可以使用会话管理，基于表单的登录，授权等所需的过滤器填充SecurityBuilder。
  * @see WebSecurity
  *
  * @author Rob Winch
@@ -55,8 +55,8 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 		extends AbstractSecurityBuilder<O> {
 	private final Log logger = LogFactory.getLog(getClass());
 
-	private final LinkedHashMap<Class<? extends SecurityConfigurer<O, B>>, List<SecurityConfigurer<O, B>>> configurers = new LinkedHashMap<>();
-	private final List<SecurityConfigurer<O, B>> configurersAddedInInitializing = new ArrayList<>();
+	private final LinkedHashMap<Class<? extends SecurityConfigurer<O, B>>, List<SecurityConfigurer<O, B>>> configurers = new LinkedHashMap<>();//configClass,List<config>的map
+	private final List<SecurityConfigurer<O, B>> configurersAddedInInitializing = new ArrayList<>();//在初始化阶段添加的config列表？似乎是的
 
 	private final Map<Class<?>, Object> sharedObjects = new HashMap<>();
 
@@ -70,7 +70,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	 * Creates a new instance with the provided {@link ObjectPostProcessor}. This post
 	 * processor must support Object since there are many types of objects that may be
 	 * post processed.
-	 *
+	 * 使用提供的ObjectPostProcessor创建一个新实例。 该后处理器必须支持Object，因为可能会处理许多类型的对象。
 	 * @param objectPostProcessor the {@link ObjectPostProcessor} to use
 	 */
 	protected AbstractConfiguredSecurityBuilder(
@@ -85,7 +85,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	 *
 	 * @param objectPostProcessor the {@link ObjectPostProcessor} to use
 	 * @param allowConfigurersOfSameType if true, will not override other
-	 * {@link SecurityConfigurer}'s when performing apply
+	 * {@link SecurityConfigurer}'s when performing apply 如果为true，则在执行应用时不会覆盖其他SecurityConfigurer
 	 */
 	protected AbstractConfiguredSecurityBuilder(
 			ObjectPostProcessor<Object> objectPostProcessor,
@@ -98,9 +98,9 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	/**
 	 * Similar to {@link #build()} and {@link #getObject()} but checks the state to
 	 * determine if {@link #build()} needs to be called first.
-	 *
+	 * 与build（）和getObject（）类似，但会检查状态以确定是否需要首先调用build（）。
 	 * @return the result of {@link #build()} or {@link #getObject()}. If an error occurs
-	 * while building, returns null.
+	 * while building, returns null.  build（）或getObject（）的结果。 如果在构建时发生错误，则返回null。
 	 */
 	public O getOrBuild() {
 		if (isUnbuilt()) {
@@ -120,7 +120,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	/**
 	 * Applies a {@link SecurityConfigurerAdapter} to this {@link SecurityBuilder} and
 	 * invokes {@link SecurityConfigurerAdapter#setBuilder(SecurityBuilder)}.
-	 *
+	 * 将SecurityConfigurerAdapter应用于此SecurityBuilder并调用SecurityConfigurerAdapter.setBuilder（SecurityBuilder）。
 	 * @param configurer
 	 * @return the {@link SecurityConfigurerAdapter} for further customizations
 	 * @throws Exception
@@ -138,7 +138,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	 * Applies a {@link SecurityConfigurer} to this {@link SecurityBuilder} overriding any
 	 * {@link SecurityConfigurer} of the exact same class. Note that object hierarchies
 	 * are not considered.
-	 *
+	 * 将SecurityConfigurer应用于此SecurityBuilder，将覆盖完全相同类的所有SecurityConfigurer。 请注意，不考虑对象层次结构。
 	 * @param configurer
 	 * @return the {@link SecurityConfigurerAdapter} for further customizations
 	 * @throws Exception
@@ -150,7 +150,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 
 	/**
 	 * Sets an object that is shared by multiple {@link SecurityConfigurer}.
-	 *
+	 *  干啥用的？
 	 * @param sharedType the Class to key the shared object by.
 	 * @param object the Object to store
 	 */
@@ -181,7 +181,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	/**
 	 * Adds {@link SecurityConfigurer} ensuring that it is allowed and invoking
 	 * {@link SecurityConfigurer#init(SecurityBuilder)} immediately if necessary.
-	 *
+	 * 添加SecurityConfigurer以确保它被允许，并在必要时立即调用SecurityConfigurer.init（SecurityBuilder）。
 	 * @param configurer the {@link SecurityConfigurer} to add
 	 */
 	@SuppressWarnings("unchecked")
@@ -196,7 +196,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 						+ " to already built object");
 			}
 			List<SecurityConfigurer<O, B>> configs = allowConfigurersOfSameType ? this.configurers
-					.get(clazz) : null;
+					.get(clazz) : null;//false就会导致原来的被清空
 			if (configs == null) {
 				configs = new ArrayList<>(1);
 			}
@@ -211,7 +211,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	/**
 	 * Gets all the {@link SecurityConfigurer} instances by its class name or an empty
 	 * List if not found. Note that object hierarchies are not considered.
-	 *
+	 * 批
 	 * @param clazz the {@link SecurityConfigurer} class to look for
 	 * @return a list of {@link SecurityConfigurer}s for further customization
 	 */
@@ -227,7 +227,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	/**
 	 * Removes all the {@link SecurityConfigurer} instances by its class name or an empty
 	 * List if not found. Note that object hierarchies are not considered.
-	 *
+	 * 批
 	 * @param clazz the {@link SecurityConfigurer} class to look for
 	 * @return a list of {@link SecurityConfigurer}s for further customization
 	 */
@@ -243,7 +243,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	/**
 	 * Gets the {@link SecurityConfigurer} by its class name or <code>null</code> if not
 	 * found. Note that object hierarchies are not considered.
-	 *
+	 * 牛逼
 	 * @param clazz
 	 * @return the {@link SecurityConfigurer} for further customizations
 	 */
@@ -295,7 +295,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	/**
 	 * Performs post processing of an object. The default is to delegate to the
 	 * {@link ObjectPostProcessor}.
-	 *
+	 * 批
 	 * @param object the Object to post process
 	 * @return the possibly modified Object to use
 	 */
@@ -304,11 +304,11 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	}
 
 	/**
-	 * Executes the build using the {@link SecurityConfigurer}'s that have been applied
-	 * using the following steps:
-	 *
-	 * <ul>
-	 * <li>Invokes {@link #beforeInit()} for any subclass to hook into</li>
+	 * Executes the build using the {@link SecurityConfigurer}'s that have been applied 使用通过以下步骤应用的SecurityConfigurer执行构建：
+	 * using the following steps:                                                       调用beforeInit（）使任何子类都可以挂接到
+	 *                                                                                  为应用于此构建器的任何SecurityConfigurer调用SecurityConfigurer.init（SecurityBuilder）。
+	 * <ul>                                                                             调用beforeConfigure（）以将任何子类挂接到
+	 * <li>Invokes {@link #beforeInit()} for any subclass to hook into</li>             调用performBuild（）实际构建对象
 	 * <li>Invokes {@link SecurityConfigurer#init(SecurityBuilder)} for any
 	 * {@link SecurityConfigurer} that was applied to this builder.</li>
 	 * <li>Invokes {@link #beforeConfigure()} for any subclass to hook into</li>
@@ -338,7 +338,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 		}
 	}
 
-	/**
+	/** 在调用每个SecurityConfigurer.init（SecurityBuilder）方法之前调用。 子类可以重写此方法以挂接到生命周期，而不使用SecurityConfigurer。
 	 * Invoked prior to invoking each {@link SecurityConfigurer#init(SecurityBuilder)}
 	 * method. Subclasses may override this method to hook into the lifecycle without
 	 * using a {@link SecurityConfigurer}.
@@ -371,7 +371,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 		}
 
 		for (SecurityConfigurer<O, B> configurer : configurersAddedInInitializing) {
-			configurer.init((B) this);
+			configurer.init((B) this);//这尼玛干啥的
 		}
 	}
 
@@ -397,26 +397,26 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 	 * @return true, if unbuilt else false
 	 */
 	private boolean isUnbuilt() {
-		synchronized (configurers) {
+		synchronized (configurers) { //这地方有必要加锁吗
 			return buildState == BuildState.UNBUILT;
 		}
 	}
 
 	/**
 	 * The build state for the application
-	 *
+	 * 批
 	 * @author Rob Winch
 	 * @since 3.2
 	 */
 	private enum BuildState {
 		/**
-		 * This is the state before the {@link Builder#build()} is invoked
+		 * This is the state before the {@link Builder#build()} is invoked没有build
 		 */
 		UNBUILT(0),
 
 		/**
 		 * The state from when {@link Builder#build()} is first invoked until all the
-		 * {@link SecurityConfigurer#init(SecurityBuilder)} methods have been invoked.
+		 * {@link SecurityConfigurer#init(SecurityBuilder)} methods have been invoked.从第一次调用Builder.build（）到所有SecurityConfigurer.init（SecurityBuilder）方法被调用之间的状态。
 		 */
 		INITIALIZING(1),
 
@@ -424,11 +424,11 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 		 * The state from after all {@link SecurityConfigurer#init(SecurityBuilder)} have
 		 * been invoked until after all the
 		 * {@link SecurityConfigurer#configure(SecurityBuilder)} methods have been
-		 * invoked.
+		 * invoked.从所有SecurityConfigurer.init（SecurityBuilder）被调用之后到所有SecurityConfigurer.configure（SecurityBuilder）方法被调用之后的状态。
 		 */
 		CONFIGURING(2),
 
-		/**
+		/** 从所有SecurityConfigurer.configure（SecurityBuilder）完成之后的时刻到performBuild（）之后。
 		 * From the point after all the
 		 * {@link SecurityConfigurer#configure(SecurityBuilder)} have completed to just
 		 * after {@link AbstractConfiguredSecurityBuilder#performBuild()}.

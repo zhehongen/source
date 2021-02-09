@@ -27,7 +27,7 @@ import org.springframework.security.oauth2.common.util.OAuth2Utils;
 
 /**
  * @author Dave Syer
- * 
+ * 有可能改变序列化方式去实现自定义response
  */
 public class OAuth2ExceptionJackson1Deserializer extends JsonDeserializer<OAuth2Exception> {
 

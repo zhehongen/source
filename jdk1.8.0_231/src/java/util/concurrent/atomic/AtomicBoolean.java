@@ -43,13 +43,13 @@ import sun.misc.Unsafe;
  * {@code AtomicBoolean} is used in applications such as atomically
  * updated flags, and cannot be used as a replacement for a
  * {@link java.lang.Boolean}.
- *
+ *一个布尔值，可以原子更新。 有关原子变量的属性的描述，请参见java.util.concurrent.atomic软件包规范。 AtomicBoolean用于诸如原子更新标志之类的应用程序中，不能用作布尔值的替代。
  * @since 1.5
  * @author Doug Lea
  */
 public class AtomicBoolean implements java.io.Serializable {
     private static final long serialVersionUID = 4654671469794556979L;
-    // setup to use Unsafe.compareAndSwapInt for updates
+    // setup to use Unsafe.compareAndSwapInt for updates设置为使用Unsafe.compareAndSwapInt进行更新
     private static final Unsafe unsafe = Unsafe.getUnsafe();
     private static final long valueOffset;
 
@@ -89,7 +89,7 @@ public class AtomicBoolean implements java.io.Serializable {
     /**
      * Atomically sets the value to the given updated value
      * if the current value {@code ==} the expected value.
-     *
+     * 如果当前值==期望值，则以原子方式将该值设置为给定的更新值。
      * @param expect the expected value
      * @param update the new value
      * @return {@code true} if successful. False return indicates that
@@ -104,7 +104,7 @@ public class AtomicBoolean implements java.io.Serializable {
     /**
      * Atomically sets the value to the given updated value
      * if the current value {@code ==} the expected value.
-     *
+     *如果当前值==期望值，则以原子方式将该值设置为给定的更新值。可能会虚假地失败，并且不提供排序保证，因此，很少是compareAndSet的适当替代方法。
      * <p><a href="package-summary.html#weakCompareAndSet">May fail
      * spuriously and does not provide ordering guarantees</a>, so is
      * only rarely an appropriate alternative to {@code compareAndSet}.
@@ -121,7 +121,7 @@ public class AtomicBoolean implements java.io.Serializable {
 
     /**
      * Unconditionally sets to the given value.
-     *
+     * 无条件设置为给定值。
      * @param newValue the new value
      */
     public final void set(boolean newValue) {
@@ -130,7 +130,7 @@ public class AtomicBoolean implements java.io.Serializable {
 
     /**
      * Eventually sets to the given value.
-     *
+     * 最终设置为给定值。
      * @param newValue the new value
      * @since 1.6
      */
@@ -141,7 +141,7 @@ public class AtomicBoolean implements java.io.Serializable {
 
     /**
      * Atomically sets to the given value and returns the previous value.
-     *
+     *以原子方式设置为给定值并返回前一个值。
      * @param newValue the new value
      * @return the previous value
      */

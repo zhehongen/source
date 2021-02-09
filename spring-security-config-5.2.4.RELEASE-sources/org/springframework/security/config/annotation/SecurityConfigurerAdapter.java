@@ -26,7 +26,7 @@ import org.springframework.core.annotation.AnnotationAwareOrderComparator;
  * the methods they are interested in. It also provides a mechanism for using the
  * {@link SecurityConfigurer} and when done gaining access to the {@link SecurityBuilder}
  * that is being configured.
- *
+ * SecurityConfigurer的基类，它允许子类仅实现它们感兴趣的方法。它还提供了一种使用SecurityConfigurer的机制，并在完成后获得对正在配置的SecurityBuilder的访问权。
  * @author Rob Winch
  * @author Wallace Wadge
  *
@@ -49,7 +49,7 @@ public abstract class SecurityConfigurerAdapter<O, B extends SecurityBuilder<O>>
 	/**
 	 * Return the {@link SecurityBuilder} when done using the {@link SecurityConfigurer}.
 	 * This is useful for method chaining.
-	 *
+	 * 使用SecurityConfigurer完成后，返回SecurityBuilder。 这对于方法链接很有用。
 	 * @return the {@link SecurityBuilder} for further customizations
 	 */
 	public B and() {
@@ -85,7 +85,7 @@ public abstract class SecurityConfigurerAdapter<O, B extends SecurityBuilder<O>>
 	 * Adds an {@link ObjectPostProcessor} to be used for this
 	 * {@link SecurityConfigurerAdapter}. The default implementation does nothing to the
 	 * object.
-	 *
+	 * 批
 	 * @param objectPostProcessor the {@link ObjectPostProcessor} to use
 	 */
 	public void addObjectPostProcessor(ObjectPostProcessor<?> objectPostProcessor) {
@@ -95,7 +95,7 @@ public abstract class SecurityConfigurerAdapter<O, B extends SecurityBuilder<O>>
 	/**
 	 * Sets the {@link SecurityBuilder} to be used. This is automatically set when using
 	 * {@link AbstractConfiguredSecurityBuilder#apply(SecurityConfigurerAdapter)}
-	 *
+	 * 设置要使用的SecurityBuilder。 使用AbstractConfiguredSecurityBuilder.apply（SecurityConfigurerAdapter）时会自动设置
 	 * @param builder the {@link SecurityBuilder} to set
 	 */
 	public void setBuilder(B builder) {
@@ -105,7 +105,7 @@ public abstract class SecurityConfigurerAdapter<O, B extends SecurityBuilder<O>>
 	/**
 	 * An {@link ObjectPostProcessor} that delegates work to numerous
 	 * {@link ObjectPostProcessor} implementations.
-	 *
+	 * 一个将工作委托给许多ObjectPostProcessor实现的ObjectPostProcessor。
 	 * @author Rob Winch
 	 */
 	private static final class CompositeObjectPostProcessor implements
@@ -113,12 +113,12 @@ public abstract class SecurityConfigurerAdapter<O, B extends SecurityBuilder<O>>
 		private List<ObjectPostProcessor<?>> postProcessors = new ArrayList<>();
 
 		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public Object postProcess(Object object) {
+		public Object postProcess(Object object) {//如果传进来的对象是后处理器的泛型参数的子类，则执行后处理方法
 			for (ObjectPostProcessor opp : postProcessors) {
-				Class<?> oppClass = opp.getClass();
+				Class<?> oppClass = opp.getClass();//后处理器的class，肯定是ObjectPostProcessor<T>的实现类吧
 				Class<?> oppType = GenericTypeResolver.resolveTypeArgument(oppClass,
-						ObjectPostProcessor.class);
-				if (oppType == null || oppType.isAssignableFrom(object.getClass())) {
+						ObjectPostProcessor.class);//解析出后处理器的泛型参数，即T.class
+				if (oppType == null || oppType.isAssignableFrom(object.getClass())) {//oppType == null无法理解。子类非泛型？
 					object = opp.postProcess(object);
 				}
 			}

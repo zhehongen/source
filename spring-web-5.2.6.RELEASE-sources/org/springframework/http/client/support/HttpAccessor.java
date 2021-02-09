@@ -38,7 +38,7 @@ import org.springframework.util.Assert;
  * such as the {@link ClientHttpRequestFactory} to operate on.
  *
  * <p>Not intended to be used directly.
- *
+ * org.springframework.web.client.RestTemplate和其他HTTP访问网关帮助器的基类，定义了要操作的通用属性，例如ClientHttpRequestFactory。
  * <p>See {@link org.springframework.web.client.RestTemplate} for an entry point.
  *
  * @author Arjen Poutsma

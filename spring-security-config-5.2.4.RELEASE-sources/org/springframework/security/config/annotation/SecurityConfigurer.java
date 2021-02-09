@@ -20,14 +20,14 @@ package org.springframework.security.config.annotation;
  * have their {@link #init(SecurityBuilder)} method invoked. After all
  * {@link #init(SecurityBuilder)} methods have been invoked, each
  * {@link #configure(SecurityBuilder)} method is invoked.
- *
+ * 允许配置SecurityBuilder。 首先，所有SecurityConfigurer都会调用其init（SecurityBuilder）方法。 调用所有init（SecurityBuilder）方法之后，将调用每个configure（SecurityBuilder）方法。
  * @see AbstractConfiguredSecurityBuilder
  *
  * @author Rob Winch
  *
- * @param <O> The object being built by the {@link SecurityBuilder} B
+ * @param <O> The object being built by the {@link SecurityBuilder} B     SecurityBuilder B正在构建的对象
  * @param <B> The {@link SecurityBuilder} that builds objects of type O. This is also the
- * {@link SecurityBuilder} that is being configured.
+ * {@link SecurityBuilder} that is being configured. 构建类型为O的对象的SecurityBuilder。这也是正在配置的SecurityBuilder。
  */
 public interface SecurityConfigurer<O, B extends SecurityBuilder<O>> {
 	/**
@@ -35,7 +35,7 @@ public interface SecurityConfigurer<O, B extends SecurityBuilder<O>> {
 	 * and modified, but not properties on the {@link SecurityBuilder} used for building
 	 * the object. This ensures that the {@link #configure(SecurityBuilder)} method uses
 	 * the correct shared objects when building. Configurers should be applied here.
-	 *
+	 * 初始化SecurityBuilder。 在这里，仅应创建和修改共享状态，而不能在用于构建对象的SecurityBuilder上创建和修改属性。 这样可以确保在构建时configure（SecurityBuilder）方法使用正确的共享库。 配置器应在此处应用。
 	 * @param builder
 	 * @throws Exception
 	 */
@@ -44,7 +44,7 @@ public interface SecurityConfigurer<O, B extends SecurityBuilder<O>> {
 	/**
 	 * Configure the {@link SecurityBuilder} by setting the necessary properties on the
 	 * {@link SecurityBuilder}.
-	 *
+	 * 通过在SecurityBuilder上设置必要的属性来配置SecurityBuilder。
 	 * @param builder
 	 * @throws Exception
 	 */

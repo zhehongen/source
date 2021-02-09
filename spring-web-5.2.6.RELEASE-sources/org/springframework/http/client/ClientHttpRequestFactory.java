@@ -24,20 +24,20 @@ import org.springframework.http.HttpMethod;
 /**
  * Factory for {@link ClientHttpRequest} objects.
  * Requests are created by the {@link #createRequest(URI, HttpMethod)} method.
- *
+ * ClientHttpRequest对象的工厂。 通过createRequest（URI，HttpMethod）方法创建请求。
  * @author Arjen Poutsma
  * @since 3.0
  */
 @FunctionalInterface
 public interface ClientHttpRequestFactory {
 
-	/**
+	/**为指定的URI和HTTP方法创建一个新的ClientHttpRequest。
 	 * Create a new {@link ClientHttpRequest} for the specified URI and HTTP method.
 	 * <p>The returned request can be written to, and then executed by calling
 	 * {@link ClientHttpRequest#execute()}.
 	 * @param uri the URI to create a request for
 	 * @param httpMethod the HTTP method to execute
-	 * @return the created request
+	 * @return the created request可以将返回的请求写入并通过调用ClientHttpRequest.execute（）执行。
 	 * @throws IOException in case of I/O errors
 	 */
 	ClientHttpRequest createRequest(URI uri, HttpMethod httpMethod) throws IOException;

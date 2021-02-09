@@ -18,7 +18,7 @@ import org.springframework.util.MultiValueMap;
 
 /**
  * Logic for handling client authentication.
- * 
+ * 处理客户端身份验证的逻辑。
  * @author Ryan Heaton
  * @author Dave Syer
  */
@@ -26,7 +26,7 @@ public interface ClientAuthenticationHandler {
 
 	/**
 	 * Authenticate a token request.
-	 * 
+	 *
 	 * @param resource The resource for which to authenticate a request.
 	 * @param form The form that is being submitted as the token request.
 	 * @param headers The request headers to be submitted.
