@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: jackson-databind
+Implementation-Version: 2.11.0
+Built-By: tatu
+Specification-Vendor: FasterXML
+Specification-Title: jackson-databind
+Implementation-Vendor-Id: com.fasterxml.jackson.core
+Implementation-Vendor: FasterXML
+Implementation-Build-Date: 2020-04-26 00:15:37+0000
+X-Compile-Target-JDK: 1.7
+X-Compile-Source-JDK: 1.7
+Created-By: Apache Maven 3.6.3
+Build-Jdk: 1.8.0_162
+Specification-Version: 2.11
+Implementation-URL: http://github.com/FasterXML/jackson
+
