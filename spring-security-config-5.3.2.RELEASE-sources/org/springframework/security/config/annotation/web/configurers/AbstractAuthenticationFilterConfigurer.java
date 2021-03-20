@@ -48,7 +48,7 @@ import java.util.Collections;
 /**
  * Base class for configuring {@link AbstractAuthenticationFilterConfigurer}. This is
  * intended for internal use only.
- *
+ * 这玩意牛逼啊
  * @see FormLoginConfigurer
  * @see OpenIDLoginConfigurer
  *

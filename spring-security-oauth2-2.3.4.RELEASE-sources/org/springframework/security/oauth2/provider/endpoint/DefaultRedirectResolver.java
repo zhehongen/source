@@ -46,9 +46,8 @@ public class DefaultRedirectResolver implements RedirectResolver {
 
 	/**
 	 * Flag to indicate that requested URIs will match if they are a subdomain of the registered value.
-	 *
+	 *如果请求的URI是注册值的子域，则该标志指示所请求的URI将匹配。
 	 * @param matchSubdomains the flag value to set (deafult true)
-	 * 如果请求的URI是注册值的子域，则该标志指示所请求的URI将匹配。
 	 */
 	public void setMatchSubdomains(boolean matchSubdomains) {
 		this.matchSubdomains = matchSubdomains;
@@ -56,14 +55,14 @@ public class DefaultRedirectResolver implements RedirectResolver {
 
 	/**
 	 * Flag that enables/disables port matching between the requested redirect URI and the registered redirect URI(s).
-	 *
+	 * 是否要求端口也匹配
 	 * @param matchPorts true to enable port matching, false to disable (defaults to true)
 	 */
 	public void setMatchPorts(boolean matchPorts) {
 		this.matchPorts = matchPorts;
 	}
 
-	/**
+	/**允许具有重定向uri的授权类型。
 	 * Grant types that are permitted to have a redirect uri.
 	 *
 	 * @param redirectGrantTypes the redirect grant types to set
@@ -103,25 +102,16 @@ public class DefaultRedirectResolver implements RedirectResolver {
 		return false;
 	}
 
-	/**
+	/**请求的重定向URI是否“匹配”指定的重定向URI。 对于URL，此实现测试用户请求的重定向是否从注册的重定向开始，
 	 * Whether the requested redirect URI "matches" the specified redirect URI. For a URL, this implementation tests if
 	 * the user requested redirect starts with the registered redirect, so it would have the same host and root path if
-	 * it is an HTTP URL. The port is also matched.
-	 * <p>
+	 * it is an HTTP URL. The port is also matched.因此如果它是HTTP URL，则它将具有相同的主机和根路径。 端口也匹配。
+	 * <p>对于其他（非URL）情况，例如某些隐式客户端，redirect_uri必须完全匹配。
 	 * For other (non-URL) cases, such as for some implicit clients, the redirect_uri must be an exact match.
 	 *
-	 * @param requestedRedirect The requested redirect URI.
-	 * @param redirectUri The registered redirect URI.
-	 * @return Whether the requested redirect URI "matches" the specified redirect URI.
-	 * 请求的重定向URI是否“匹配”指定的重定向URI。 对于URL，此实现测试用户请求的重定向是否从注册的重定向开始，
-	 * 因此如果它是HTTP URL，则它将具有相同的主机和根路径。 端口也匹配。
-	 * 对于其他（非URL）情况，例如某些隐式客户端，redirect_uri必须完全匹配。
-	 *
-	 * 参数：
-	 * requestRedirect –请求的重定向URI。
-	 * redirectUri –注册的重定向URI。
-	 * 返回值：
-	 * 请求的重定向URI是否“匹配”指定的重定向URI。
+	 * @param requestedRedirect The requested redirect URI.请求的重定向URI
+	 * @param redirectUri The registered redirect URI.注册的重定向URI
+	 * @return Whether the requested redirect URI "matches" the specified redirect URI.请求的重定向URI是否“匹配”指定的重定向URI
 	 */
 	protected boolean redirectMatches(String requestedRedirect, String redirectUri) {
 		UriComponents requestedRedirectUri = UriComponentsBuilder.fromUriString(requestedRedirect).build();
@@ -148,8 +138,7 @@ public class DefaultRedirectResolver implements RedirectResolver {
 	 *
 	 * @param registered the registered host
 	 * @param requested the requested host
-	 * @return true if they match
-	 * //什么玩意？是子域名就行
+	 * @return true if they match什么玩意？是子域名就行
 	 */
 	protected boolean hostMatches(String registered, String requested) {
 		if (matchSubdomains) {
@@ -160,7 +149,7 @@ public class DefaultRedirectResolver implements RedirectResolver {
 
 	/**
 	 * Attempt to match one of the registered URIs to the that of the requested one.
-	 *
+	 * 尝试将一个已注册的URI与请求的URI匹配。         用于尝试查找匹配项的已注册uri集。不能为null或空。
 	 * @param redirectUris the set of the registered URIs to try and find a match. This cannot be null or empty.
 	 * @param requestedRedirect the URI used as part of the request
 	 * @return the matching URI

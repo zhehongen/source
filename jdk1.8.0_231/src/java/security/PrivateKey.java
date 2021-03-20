@@ -65,3 +65,11 @@ public interface PrivateKey extends Key, javax.security.auth.Destroyable {
      */
     static final long serialVersionUID = 6034044314589513430L;
 }
+/**
+ * 私钥。 该接口的目的是对所有私钥接口进行分组（并提供类型安全性）。
+ * 注意：专用私钥接口扩展了此接口。 例如，请参见java.security.interfaces中的DSAPrivateKey接口。
+ * 实现应覆盖javax.security.auth.Destroyable接口中的默认destroy和isDestroyed方法，以使敏感密钥信息能够被销毁，清除，
+ * 或者在此类信息是不可变的，未引用的情况下。 
+ * 最后，由于PrivateKey是可序列化的，因此实现还应该重写java.io.ObjectOutputStream.writeObject（Object）
+ * 以防止序列化销毁的密钥。
+ */

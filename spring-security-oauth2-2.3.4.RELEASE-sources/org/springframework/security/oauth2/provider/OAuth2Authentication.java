@@ -4,17 +4,15 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.CredentialsContainer;
 
-/**
+/**OAuth 2身份验证令牌可以包含两种身份验证：一种用于客户端，一种用于用户。
  * An OAuth 2 authentication token can contain two authentications: one for the client and one for the user. Since some
  * OAuth authorization grants don't require user authentication, the user authentication may be null.
- * OAuth 2身份验证令牌可以包含两种身份验证：一种用于客户端，一种用于用户。
- * 由于某些OAuth授权授予不需要用户身份验证，因此用户身份验证可能为null。
- * @author Ryan Heaton
+ *由于某些OAuth授权授予不需要用户身份验证，因此用户身份验证可能为null。
+ *  @author Ryan Heaton
  */
 public class OAuth2Authentication extends AbstractAuthenticationToken {
 
 	private static final long serialVersionUID = -4809832298438307309L;
-
 	//请求
 	private final OAuth2Request storedRequest;
 	//用户认证信息

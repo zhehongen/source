@@ -1811,7 +1811,7 @@ public class ConcurrentHashMap<K,V> extends AbstractMap<K,V>
         return val;
     }
 
-    /**
+    /**尝试计算指定键及其当前映射值的映射（如果没有当前映射，则为null）。整个方法调用是原子执行的。在计算进行过程中，可能会阻止其他线程对此映射进行的某些尝试的更新操作，因此计算应简短而简单，并且不得尝试更新此Map的任何其他映射。
      * Attempts to compute a mapping for the specified key and its
      * current mapped value (or {@code null} if there is no current
      * mapping). The entire method invocation is performed atomically.

@@ -603,7 +603,7 @@ public final class HttpSecurity extends
 		return HttpSecurity.this;
 	}
 
-	/**
+	/**以下配置演示了如何强制一次仅认证一个用户实例。如果用户未注销而使用用户名“user”进行身份验证，并且尝试使用“ user”进行身份验证，则第一个会话将被强制终止并发送到“ /login?expired” URL。
 	 * Allows configuring of Session Management.
 	 *
 	 * <h2>Example Configuration</h2>
@@ -631,7 +631,7 @@ public final class HttpSecurity extends
 	 * 	}
 	 * }
 	 * </pre>
-	 *
+	 * 使用SessionManagementConfigurer.maximumSessions（int）时，请不要忘记为应用程序配置HttpSessionEventPublisher，以确保清除过期的会话
 	 * When using {@link SessionManagementConfigurer#maximumSessions(int)}, do not forget
 	 * to configure {@link HttpSessionEventPublisher} for the application to ensure that
 	 * expired sessions are cleaned up.

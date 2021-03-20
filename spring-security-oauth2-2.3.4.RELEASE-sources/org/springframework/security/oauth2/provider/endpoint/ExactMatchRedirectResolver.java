@@ -5,7 +5,7 @@ package org.springframework.security.oauth2.provider.endpoint;
 /**
  * Strict implementation for a redirect resolver which requires
  * an exact match between the registered and requested redirect_uri.
- *
+ * 精确匹配
  * @author Ryan Heaton
  * @author Dave Syer
  */

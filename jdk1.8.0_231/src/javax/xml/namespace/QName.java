@@ -31,7 +31,7 @@ import java.security.PrivilegedAction;
 
 import javax.xml.XMLConstants;
 
-/**
+/**QName表示XML规范中定义的限定名称：XMLSchema Part2:Datatypes规范、XML中的名称空间、XML勘误表中的名称空间。
  * <p><code>QName</code> represents a <strong>qualified name</strong>
  * as defined in the XML specifications: <a
  * href="http://www.w3.org/TR/xmlschema-2/#QName">XML Schema Part2:
@@ -43,7 +43,7 @@ import javax.xml.XMLConstants;
  *
  * <p>The value of a <code>QName</code> contains a <strong>Namespace
  * URI</strong>, <strong>local part</strong> and
- * <strong>prefix</strong>.</p>
+ * <strong>prefix</strong>.</p>QName的值包含命名空间URI、本地部分和前缀。
  *
  * <p>The prefix is included in <code>QName</code> to retain lexical
  * information <strong><em>when present</em></strong> in an {@link
@@ -52,7 +52,7 @@ import javax.xml.XMLConstants;
  * QName.equals(Object)} or to compute the {@link #hashCode()
  * QName.hashCode()}.  Equality and the hash code are defined using
  * <strong><em>only</em></strong> the Namespace URI and local part.</p>
- *
+ * 该前缀包含在QName中，以在XML输入源中存在时保留词法信息。 该前缀不用于QName.equals（Object）或用于计算QName.hashCode（）。 仅使用命名空间URI和本地部分定义相等性和哈希码。
  * <p>If not specified, the Namespace URI is set to {@link
  * javax.xml.XMLConstants#NULL_NS_URI XMLConstants.NULL_NS_URI}.
  * If not specified, the prefix is set to {@link
@@ -60,7 +60,7 @@ import javax.xml.XMLConstants;
  * XMLConstants.DEFAULT_NS_PREFIX}.</p>
  *
  * <p><code>QName</code> is immutable.</p>
- *
+ * 如果未指定，则命名空间URI设置为XMLConstants.NULL_NS_URI。 如果未指定，则将前缀设置为XMLConstants.DEFAULT_NS_PREFIX。
  * @author <a href="mailto:Jeff.Suttor@Sun.com">Jeff Suttor</a>
  * @version $Revision: 1.8 $, $Date: 2010/03/18 03:06:17 $
  * @see <a href="http://www.w3.org/TR/xmlschema-2/#QName">
@@ -69,7 +69,7 @@ import javax.xml.XMLConstants;
  *   Namespaces in XML</a>
  * @see <a href="http://www.w3.org/XML/xml-names-19990114-errata">
  *   Namespaces in XML Errata</a>
- * @since 1.5
+ * @since 1.5 吊
  */
 
 public class QName implements Serializable {

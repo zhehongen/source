@@ -43,11 +43,11 @@ import javax.servlet.Filter;
 
 import static org.springframework.util.StringUtils.hasText;
 
-/**
+/**用于SAML 2.0登录的AbstractHttpConfigurer，它利用了SAML 2.0 Web浏览器单点登录（WebSSO）流。
  * An {@link AbstractHttpConfigurer} for SAML 2.0 Login,
  * which leverages the SAML 2.0 Web Browser Single Sign On (WebSSO) Flow.
- *
- * <p>
+ *SAML 2.0登录为应用程序提供了使用户能够通过使用他们在SAML 2.0身份提供程序上的现有帐户登录的功能。
+ * <p>为所有配置选项提供了默认值，唯一需要的配置是DependingPartyRegistrationRepository（RelyingPartyRegistrationRepository）。另外，也可以注册RelyingPartyRegistrationRepository @Bean。
  * SAML 2.0 Login provides an application with the capability to have users log in
  * by using their existing account at an SAML 2.0 Identity Provider.
  *
@@ -95,10 +95,10 @@ import static org.springframework.util.StringUtils.hasText;
 public final class Saml2LoginConfigurer<B extends HttpSecurityBuilder<B>> extends
 		AbstractAuthenticationFilterConfigurer<B, Saml2LoginConfigurer<B>, Saml2WebSsoAuthenticationFilter> {
 
-	private String loginPage;
+	private String loginPage;//登录页
 
 	private String loginProcessingUrl = Saml2WebSsoAuthenticationFilter.DEFAULT_FILTER_PROCESSES_URI;
-
+	//还是不懂，本地类，
 	private AuthenticationRequestEndpointConfig authenticationRequestEndpoint = new AuthenticationRequestEndpointConfig();
 
 	private RelyingPartyRegistrationRepository relyingPartyRegistrationRepository;

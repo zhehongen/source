@@ -42,7 +42,7 @@ public interface RSAKey {
 
     /**
      * Returns the modulus.
-     *
+     * 返回模数。
      * @return the modulus
      */
     public BigInteger getModulus();

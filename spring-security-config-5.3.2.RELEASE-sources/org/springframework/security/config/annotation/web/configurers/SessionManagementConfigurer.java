@@ -88,7 +88,7 @@ import org.springframework.util.CollectionUtils;
  * <li>{@link AuthenticationTrustResolver} is optionally used to populate the
  * {@link HttpSessionSecurityContextRepository} and {@link SessionManagementFilter}</li>
  * </ul>
- *
+ * 批
  * @author Rob Winch
  * @author Onur Kagan Ozcan
  * @since 3.2

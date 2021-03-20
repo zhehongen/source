@@ -32,7 +32,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.util.MultiValueMap;
 
-/**
+/**表示URI组件的不可变集合，将组件类型映射到字符串值。包含所有组件的便利获取程序。实际上类似于URI，但具有更强大的编码选项和对URI模板变量的支持。
  * Represents an immutable collection of URI components, mapping component type to
  * String values. Contains convenience getters for all components. Effectively similar
  * to {@link java.net.URI}, but with more powerful encoding options and support for
@@ -47,7 +47,7 @@ import org.springframework.util.MultiValueMap;
 @SuppressWarnings("serial")
 public abstract class UriComponents implements Serializable {
 
-	/** Captures URI template variable names. */
+	/** Captures URI template variable names. 捕获URI模板变量名称*/
 	private static final Pattern NAMES_PATTERN = Pattern.compile("\\{([^/]+?)}");
 
 
@@ -55,7 +55,7 @@ public abstract class UriComponents implements Serializable {
 	private final String scheme;
 
 	@Nullable
-	private final String fragment;
+	private final String fragment;//什么叫片段
 
 
 	protected UriComponents(@Nullable String scheme, @Nullable String fragment) {
@@ -83,7 +83,7 @@ public abstract class UriComponents implements Serializable {
 	}
 
 	/**
-	 * Return the scheme specific part. Can be {@code null}.
+	 * Return the scheme specific part. Can be {@code null}.返回方案特定部分。
 	 */
 	@Nullable
 	public abstract String getSchemeSpecificPart();
@@ -111,7 +111,7 @@ public abstract class UriComponents implements Serializable {
 	@Nullable
 	public abstract String getPath();
 
-	/**
+	/**返回路径段列表。如果没有设置路径，则为空。
 	 * Return the list of path segments. Empty if no path has been set.
 	 */
 	public abstract List<String> getPathSegments();

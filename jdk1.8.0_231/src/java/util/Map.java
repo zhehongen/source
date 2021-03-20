@@ -1028,40 +1028,40 @@ public interface Map<K,V> {
     }
 
     /**
-     * Attempts to compute a mapping for the specified key and its current
+     * Attempts to compute a mapping for the specified key and its current       尝试计算指定键及其当前映射值的映射（如果没有当前映射，则为null）。例如，要将String msg创建或附加到值映射中，请执行以下操作：
      * mapped value (or {@code null} if there is no current mapping). For
-     * example, to either create or append a {@code String} msg to a value
-     * mapping:
-     *
+     * example, to either create or append a {@code String} msg to a value        map.compute（key，（k，v）->（v == null）？msg：v.concat（msg））
+     * mapping:                                                                  （方法merge（）通常更容易用于此目的。）
+     *                                                                           如果该函数返回null，则将删除该映射（如果最初不存在，则保持不存在）。如果函数本身引发（未经检查的）异常，则重新引发该异常，并且当前映射保持不变。
      * <pre> {@code
-     * map.compute(key, (k, v) -> (v == null) ? msg : v.concat(msg))}</pre>
-     * (Method {@link #merge merge()} is often simpler to use for such purposes.)
-     *
-     * <p>If the function returns {@code null}, the mapping is removed (or
-     * remains absent if initially absent).  If the function itself throws an
-     * (unchecked) exception, the exception is rethrown, and the current mapping
-     * is left unchanged.
-     *
-     * @implSpec
-     * The default implementation is equivalent to performing the following
-     * steps for this {@code map}, then returning the current value or
+     * map.compute(key, (k, v) -> (v == null) ? msg : v.concat(msg))}</pre>      参数：
+     * (Method {@link #merge merge()} is often simpler to use for such purposes.)key –与指定值关联的键
+     *                                                                           remappingFunction –计算值的函数
+     * <p>If the function returns {@code null}, the mapping is removed (or       返回值：
+     * remains absent if initially absent).  If the function itself throws an    与指定键关联的新值；如果没有，则为null
+     * (unchecked) exception, the exception is rethrown, and the current mapping 抛出：
+     * is left unchanged.                                                        NullPointerException-如果指定键为null且此映射不支持空键，或者remappingFunction为null
+     *                                                                           UnsupportedOperationException-如果此映射不支持put操作（可选）
+     * @implSpec                                                                 ClassCastException-如果指定键或值的类阻止其存储在此映射中（可选）
+     * The default implementation is equivalent to performing the following      实施要求：
+     * steps for this {@code map}, then returning the current value or           默认实现等效于对此映射执行以下步骤，然后返回当前值；如果不存在，则返回null：
      * {@code null} if absent:
      *
      * <pre> {@code
      * V oldValue = map.get(key);
-     * V newValue = remappingFunction.apply(key, oldValue);
-     * if (oldValue != null ) {
-     *    if (newValue != null)
-     *       map.put(key, newValue);
-     *    else
-     *       map.remove(key);
-     * } else {
-     *    if (newValue != null)
-     *       map.put(key, newValue);
-     *    else
-     *       return null;
-     * }
-     * }</pre>
+     * V newValue = remappingFunction.apply(key, oldValue);      V oldValue = map.get(key);
+     * if (oldValue != null ) {                                   V newValue = remappingFunction.apply(key, oldValue);
+     *    if (newValue != null)                                   if (oldValue != null ) {
+     *       map.put(key, newValue);                                 if (newValue != null)
+     *    else                                                          map.put(key, newValue);
+     *       map.remove(key);                                        else
+     * } else {                                                         map.remove(key);
+     *    if (newValue != null)                                   } else {
+     *       map.put(key, newValue);                                 if (newValue != null)
+     *    else                                                          map.put(key, newValue);
+     *       return null;                                            else
+     * }                                                                return null;
+     * }</pre>                                                    }
      *
      * <p>The default implementation makes no guarantees about synchronization
      * or atomicity properties of this method. Any implementation providing
@@ -1070,7 +1070,7 @@ public interface Map<K,V> {
      * subinterface {@link java.util.concurrent.ConcurrentMap} must document
      * whether the function is applied once atomically only if the value is not
      * present.
-     *
+     *默认实现不保证此方法的同步性或原子性。提供原子性保证的任何实现都必须重写此方法并记录其并发属性。特别是，子接口java.util.concurrent.ConcurrentMap的所有实现都必须记录该函数是否仅在不存在该值的情况下原子地应用一次。
      * @param key key with which the specified value is to be associated
      * @param remappingFunction the function to compute a value
      * @return the new value associated with the specified key, or null if none
@@ -1116,7 +1116,7 @@ public interface Map<K,V> {
      * method may be of use when combining multiple mapped values for a key.
      * For example, to either create or append a {@code String msg} to a
      * value mapping:
-     *
+     *如果指定的键尚未与值关联或与null关联，请将其与给定的非null值关联。否则，用给定的重映射函数的结果替换关联的值，如果结果为null，则将其删除。当组合一个键的多个映射值时，此方法可能有用。例如，要将String msg创建或附加到值映射中，请执行以下操作：
      * <pre> {@code
      * map.merge(key, msg, String::concat)
      * }</pre>
@@ -1151,10 +1151,10 @@ public interface Map<K,V> {
      * @param key key with which the resulting value is to be associated
      * @param value the non-null value to be merged with the existing value
      *        associated with the key or, if no existing value or a null value
-     *        is associated with the key, to be associated with the key
-     * @param remappingFunction the function to recompute a value if present
+     *        is associated with the key, to be associated with the key要与该键关联的现有值合并的非null值，或者如果该键没有关联现有值或null值，则要与该键关联
+     * @param remappingFunction the function to recompute a value if present重新计算值（如果存在）的函数
      * @return the new value associated with the specified key, or null if no
-     *         value is associated with the key
+     *         value is associated with the key与指定键关联的新值；如果没有值与键关联，则为null
      * @throws UnsupportedOperationException if the {@code put} operation
      *         is not supported by this map
      *         (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
