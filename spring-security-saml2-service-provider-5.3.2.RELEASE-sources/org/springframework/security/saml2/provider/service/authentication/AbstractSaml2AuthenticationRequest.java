@@ -56,11 +56,11 @@ abstract class AbstractSaml2AuthenticationRequest {
 		this.relayState = relayState;
 	}
 
-	/**返回要发送的AuthNRequest XML值。 该值已被编码用于传输。 如果getBinding（）是Saml2MessageBinding.REDIRECT，则将值放气并进行SAML编码。 如果getBinding（）是Saml2MessageBinding.POST，则该值是SAML编码的。
+	/**返回要发送的AuthNRequest XML值。 该值已被编码用于传输。 如果getBinding（）是Saml2MessageBinding.REDIRECT，则将值放气并进行SAML编码。
 	 * Returns the AuthNRequest XML value to be sent. This value is already encoded for transport.
 	 * If {@link #getBinding()} is {@link Saml2MessageBinding#REDIRECT} the value is deflated and SAML encoded.
 	 * If {@link #getBinding()} is {@link Saml2MessageBinding#POST} the value is SAML encoded.
-	 * @return the SAMLRequest parameter value
+	 * @return the SAMLRequest parameter value 如果getBinding（）是Saml2MessageBinding.POST，则该值是SAML编码的。
 	 */
 	public String getSamlRequest() {
 		return this.samlRequest;

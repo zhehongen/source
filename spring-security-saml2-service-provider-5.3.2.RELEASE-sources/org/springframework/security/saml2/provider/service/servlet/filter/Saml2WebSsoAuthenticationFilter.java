@@ -38,7 +38,7 @@ import static org.springframework.security.saml2.provider.service.authentication
 import static org.springframework.util.StringUtils.hasText;
 
 /**
- * @since 5.2
+ * @since 5.2 Saml2WebSsoAuthenticationRequestFilter这俩孙子啥区别。这是真正的断言消费服务
  */
 public class Saml2WebSsoAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
@@ -46,7 +46,7 @@ public class Saml2WebSsoAuthenticationFilter extends AbstractAuthenticationProce
 	private final RequestMatcher matcher;
 	private final RelyingPartyRegistrationRepository relyingPartyRegistrationRepository;
 
-	/**
+	/**创建一个Saml2WebSsoAuthenticationFilter身份验证过滤器，该过滤器配置为使用DEFAULT_FILTER_PROCESSES_URI处理URL
 	 * Creates a {@code Saml2WebSsoAuthenticationFilter} authentication filter that is configured
 	 * to use the {@link #DEFAULT_FILTER_PROCESSES_URI} processing URL
 	 * @param relyingPartyRegistrationRepository - repository of configured SAML 2 entities. Required.
@@ -55,7 +55,7 @@ public class Saml2WebSsoAuthenticationFilter extends AbstractAuthenticationProce
 		this(relyingPartyRegistrationRepository, DEFAULT_FILTER_PROCESSES_URI);
 	}
 
-	/**
+	/**创建一个Saml2WebSsoAuthenticationFilter身份验证筛选器
 	 * Creates a {@code Saml2WebSsoAuthenticationFilter} authentication filter
 	 * @param relyingPartyRegistrationRepository - repository of configured SAML 2 entities. Required.
 	 * @param filterProcessesUrl the processing URL, must contain a {registrationId} variable. Required.

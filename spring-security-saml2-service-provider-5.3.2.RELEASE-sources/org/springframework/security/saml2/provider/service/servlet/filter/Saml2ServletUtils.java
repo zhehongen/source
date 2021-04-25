@@ -51,7 +51,7 @@ final class Saml2ServletUtils {
 		uriVariables.put("baseScheme", scheme == null ? "" : scheme);
 		String host = uriComponents.getHost();
 		uriVariables.put("baseHost", host == null ? "" : host);
-		// following logic is based on HierarchicalUriComponents#toUriString()
+		// following logic is based on HierarchicalUriComponents#toUriString() 以下逻辑基于HierarchicalUriComponents＃toUriString（）
 		int port = uriComponents.getPort();
 		uriVariables.put("basePort", port == -1 ? "" : ":" + port);
 		String path = uriComponents.getPath();
@@ -69,7 +69,7 @@ final class Saml2ServletUtils {
 				.buildAndExpand(uriVariables)
 				.toUriString();
 	}
-
+	//应用uri
 	static String getApplicationUri(HttpServletRequest request) {
 		UriComponents uriComponents = fromHttpUrl(buildFullRequestUrl(request))
 				.replacePath(request.getContextPath())

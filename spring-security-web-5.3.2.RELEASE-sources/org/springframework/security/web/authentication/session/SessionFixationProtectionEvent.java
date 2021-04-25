@@ -22,7 +22,7 @@ import org.springframework.util.Assert;
 
 /**
  * Indicates a session ID was changed for the purposes of session fixation protection.
- *
+ * 这是关键，来实现多session并存，并且可以支持服务端强制销毁jwt token
  * @author Nicholas Williams
  * @since 3.2
  * @see SessionFixationProtectionStrategy

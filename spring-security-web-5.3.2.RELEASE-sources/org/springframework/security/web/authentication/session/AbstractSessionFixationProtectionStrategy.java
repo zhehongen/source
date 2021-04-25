@@ -49,19 +49,19 @@ abstract class AbstractSessionFixationProtectionStrategy implements
 	 */
 	private boolean alwaysCreateSession;
 
-	/**
+	/**在新认证用户时调用。
 	 * Called when a user is newly authenticated.
-	 * <p>
+	 * <p>如果会话已经存在，并且与客户端的会话ID相匹配，则将创建一个新会话，并将会话属性复制到该会话中（如果设置了migrationSessionAttributes）。
 	 * If a session already exists, and matches the session Id from the client, a new
 	 * session will be created, and the session attributes copied to it (if
 	 * {@code migrateSessionAttributes} is set). If the client's requested session Id is
 	 * invalid, nothing will be done, since there is no need to change the session Id if
 	 * it doesn't match the current session.
-	 * <p>
+	 * <p>如果客户端请求的会话ID无效，则不会执行任何操作，因为如果会话ID与当前会话不匹配，则无需更改会话ID。
 	 * If there is no session, no action is taken unless the {@code alwaysCreateSession}
 	 * property is set, in which case a session will be created if one doesn't already
-	 * exist.
-	 */
+	 * exist.如果没有会话，则除非设置了alwaysCreateSession属性，否则将不执行任何操作，在这种情况下，如果一个会话不存在，则将创建一个会话。
+	 如果确定不允许会话认证。这通常是因为用户一次打开了太多会话。*/
 	public void onAuthentication(Authentication authentication,
 			HttpServletRequest request, HttpServletResponse response) {
 		boolean hadSessionAlready = request.getSession(false) != null;

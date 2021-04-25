@@ -16,13 +16,13 @@
 
 package org.springframework.security.saml2.provider.service.registration;
 
-/**使用支持的绑定交换消息的绑定类型为urn：oasis：names：tc：SAML：2.0：bindings：HTTP-POST和urn：oasis：names：tc：SAML：2.0：bindings：HTTP-Redirect。 另外，还支持在消息中带有XML签名而不是查询参数的urn：oasis：names：tc：SAML：2.0：bindings：HTTP-Redirect。
+/**使用支持的绑定交换消息的绑定类型为urn：oasis：names：tc：SAML：2.0：bindings：HTTP-POST和urn：oasis：names：tc：SAML：2.0：bindings：HTTP-Redirect。
  * The type of bindings that messages are exchanged using
  * Supported bindings are {@code urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST}
  * and {@code urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect}.
  * In addition there is support for {@code urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect}
  * with an XML signature in the message rather than query parameters.
- * @since 5.3
+ * @since 5.3 另外，还支持在消息中带有XML签名而不是查询参数的urn：oasis：names：tc：SAML：2.0：bindings：HTTP-Redirect。
  */
 public enum Saml2MessageBinding {
 

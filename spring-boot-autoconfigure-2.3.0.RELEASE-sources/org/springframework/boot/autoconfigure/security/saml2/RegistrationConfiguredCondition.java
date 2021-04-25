@@ -31,7 +31,7 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 /**
  * Condition that matches if any {@code spring.security.saml2.relyingparty.registration}
  * properties are defined.
- *
+ * 这玩意不好理解。
  * @author Madhura Bhave
  * @author Phillip Webb
  */

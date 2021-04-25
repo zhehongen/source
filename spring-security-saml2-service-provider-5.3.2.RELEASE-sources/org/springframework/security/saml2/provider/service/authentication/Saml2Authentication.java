@@ -24,10 +24,10 @@ import org.springframework.util.Assert;
 
 import java.util.Collection;
 
-/**
+/**代表已认证的SAML 2.0身份验证的AbstractAuthenticationToken的实现。
  * An implementation of an {@link AbstractAuthenticationToken}
  * that represents an authenticated SAML 2.0 {@link Authentication}.
- * <p>
+ * <p>Authentication将有效的SAML声明数据与Spring Security认证对象相关联。完整的声明以String格式getSaml2Response（）包含在对象中。
  * The {@link Authentication} associates valid SAML assertion
  * data with a Spring Security authentication object
  * The complete assertion is contained in the object in String format,
@@ -56,7 +56,7 @@ public class Saml2Authentication extends AbstractAuthenticationToken {
 		return this.principal;
 	}
 
-	/**
+	/**以解码的XML形式返回SAML响应对象。 可能包含加密元素
 	 * Returns the SAML response object, as decoded XML. May contain encrypted elements
 	 * @return string representation of the SAML Response XML object
 	 */

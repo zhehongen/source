@@ -27,15 +27,15 @@ import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
 import org.springframework.util.Assert;
 
-/**
+/**一个SessionRegistry，它从Spring Session检索会话信息，而不是自己维护会话信息。 这允许在集群环境中使用Spring Security进行并发会话管理。
  * A {@link SessionRegistry} that retrieves session information from Spring Session,
  * rather than maintaining it itself. This allows concurrent session management with
  * Spring Security in a clustered environment.
- * <p>
+ * <p>依靠能够派生与Spring Session相同的，基于String的给主体getAllSessions（Object，boolean）的基于字符串的表示形式，以查找用户的会话。
  * Relies on being able to derive the same String-based representation of the principal
  * given to {@link #getAllSessions(Object, boolean)} as used by Spring Session in order to
  * look up the user's sessions.
- * <p>
+ * <p>不支持getAllPrincipals（），因为该信息不可用。
  * Does not support {@link #getAllPrincipals()}, since that information is not available.
  *
  * @param <S> the {@link Session} type.
@@ -95,14 +95,14 @@ public class SpringSessionBackedSessionRegistry<S extends Session> implements Se
 	public void registerNewSession(String sessionId, Object principal) {
 	}
 
-	/*
+	/*这是一项禁忌措施，因为我们不会自己管理会议。
 	 * This is a no-op, as we don't administer sessions ourselves.
 	 */
 	@Override
 	public void removeSessionInformation(String sessionId) {
 	}
 
-	/**
+	/**派生给定主体的字符串名称。
 	 * Derives a String name for the given principal.
 	 * @param principal as provided by Spring Security
 	 * @return name of the principal, or its {@code toString()} representation if no name

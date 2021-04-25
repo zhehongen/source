@@ -74,7 +74,7 @@ public interface RequestMatcher {
 
 		/**
 		 * Returns the extracted variable values where the key is the variable name and the value is the variable value
-		 *
+		 * 返回提取的变量值，其中键是变量名，值是变量值
 		 * @return a map containing key-value pairs representing extracted variable names and variable values
 		 */
 		public Map<String, String> getVariables() {

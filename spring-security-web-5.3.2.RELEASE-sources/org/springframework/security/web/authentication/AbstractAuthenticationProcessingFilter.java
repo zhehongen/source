@@ -119,7 +119,7 @@ public abstract class AbstractAuthenticationProcessingFilter extends GenericFilt
 	protected ApplicationEventPublisher eventPublisher;
 	protected AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource = new WebAuthenticationDetailsSource();
 	private AuthenticationManager authenticationManager;
-	protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
+	protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();//国际化？
 	private RememberMeServices rememberMeServices = new NullRememberMeServices();
 
 	private RequestMatcher requiresAuthenticationRequestMatcher;
@@ -240,16 +240,16 @@ public abstract class AbstractAuthenticationProcessingFilter extends GenericFilt
 		successfulAuthentication(request, response, chain, authResult);
 	}
 
-	/**
+	/**指示此过滤器是否应尝试处理当前调用的登录请求。
 	 * Indicates whether this filter should attempt to process a login request for the
 	 * current invocation.
-	 * <p>
+	 * <p>在与filterProcessesUrl属性进行匹配之前，它将剥离请求URL的“路径”部分中的所有参数（例如https：//host/myapp/index.html; jsessionid = blah中的jsessionid参数）。
 	 * It strips any parameters from the "path" section of the request URL (such as the
 	 * jsessionid parameter in <em>https://host/myapp/index.html;jsessionid=blah</em>)
 	 * before matching against the <code>filterProcessesUrl</code> property.
-	 * <p>
+	 * <p>子类可能会因特殊要求而被覆盖，例如Tapestry集成。
 	 * Subclasses may override for special requirements, such as Tapestry integration.
-	 *
+	 * 如果过滤器应尝试进行身份验证，则为true，否则为false。
 	 * @return <code>true</code> if the filter should attempt authentication,
 	 * <code>false</code> otherwise.
 	 */
@@ -457,3 +457,24 @@ public abstract class AbstractAuthenticationProcessingFilter extends GenericFilt
 		return failureHandler;
 	}
 }
+/**
+ * 基于浏览器的基于HTTP的身份验证请求的抽象处理器。
+ * 认证过程
+ * 筛选器要求您设置authenticationManager属性。
+ * 需要AuthenticationManager来处理通过实现类创建的身份验证请求令牌。
+ * 如果请求与setRequiresAuthenticationRequestMatcher（RequestMatcher）匹配，则此筛选器将拦截请求并尝试从该请求执行身份验证。
+ * 身份验证由tryAuthentication方法执行，该方法必须由子类实现。
+ * 认证成功
+ * 如果身份验证成功，则将生成的Authentication对象放置在当前线程的SecurityContext中，这可以确保已由较早的过滤器创建。
+ * 成功登录后，将调用已配置的AuthenticationSuccessHandler，以将重定向重定向到适当的目的地。
+ * 默认行为在SavedRequestAwareAuthenticationSuccessHandler中实现，它将使用ExceptionTranslationFilter设置的任何DefaultSavedRequest并将用户重定向到其中包含的URL。否则，它将重定向到Web应用程序根目录“ /”。您可以通过注入此类的不同配置实例或使用其他实现来自定义此行为。
+ * 有关更多信息，请参见成功的Authentication（HttpServletRequest，HttpServletResponse，FilterChain，Authentication）方法。
+ * 验证失败
+ * 如果身份验证失败，它将委派给已配置的AuthenticationFailureHandler，以允许将失败信息传达给客户端。默认实现是SimpleUrlAuthenticationFailureHandler，它将向客户端发送401错误代码。也可以使用失败URL进行配置。同样，您可以在此处注入您需要的任何行为。
+ * 活动发布
+ * 如果身份验证成功，则将通过应用程序上下文发布InteractiveAuthenticationSuccessEvent。
+ * 如果身份验证失败，则不会发布任何事件，因为通常会通过特定于AuthenticationManager的应用程序事件来记录该事件。
+ * 会话认证
+ * 该类具有可选的SessionAuthenticationStrategy，将在成功调用tryAuthentication（）之后立即调用它。
+ * 可以注入不同的实现，以实现诸如防止会话固定攻击之类的功能，或控制主体可能同时拥有的会话数。
+ * */

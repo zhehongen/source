@@ -35,22 +35,22 @@ import sun.security.util.Debug;
 import sun.security.jca.*;
 import sun.security.jca.GetInstance.Instance;
 
-/**
+/** 密钥工厂用于将密钥（密钥类型为不透明的加密密钥）转换为密钥规范（基础密钥材料的透明表示），反之亦然。
  * Key factories are used to convert <I>keys</I> (opaque
  * cryptographic keys of type {@code Key}) into <I>key specifications</I>
  * (transparent representations of the underlying key material), and vice
  * versa.
- *
+ *关键工厂是双向的。也就是说，它们允许您根据给定的密钥规范（密钥材料）构建不透明的密钥对象，或以合适的格式检索密钥对象的基础密钥材料。
  * <P> Key factories are bi-directional. That is, they allow you to build an
  * opaque key object from a given key specification (key material), or to
  * retrieve the underlying key material of a key object in a suitable format.
- *
+ *同一密钥可能存在多个兼容的密钥规范。例如，可以使用DSAPublicKeySpec或X509EncodedKeySpec指定DSA公共密钥。密钥工厂可用于在兼容的密钥规范之间进行转换。
  * <P> Multiple compatible key specifications may exist for the same key.
  * For example, a DSA public key may be specified using
  * {@code DSAPublicKeySpec} or
  * {@code X509EncodedKeySpec}. A key factory can be used to translate
  * between compatible key specifications.
- *
+ * 以下是如何使用密钥工厂以从其编码实例化DSA公共密钥的示例。假设爱丽丝已收到鲍勃的数字签名。鲍勃还向她发送了他的公共密钥（以编码格式）以验证其签名。然后，爱丽丝执行以下操作：
  * <P> The following is an example of how to use a key factory in order to
  * instantiate a DSA public key from its encoding.
  * Assume Alice has received a digital signature from Bob.
@@ -58,15 +58,15 @@ import sun.security.jca.GetInstance.Instance;
  * his signature. Alice then performs the following actions:
  *
  * <pre>
- * X509EncodedKeySpec bobPubKeySpec = new X509EncodedKeySpec(bobEncodedPubKey);
- * KeyFactory keyFactory = KeyFactory.getInstance("DSA");
- * PublicKey bobPubKey = keyFactory.generatePublic(bobPubKeySpec);
- * Signature sig = Signature.getInstance("DSA");
- * sig.initVerify(bobPubKey);
- * sig.update(data);
- * sig.verify(signature);
+ * X509EncodedKeySpec bobPubKeySpec = new X509EncodedKeySpec(bobEncodedPubKey);    X509EncodedKeySpec bobPubKeySpec = new X509EncodedKeySpec(bobEncodedPubKey);
+ * KeyFactory keyFactory = KeyFactory.getInstance("DSA");                          KeyFactory keyFactory = KeyFactory.getInstance("DSA");
+ * PublicKey bobPubKey = keyFactory.generatePublic(bobPubKeySpec);                 PublicKey bobPubKey = keyFactory.generatePublic(bobPubKeySpec);
+ * Signature sig = Signature.getInstance("DSA");                                   Signature sig = Signature.getInstance("DSA");
+ * sig.initVerify(bobPubKey);                                                      sig.initVerify(bobPubKey);
+ * sig.update(data);                                                               sig.update(data);
+ * sig.verify(signature);                                                          sig.verify(signature);
  * </pre>
- *
+ *这些算法在Java密码体系结构标准算法名称文档的KeyFactory部分中进行了描述。请查阅发行文档以了解您的实现，以了解是否支持其他算法。
  * <p> Every implementation of the Java platform is required to support the
  * following standard {@code KeyFactory} algorithms:
  * <ul>

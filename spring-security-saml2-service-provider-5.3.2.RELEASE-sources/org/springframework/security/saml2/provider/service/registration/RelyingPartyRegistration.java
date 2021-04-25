@@ -31,7 +31,7 @@ import static org.springframework.util.Assert.hasText;
 import static org.springframework.util.Assert.notEmpty;
 import static org.springframework.util.Assert.notNull;
 
-/**
+/**表示已配置的服务提供商SP和远程身份提供商IDP对。每个SP / IDP对使用registrationId（任意字符串）唯一标识。完全配置的注册可能看起来像
  * Represents a configured service provider, SP, and a remote identity provider, IDP, pair.
  * Each SP/IDP pair is uniquely identified using a <code>registrationId</code>, an arbitrary string.
  * A fully configured registration may look like
@@ -63,10 +63,10 @@ import static org.springframework.util.Assert.notNull;
  */
 public class RelyingPartyRegistration {
 
-	private final String registrationId;
+	private final String registrationId;//用一个随机数标示SP / IDP对
 	private final String assertionConsumerServiceUrlTemplate;
 	private final List<Saml2X509Credential> credentials;
-	private final String localEntityIdTemplate;
+	private final String localEntityIdTemplate;//???
 	private final ProviderDetails providerDetails;
 
 	private RelyingPartyRegistration(
@@ -240,9 +240,9 @@ public class RelyingPartyRegistration {
 	 * @since 5.3
 	 */
 	public final static class ProviderDetails {
-		private final String entityId;
-		private final String webSsoUrl;
-		private final boolean signAuthNRequest;
+		private final String entityId;//idp id
+		private final String webSsoUrl;//idp sso url即接收AuthNRequests的地方
+		private final boolean signAuthNRequest;//???
 		private final Saml2MessageBinding binding;
 
 		private ProviderDetails(
@@ -276,7 +276,7 @@ public class RelyingPartyRegistration {
 			return webSsoUrl;
 		}
 
-		/**
+		/**是否应该签署来自此依赖派对到IDP的AuthnRequests。
 		 * @return {@code true} if AuthNRequests from this relying party to the IDP should be signed
 		 * {@code false} if no signature is required.
 		 */
@@ -325,7 +325,7 @@ public class RelyingPartyRegistration {
 
 			/**
 			 * Set to true if the AuthNRequest message should be signed
-			 *
+			 * 签名
 			 * @param signAuthNRequest true if the message should be signed
 			 * @return this object
 			 */
@@ -376,7 +376,7 @@ public class RelyingPartyRegistration {
 		/**
 		 * Sets the {@code registrationId} template. Often be used in URL paths
 		 * @param id registrationId for this object, should be unique
-		 * @return this object
+		 * @return this object设置注册表模板。 通常用于URL路径
 		 */
 		public Builder registrationId(String id) {
 			this.registrationId = id;
@@ -442,19 +442,19 @@ public class RelyingPartyRegistration {
 		 *             .build();
 		 * </code>
 		 * @param credentials - a consumer that can modify the collection of credentials
-		 * @return this object
+		 * @return this object可以修改凭据集合的消费者
 		 */
 		public Builder credentials(Consumer<Collection<Saml2X509Credential>> credentials) {
 			credentials.accept(this.credentials);
 			return this;
 		}
 
-		/**
+		/**设置本地依赖方或服务提供商实体ID模板。 可以基于BaseURL，Registration，BaseScheme，Basehost和BasePort的可能变量生成它的实体ID，例如{BaseURL} / Saml2 / Service-Provider-Metadata / {RegistalyID}
 		 * Sets the local relying party, or Service Provider, entity Id template.
 		 * can generate it's entity ID based on possible variables of {@code baseUrl}, {@code registrationId},
 		 * {@code baseScheme}, {@code baseHost}, and {@code basePort}, for example
 		 * {@code {baseUrl}/saml2/service-provider-metadata/{registrationId}}
-		 * @return a string containing the entity ID or entity ID template
+		 * @return a string containing the entity ID or entity ID template包含实体ID或实体ID模板的字符串
 		 */
 
 		public Builder localEntityIdTemplate(String template) {

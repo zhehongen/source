@@ -37,7 +37,7 @@ public interface FindByIndexNameSessionRepository<S extends Session> extends Ses
 	 *
 	 * @since 1.1
 	 */
-	String PRINCIPAL_NAME_INDEX_NAME = FindByIndexNameSessionRepository.class.getName()
+	String PRINCIPAL_NAME_INDEX_NAME = FindByIndexNameSessionRepository.class.getName()//org.springframework.session.FindByIndexNameSessionRepository
 			.concat(".PRINCIPAL_NAME_INDEX_NAME");
 
 	/**

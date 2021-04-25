@@ -433,7 +433,7 @@ public class Timer {
         }
     }
 
-    /**
+    /**清除
      * Removes all cancelled tasks from this timer's task queue.  <i>Calling
      * this method has no effect on the behavior of the timer</i>, but
      * eliminates the references to the cancelled tasks from the queue.

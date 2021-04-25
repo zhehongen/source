@@ -334,7 +334,7 @@ public final class LogoutConfigurer<H extends HttpSecurityBuilder<H>> extends
 		logoutHandlers.add(postProcess(new LogoutSuccessEventPublishingLogoutHandler()));
 		LogoutHandler[] handlers = logoutHandlers
 				.toArray(new LogoutHandler[0]);
-		LogoutFilter result = new LogoutFilter(getLogoutSuccessHandler(), handlers);
+		LogoutFilter result = new LogoutFilter(getLogoutSuccessHandler(), handlers);//一个是成功退出登录的handler，一个是去处理退出登录请求的hander
 		result.setLogoutRequestMatcher(getLogoutRequestMatcher(http));
 		result = postProcess(result);
 		return result;

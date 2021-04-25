@@ -20,7 +20,7 @@ import org.springframework.security.authentication.AuthenticationDetailsSource;
 
 /**
  * A source for authentication details in an OAuth2 protected Resource.
- * 
+ * 批
  * @author Dave Syer
  * 
  */

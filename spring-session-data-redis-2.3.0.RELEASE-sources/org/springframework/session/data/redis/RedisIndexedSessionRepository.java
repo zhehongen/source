@@ -251,15 +251,15 @@ public class RedisIndexedSessionRepository
 
 	private static final Log logger = LogFactory.getLog(RedisIndexedSessionRepository.class);
 
-	private static final String SPRING_SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";
+	private static final String SPRING_SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";//安全上下文，认证信息都放在里面
 
 	/**
-	 * The default Redis database used by Spring Session.
+	 * The default Redis database used by Spring Session.默认数据库
 	 */
 	public static final int DEFAULT_DATABASE = 0;
 
 	/**
-	 * The default namespace for each key and channel in Redis used by Spring Session.
+	 * The default namespace for each key and channel in Redis used by Spring Session.默认命名空间
 	 */
 	public static final String DEFAULT_NAMESPACE = "spring:session";
 
@@ -270,7 +270,7 @@ public class RedisIndexedSessionRepository
 	 */
 	private String namespace = DEFAULT_NAMESPACE + ":";
 
-	private String sessionCreatedChannelPrefix;
+	private String sessionCreatedChannelPrefix;//session创建通道前缀
 
 	private String sessionDeletedChannel;
 
@@ -278,7 +278,7 @@ public class RedisIndexedSessionRepository
 
 	private final RedisOperations<Object, Object> sessionRedisOperations;
 
-	private final RedisSessionExpirationPolicy expirationPolicy;
+	private final RedisSessionExpirationPolicy expirationPolicy;//过期策略
 
 	private ApplicationEventPublisher eventPublisher = (event) -> {
 	};
@@ -289,7 +289,7 @@ public class RedisIndexedSessionRepository
 	 */
 	private Integer defaultMaxInactiveInterval;
 
-	private IndexResolver<Session> indexResolver = new DelegatingIndexResolver<>(new PrincipalNameIndexResolver<>());
+	private IndexResolver<Session> indexResolver = new DelegatingIndexResolver<>(new PrincipalNameIndexResolver<>());//干毛
 
 	private RedisSerializer<Object> defaultSerializer = new JdkSerializationRedisSerializer();
 
@@ -598,11 +598,11 @@ public class RedisIndexedSessionRepository
 				+ principalName;
 	}
 
-	String getExpirationsKey(long expiration) {
+	String getExpirationsKey(long expiration) {//在某个时间点过期的所有sessionID,时间点精确到分钟
 		return this.namespace + "expirations:" + expiration;
 	}
 
-	private String getExpiredKey(String sessionId) {
+	private String getExpiredKey(String sessionId) {//某个sessionid的过期时间
 		return getExpiredKeyPrefix() + sessionId;
 	}
 
@@ -855,3 +855,74 @@ public class RedisIndexedSessionRepository
 	}
 
 }
+/**
+ * 使用Spring Data的RedisOperations实现的org.springframework.session.SessionRepository。
+ * 在Web环境中，通常将其与SessionRepositoryFilter结合使用。
+ * 此实现通过实现MessageListener支持SessionDeletedEvent和SessionExpiredEvent。
+ * 创建一个新实例
+ * 下面是一个如何创建新实例的典型示例：
+ RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+
+ // ... configure redisTemplate ...
+
+ RedisIndexedSessionRepository redisSessionRepository =
+ new RedisIndexedSessionRepository(redisTemplate);
+ *
+ * 有关如何创建RedisTemplate的更多信息，请参考《 Spring Data Redis参考》。
+ * 储存详细资料
+ * 以下各节概述了如何为每个操作更新Redis。创建新会话的示例可以在下面找到。以下各节描述了详细信息。
+ HMSET spring:session:sessions:33fdd1b6-b496-4b33-9f7d-df96679d32fe creationTime 1404360000000 maxInactiveInterval 1800 lastAccessedTime 1404360000000 sessionAttr:attrName someAttrValue sessionAttr2:attrName someAttrValue2
+ EXPIRE spring:session:sessions:33fdd1b6-b496-4b33-9f7d-df96679d32fe 2100
+ APPEND spring:session:sessions:expires:33fdd1b6-b496-4b33-9f7d-df96679d32fe ""
+ EXPIRE spring:session:sessions:expires:33fdd1b6-b496-4b33-9f7d-df96679d32fe 1800
+ SADD spring:session:expirations:1439245080000 expires:33fdd1b6-b496-4b33-9f7d-df96679d32fe
+ EXPIRE spring:session:expirations1439245080000 2100
+ *
+ * 保存会议
+ * 每个会话都以哈希形式存储在Redis中。每个会话都使用HMSET命令设置和更新。下面是一个如何存储每个会话的示例。
+ * HMSET spring:session:sessions:33fdd1b6-b496-4b33-9f7d-df96679d32fe creationTime 1404360000000 maxInactiveInterval 1800 lastAccessedTime 1404360000000 sessionAttr:attrName someAttrValue sessionAttr:attrName2 someAttrValue2
+ * 在此示例中，关于会话的以下语句是正确的：
+ * 会话ID为33fdd1b6-b496-4b33-9f7d-df96679d32fe
+ * 该会话的创建时间为格林尼治标准时间1970年1月1日午夜以来的1404360000000。
+ * 会话将在1800秒（30分钟）后过期。
+ * 该会话的访问时间为格林尼治标准时间1970年1月1日午夜以来的1404360000000。
+ * 会话具有两个属性。第一个是值为“ someAttrValue”的“ attrName”。第二个会话属性被命名为“ attrName2”，其值为“ someAttrValue2”。
+ * 优化写入
+ * RedisIndexedSessionRepository.RedisSession跟踪已更改的属性，仅更新那些属性。
+ * 这意味着，如果一次写入一个属性并读取多次，我们只需要写入一次该属性。例如，假设先前的会话属性“ sessionAttr2”已更新。保存后将执行以下操作：
+ *      HMSET spring:session:sessions:33fdd1b6-b496-4b33-9f7d-df96679d32fe sessionAttr:attrName2 newValue
+ *
+ * SessionCreatedEvent
+ * 创建会话后，会将事件发送到Redis，其通道为“ spring：session：channel：created：33fdd1b6-b496-4b33-9f7d-df96679d32fe”，从而使“ 33fdd1b6-b496-4b33-9f7d-df96679d32fe”成为会话ID。事件的主体将是创建的会话。
+ * 如果注册为MessageListener，则RedisIndexedSessionRepository将把Redis消息转换为SessionCreatedEvent。
+ * 期满
+ * 使用基于RedisIndexedSessionRepository.RedisSession.getMaxInactiveInterval（）的EXPIRE命令将到期与每个会话相关联。例如：
+ *     EXPIRE spring:session:sessions:33fdd1b6-b496-4b33-9f7d-df96679d32fe 2100
+ *
+ * 您会注意到，设置的过期时间是会话实际过期后的5分钟。这是必需的，以便在会话过期时可以访问该会话的值。
+ * 会话本身会在实际上过期后五分钟设置过期，以确保将其清除，但是只有在我们执行任何必要的处理之后才能设置该过期时间。
+ * 注意：findById（String）方法可确保不会返回任何过期的会话。这意味着在使用会话之前无需检查到期时间
+ * Spring Session依赖Redis的过期和删除键空间通知来触发SessionDestroyedEvent。
+ * SessionDestroyedEvent可以确保清理与Session相关的资源。
+ * 例如，当使用Spring Session的WebSocket支持时，Redis过期或删除事件将触发与该会话关联的所有WebSocket连接被关闭。
+ * 不会直接在会话密钥本身上跟踪到期时间，因为这将意味着会话数据将不再可用。而是使用特殊的会话过期key。
+ * 在我们的示例中，expires键是：
+ APPEND spring:session:sessions:expires:33fdd1b6-b496-4b33-9f7d-df96679d32fe ""
+ EXPIRE spring:session:sessions:expires:33fdd1b6-b496-4b33-9f7d-df96679d32fe 1800
+ 当会话过期时，密钥将被删除或过期，密钥空间通知将触发对实际会话的查找，并触发SessionDestroyedEvent。
+ 完全依赖Redis到期的一个问题是，如果未访问密钥，Redis无法保证何时触发过期事件。
+ 特别是，Redis用于清除过期密钥的后台任务是低优先级任务，并且可能不会触发密钥过期。
+ 有关更多详细信息，请参阅Redis文档中的“定时过期事件”部分。
+ 为了规避不能保证发生过期事件的事实，我们可以确保在预期每个密钥都将到期时对其进行访问。
+ 这意味着，如果密钥上的TTL过期，当我们尝试访问密钥时，Redis将删除密钥并触发过期事件。
+ 因此，每个会话的到期时间也会被追踪到最近的分钟。这允许后台任务访问可能过期的会话，以确保以更确定的方式触发Redis过期事件。
+ 例如：
+ SADD spring:session:expirations:1439245080000 expires:33fdd1b6-b496-4b33-9f7d-df96679d32fe
+ EXPIRE spring:session:expirations1439245080000 2100
+
+ 然后，后台任务将使用这些映射来显式请求每个会话过期密钥。
+ 通过访问密钥而不是删除密钥，我们确保Redis仅在TTL过期时才为我们删除密钥。
+ 注意：我们不会明确删除密钥，因为在某些情况下，可能会出现竞争情况，错误地将密钥标识为未过期。
+ 缺少使用分布式锁（这会破坏我们的性能），无法确保到期映射的一致性。
+ 通过简单地访问密钥，我们确保仅在该密钥上的TTL过期时才删除该密钥。
+ */

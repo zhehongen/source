@@ -19,7 +19,7 @@ package org.springframework.security.saml2.provider.service.registration;
 /**根据唯一的registrationId解析RelyingPartyRegistration，已配置的服务提供者和远程身份提供者对。
  * Resolves a {@link RelyingPartyRegistration}, a configured service provider and remote identity provider pair
  * based on a unique registrationId.
- * @since 5.2
+ * @since 5.2 Repository（存储库，这个名字是关键）。怎么把这些孙子都注册上来是个难点啊
  */
 public interface RelyingPartyRegistrationRepository {
 

@@ -24,7 +24,7 @@ import static org.springframework.security.saml2.provider.service.registration.S
  * Data holder for information required to send an {@code AuthNRequest} over a POST binding
  * from the service provider to the identity provider
  * https://www.oasis-open.org/committees/download.php/35711/sstc-saml-core-errata-2.0-wd-06-diff.pdf (line 2031)
- *
+ * post绑定
  * @see Saml2AuthenticationRequestFactory
  * @since 5.3
  */
@@ -45,13 +45,13 @@ public class Saml2PostAuthenticationRequest extends AbstractSaml2AuthenticationR
 		return POST;
 	}
 
-	/**
+	/**从Saml2AuthenticationRequestContext对象构造一个Saml2PostAuthenticationRequest.Builder。
 	 * Constructs a {@link Builder} from a {@link Saml2AuthenticationRequestContext} object.
 	 * By default the {@link Saml2PostAuthenticationRequest#getAuthenticationRequestUri()} will be set to the
 	 * {@link Saml2AuthenticationRequestContext#getDestination()} value.
 	 * @param context input providing {@code Destination}, {@code RelayState}, and {@code Issuer} objects.
 	 * @return a modifiable builder object
-	 */
+	默认情况下，getAuthenticationRequestUri（）将设置为Saml2AuthenticationRequestContext.getDestination（）值。*/
 	public static Builder withAuthenticationRequestContext(Saml2AuthenticationRequestContext context) {
 		return new Builder()
 				.authenticationRequestUri(context.getDestination())

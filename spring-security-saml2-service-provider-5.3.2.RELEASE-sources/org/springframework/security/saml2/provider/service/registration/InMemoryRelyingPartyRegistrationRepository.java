@@ -28,7 +28,7 @@ import static java.util.Arrays.asList;
 import static org.springframework.util.Assert.notEmpty;
 import static org.springframework.util.Assert.notNull;
 
-/**
+/**吊，简单,但我需要存入数据库，奶奶的
  * @since 5.2
  */
 public class InMemoryRelyingPartyRegistrationRepository

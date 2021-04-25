@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * Implementation of {@link AuthenticationDetailsSource} which builds the details object
  * from an <tt>HttpServletRequest</tt> object, creating a {@code WebAuthenticationDetails}
  * .
- *
+ *批
  * @author Ben Alex
  */
 public class WebAuthenticationDetailsSource implements

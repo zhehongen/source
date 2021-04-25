@@ -24,14 +24,14 @@ import org.springframework.util.Assert;
  * to be sent from the service provider to the identity provider
  * <a href="https://www.oasis-open.org/committees/download.php/35711/sstc-saml-core-errata-2.0-wd-06-diff.pdf">
  * Assertions and Protocols for SAML 2 (line 2031)</a>
- *
+ * 数据持有者，用于创建从服务提供商发送到身份提供商的AuthNRequest所需的信息，SAML 2的断言和协议
  * @see Saml2AuthenticationRequestFactory#createPostAuthenticationRequest(Saml2AuthenticationRequestContext)
  * @see Saml2AuthenticationRequestFactory#createRedirectAuthenticationRequest(Saml2AuthenticationRequestContext)
  * @since 5.3
  */
 public final class Saml2AuthenticationRequestContext {
 	private final RelyingPartyRegistration relyingPartyRegistration;
-	private final String issuer;
+	private final String issuer;//签署人
 	private final String assertionConsumerServiceUrl;
 	private final String relayState;
 
@@ -49,7 +49,7 @@ public final class Saml2AuthenticationRequestContext {
 		this.relayState = relayState;
 	}
 
-	/**
+	/**返回用于AuthNRequest的RelyingPartyRegistration配置。
 	 * Returns the {@link RelyingPartyRegistration} configuration for which the AuthNRequest is intended for.
 	 * @return the {@link RelyingPartyRegistration} configuration
 	 */
@@ -57,7 +57,7 @@ public final class Saml2AuthenticationRequestContext {
 		return this.relyingPartyRegistration;
 	}
 
-	/**
+	/**返回要在AuthNRequest对象中使用的Issuer值。 此属性应用于填充AuthNRequest.Issuer XML元素。 该值通常是URI，但可以是任意字符串。
 	 * Returns the {@code Issuer} value to be used in the {@code AuthNRequest} object.
 	 * This property should be used to populate the {@code AuthNRequest.Issuer} XML element.
 	 * This value typically is a URI, but can be an arbitrary string.
@@ -67,7 +67,7 @@ public final class Saml2AuthenticationRequestContext {
 		return this.issuer;
 	}
 
-	/**
+	/**返回此SP希望在其上接收断言的所需AssertionConsumerServiceUrl。 IDP可能会也可能不会接受此请求。 此属性填充AuthNRequest.AssertionConsumerServiceURL XML属性。
 	 * Returns the desired {@code AssertionConsumerServiceUrl} that this SP wishes to receive the
 	 * assertion on. The IDP may or may not honor this request.
 	 * This property populates the {@code AuthNRequest.AssertionConsumerServiceURL} XML attribute.
@@ -85,7 +85,7 @@ public final class Saml2AuthenticationRequestContext {
 		return this.relayState;
 	}
 
-	/**
+	/**返回此身份验证请求的目标，即WEB单一登录URI。 此属性还可以填充AuthNRequest.Destination XML属性。
 	 * Returns the {@code Destination}, the WEB Single Sign On URI, for this authentication request.
 	 * This property can also populate the {@code AuthNRequest.Destination} XML attribute.
 	 * @return the Destination value

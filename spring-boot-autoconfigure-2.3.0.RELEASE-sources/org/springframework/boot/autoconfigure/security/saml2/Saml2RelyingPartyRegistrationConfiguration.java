@@ -45,7 +45,7 @@ import org.springframework.util.Assert;
 /**
  * {@link Configuration @Configuration} used to map {@link Saml2RelyingPartyProperties} to
  * relying party registrations in a {@link RelyingPartyRegistrationRepository}.
- *
+ * 用于将Saml2RelyingPartyProperties映射到RelyingPartyRegistrationRepository中依赖方注册的配置。
  * @author Madhura Bhave
  * @author Phillip Webb
  */

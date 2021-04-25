@@ -23,10 +23,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
+/**使用HttpServletRequest.invalidate（）防止会话固定攻击。
  * Uses {@code HttpServletRequest.invalidate()} to protect against session fixation
- * attacks.
- * <p>
+ * attacks.如果新身份验证的用户已有会话，则为他们创建一个新会话（以防御会话固定保护攻击），并将其会话属性复制到新会话中。可以通过将migrationSessionAttributes设置为false来禁用属性的复制（请注意，即使在这种情况下，内部Spring Security属性仍将迁移到新会话）。
+ * <p>仅当您的servlet容器在会话无效时始终分配新的会话ID并通过调用HttpServletRequest.getSession（）创建新的会话时，此方法才有效。
  * Creates a new session for the newly authenticated user if they already have a session
  * (as a defence against session-fixation protection attacks), and copies their session
  * attributes across to the new session. The copying of the attributes can be disabled by
@@ -37,15 +37,15 @@ import javax.servlet.http.HttpSession;
  * session Id when a session is invalidated and a new session created by calling
  * {@link HttpServletRequest#getSession()}.
  * <p>
- * <h3>Issues with {@code HttpSessionBindingListener}</h3>
- * <p>
+ * <h3>Issues with {@code HttpSessionBindingListener}</h3>HttpSessionBindingListener的问题
+ * <p>如果任何对象以某种方式实现HttpSessionBindingListener接口，而这种方式可以对对象的生命周期进行假设，则现有属性向新创建的会话的迁移可能会引起问题。一个示例是使用Spring会话范围的Bean，在这种情况下，从会话中初始删除该Bean会导致调用DisposableBean接口（假设不再需要该Bean）。
  * The migration of existing attributes to the newly-created session may cause problems if
  * any of the objects implement the {@code HttpSessionBindingListener} interface in a way
  * which makes assumptions about the life-cycle of the object. An example is the use of
  * Spring session-scoped beans, where the initial removal of the bean from the session
  * will cause the {@code DisposableBean} interface to be invoked, in the assumption that
  * the bean is no longer required.
- * <p>
+ * <p>我们建议您在设计应用程序时考虑到这一点，并且不要存储属性，这些属性在被删除然后放回会话中时可能无法正常运行。或者，您应该自定义SessionAuthenticationStrategy以特定于应用程序的方式处理该问题。
  * We'd recommend that you take account of this when designing your application and do not
  * store attributes which may not function correctly when they are removed and then placed
  * back in the session. Alternatively, you should customize the
@@ -67,10 +67,10 @@ public class SessionFixationProtectionStrategy extends
 	 * Called to extract the existing attributes from the session, prior to invalidating
 	 * it. If {@code migrateAttributes} is set to {@code false}, only Spring Security
 	 * attributes will be retained. All application attributes will be discarded.
-	 * <p>
+	 * <p>在使会话无效之前，调用该方法从会话中提取现有属性。 如果将migrationAttributes设置为false，则仅保留Spring Security属性。 所有应用程序属性将被丢弃。
 	 * You can override this method to control exactly what is transferred to the new
 	 * session.
-	 *
+	 * 您可以重写此方法以精确控制将什么传输到新会话。
 	 * @param session the session from which the attributes should be extracted
 	 * @return the map of session attributes which should be transferred to the new
 	 * session
@@ -124,7 +124,7 @@ public class SessionFixationProtectionStrategy extends
 		while (enumer.hasMoreElements()) {
 			String key = (String) enumer.nextElement();
 			if (!migrateSessionAttributes && !key.startsWith("SPRING_SECURITY_")) {
-				// Only retain Spring Security attributes
+				// Only retain Spring Security attributes仅保留Spring Security属性
 				continue;
 			}
 			attributesToMigrate.put(key, session.getAttribute(key));

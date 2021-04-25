@@ -36,7 +36,7 @@ public class WebAuthenticationDetails implements Serializable {
 	// ================================================================================================
 
 	private final String remoteAddress;
-	private final String sessionId;
+	private final String sessionId;//这孙子老是空
 
 	// ~ Constructors
 	// ===================================================================================================

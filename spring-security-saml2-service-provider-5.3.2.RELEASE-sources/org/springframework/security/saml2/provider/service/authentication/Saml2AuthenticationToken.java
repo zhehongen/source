@@ -21,7 +21,7 @@ import org.springframework.security.saml2.credentials.Saml2X509Credential;
 
 import java.util.List;
 
-/**
+/**表示包含尚未验证的断言的传入SAML 2.0响应。 isAuthenticated（）将始终返回false。
  * Represents an incoming SAML 2.0 response containing an assertion that has not been validated.
  * {@link Saml2AuthenticationToken#isAuthenticated()} will always return false.
  * @since 5.2
@@ -34,10 +34,10 @@ public class Saml2AuthenticationToken extends AbstractAuthenticationToken {
 	private String localSpEntityId;
 	private List<Saml2X509Credential> credentials;
 
-	/**
-	 * Creates an authentication token from an incoming SAML 2 Response object
-	 * @param saml2Response inflated and decoded XML representation of the SAML 2 Response
-	 * @param recipientUri the URL that the SAML 2 Response was received at. Used for validation
+	/**从传入的SAML 2响应对象创建身份验证令牌
+	 * Creates an authentication token from an incoming SAML 2 Response object  
+	 * @param saml2Response inflated and decoded XML representation of the SAML 2 Response  SAML 2响应的膨胀和解码XML表示
+	 * @param recipientUri the URL that the SAML 2 Response was received at. Used for validation 接收SAML 2响应的URL。 用于验证
 	 * @param idpEntityId the entity ID of the asserting entity
 	 * @param localSpEntityId the configured local SP, the relying party, entity ID
 	 * @param credentials the credentials configured for signature verification and decryption
@@ -81,7 +81,7 @@ public class Saml2AuthenticationToken extends AbstractAuthenticationToken {
 		return this.saml2Response;
 	}
 
-	/**
+	/**返回SAML 2响应对象进入的URI
 	 * Returns the URI that the SAML 2 Response object came in on
 	 * @return URI as a string
 	 */

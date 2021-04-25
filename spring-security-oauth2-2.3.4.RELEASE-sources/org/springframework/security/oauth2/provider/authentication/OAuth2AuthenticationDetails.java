@@ -21,12 +21,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  * A holder of selected HTTP details related to an OAuth2 authentication request.
- * 
+ *
  * @author Dave Syer
- * 
+ *
  */
 public class OAuth2AuthenticationDetails implements Serializable {
-	
+
 	private static final long serialVersionUID = -4809832298438307309L;
 
 	public static final String ACCESS_TOKEN_VALUE = OAuth2AuthenticationDetails.class.getSimpleName() + ".ACCESS_TOKEN_VALUE";
@@ -42,14 +42,14 @@ public class OAuth2AuthenticationDetails implements Serializable {
 	private final String tokenType;
 
 	private final String display;
-	
+
 	private Object decodedDetails;
 
 
 	/**
 	 * Records the access token value and remote address and will also set the session Id if a session already exists
 	 * (it won't create one).
-	 * 
+	 *
 	 * @param request that the authentication request was received from
 	 */
 	public OAuth2AuthenticationDetails(HttpServletRequest request) {
@@ -83,16 +83,16 @@ public class OAuth2AuthenticationDetails implements Serializable {
 
 	/**
 	 * The access token value used to authenticate the request (normally in an authorization header).
-	 * 
+	 *
 	 * @return the tokenValue used to authenticate the request
 	 */
 	public String getTokenValue() {
 		return tokenValue;
 	}
-	
+
 	/**
 	 * The access token type used to authenticate the request (normally in an authorization header).
-	 * 
+	 * 牛
 	 * @return the tokenType used to authenticate the request if known
 	 */
 	public String getTokenType() {
@@ -101,7 +101,7 @@ public class OAuth2AuthenticationDetails implements Serializable {
 
 	/**
 	 * Indicates the TCP/IP address the authentication request was received from.
-	 * 
+	 *
 	 * @return the address
 	 */
 	public String getRemoteAddress() {
@@ -110,7 +110,7 @@ public class OAuth2AuthenticationDetails implements Serializable {
 
 	/**
 	 * Indicates the <code>HttpSession</code> id the authentication request was received from.
-	 * 
+	 *
 	 * @return the session ID
 	 */
 	public String getSessionId() {
@@ -120,7 +120,7 @@ public class OAuth2AuthenticationDetails implements Serializable {
 	/**
 	 * The authentication details obtained by decoding the access token
 	 * if available.
-	 * 
+	 *
 	 * @return the decodedDetails if available (default null)
 	 */
 	public Object getDecodedDetails() {
@@ -130,7 +130,7 @@ public class OAuth2AuthenticationDetails implements Serializable {
 	/**
 	 * The authentication details obtained by decoding the access token
 	 * if available.
-	 * 
+	 * 通过解码访问令牌（如果有）获得的身份验证详细信息。
 	 * @param decodedDetails the decodedDetails to set
 	 */
 	public void setDecodedDetails(Object decodedDetails) {
@@ -181,7 +181,7 @@ public class OAuth2AuthenticationDetails implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
+
 
 }

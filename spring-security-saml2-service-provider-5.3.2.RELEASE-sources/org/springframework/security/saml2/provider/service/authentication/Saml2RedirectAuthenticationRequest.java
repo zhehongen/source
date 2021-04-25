@@ -26,7 +26,7 @@ import static org.springframework.security.saml2.provider.service.registration.S
  * https://www.oasis-open.org/committees/download.php/35711/sstc-saml-core-errata-2.0-wd-06-diff.pdf (line 2031)
  * 数据持有人，用于通过REDIRECT绑定从服务提供商向身份提供商发送AuthNRequest所需的信息
  * @see Saml2AuthenticationRequestFactory
- * @since 5.3
+ * @since 5.3重定向绑定
  */
 public class Saml2RedirectAuthenticationRequest extends AbstractSaml2AuthenticationRequest {
 

@@ -30,7 +30,7 @@ import org.springframework.session.SessionRepository;
 /**
  * Ensures that calling {@link #expireNow()} propagates to Spring Session, since this
  * session information contains only derived data and is not the authoritative source.
- *
+ * 确保调用expireNow（）传播到Spring Session，因为此会话信息仅包含派生数据，而不是权威源。
  * @param <S> the {@link Session} type.
  * @author Joris Kuipers
  * @author Vedran Pavic
@@ -61,7 +61,7 @@ class SpringSessionBackedSessionInformation<S extends Session> extends SessionIn
 	 * @return the principal's name, or empty String if it couldn't be determined
 	 */
 	private static String resolvePrincipal(Session session) {
-		String principalName = session.getAttribute(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME);
+		String principalName = session.getAttribute(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME);//无法理解
 		if (principalName != null) {
 			return principalName;
 		}

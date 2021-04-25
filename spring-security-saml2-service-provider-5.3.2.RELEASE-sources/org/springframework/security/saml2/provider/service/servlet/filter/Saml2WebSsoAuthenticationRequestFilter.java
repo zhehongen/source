@@ -45,13 +45,13 @@ import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.springframework.util.StringUtils.hasText;
 
-/**
+/** 普通请求处理过滤器？拦截向idp的认证请求，添加认证请求信息，去触发向idp的认证请求
  * @since 5.2
  */
 public class Saml2WebSsoAuthenticationRequestFilter extends OncePerRequestFilter {
 
 	private final RelyingPartyRegistrationRepository relyingPartyRegistrationRepository;
-	private RequestMatcher redirectMatcher = new AntPathRequestMatcher("/saml2/authenticate/{registrationId}");
+	private RequestMatcher redirectMatcher = new AntPathRequestMatcher("/saml2/authenticate/{registrationId}");//为什么叫重定向
 	private Saml2AuthenticationRequestFactory authenticationRequestFactory = new OpenSamlAuthenticationRequestFactory();
 
 	public Saml2WebSsoAuthenticationRequestFilter(RelyingPartyRegistrationRepository relyingPartyRegistrationRepository) {
@@ -75,7 +75,7 @@ public class Saml2WebSsoAuthenticationRequestFilter extends OncePerRequestFilter
 		MatchResult matcher = this.redirectMatcher.matcher(request);
 		if (!matcher.isMatch()) {
 			filterChain.doFilter(request, response);
-			return;
+			return;//路径不匹配，继续执行后面的过滤器。路径匹配，不再执行后面的过滤器了
 		}
 
 		String registrationId = matcher.getVariables().get("registrationId");
@@ -138,15 +138,15 @@ public class Saml2WebSsoAuthenticationRequestFilter extends OncePerRequestFilter
 	private Saml2AuthenticationRequestContext createRedirectAuthenticationRequestContext(
 			RelyingPartyRegistration relyingParty,
 			HttpServletRequest request) {
-		String applicationUri = Saml2ServletUtils.getApplicationUri(request);
+		String applicationUri = Saml2ServletUtils.getApplicationUri(request);//什么玩意？
 		Function<String, String> resolver = templateResolver(applicationUri, relyingParty);
-		String localSpEntityId = resolver.apply(relyingParty.getLocalEntityIdTemplate());
-		String assertionConsumerServiceUrl = resolver.apply(relyingParty.getAssertionConsumerServiceUrlTemplate());
+		String localSpEntityId = resolver.apply(relyingParty.getLocalEntityIdTemplate());//{baseUrl}/saml2/service-provider-metadata/{registrationId}
+		String assertionConsumerServiceUrl = resolver.apply(relyingParty.getAssertionConsumerServiceUrlTemplate());//acs
 		return Saml2AuthenticationRequestContext.builder()
 				.issuer(localSpEntityId)
 				.relyingPartyRegistration(relyingParty)
 				.assertionConsumerServiceUrl(assertionConsumerServiceUrl)
-				.relayState(request.getParameter("RelayState"))
+				.relayState(request.getParameter("RelayState"))//吊
 				.build();
 	}
 
