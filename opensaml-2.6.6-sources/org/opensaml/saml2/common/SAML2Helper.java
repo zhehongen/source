@@ -75,7 +75,7 @@ public class SAML2Helper {
      * @return the earliest expiration instant within a metadata tree
      */
     public static DateTime getEarliestExpiration(XMLObject xmlObject, DateTime earliestExpiration, DateTime now) {
-
+      //说明：  earliestExpiration=now+4h
         // expiration time for a specific element
         DateTime elementExpirationTime;
 
@@ -84,7 +84,7 @@ public class SAML2Helper {
             CacheableSAMLObject cacheInfo = (CacheableSAMLObject) xmlObject;
 
             if (cacheInfo.getCacheDuration() != null && cacheInfo.getCacheDuration().longValue() > 0) {
-                elementExpirationTime = now.plus(cacheInfo.getCacheDuration().longValue());
+                elementExpirationTime = now.plus(cacheInfo.getCacheDuration().longValue());//now+元数据本身过期时间
                 if (earliestExpiration == null) {
                     earliestExpiration = elementExpirationTime;
                 } else {
@@ -118,6 +118,6 @@ public class SAML2Helper {
             }
         }
 
-        return earliestExpiration;
+        return earliestExpiration;//说明：好理解。但是返回结果有可能为null?似乎不会，总有一个child有过期时间？确实有可能为空
     }
 }
