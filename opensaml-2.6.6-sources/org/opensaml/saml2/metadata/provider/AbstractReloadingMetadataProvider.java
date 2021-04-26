@@ -256,14 +256,14 @@ public abstract class AbstractReloadingMetadataProvider extends AbstractObservab
         log.debug("Beginning refresh of metadata from '{}'", mdId);
         try {
             byte[] mdBytes = fetchMetadata();
-            if (mdBytes == null) {
+            if (mdBytes == null) {//说明：接口规范认为获取不到，就认为没变
                 log.debug("Metadata from '{}' has not changed since last refresh", mdId);
-                processCachedMetadata(mdId, now);
+                processCachedMetadata(mdId, now);//说明：计算过期时间expirationTime和下次刷新时间nextRefresh
             } else {
                 log.debug("Processing new metadata from '{}'", mdId);
                 processNewMetadata(mdId, now, mdBytes);
             }
-        } catch (Throwable t) {
+        } catch (Throwable t) {//说明：抛异常了怎么办？下次尽快调度，所以时间间隔加minRefreshDelay
             log.error("Error occurred while attempting to refresh metadata from '" + mdId + "'", t);
             nextRefresh = new DateTime(ISOChronology.getInstanceUTC()).plus(minRefreshDelay);
             if (t instanceof Exception) {
@@ -273,8 +273,8 @@ public abstract class AbstractReloadingMetadataProvider extends AbstractObservab
                         t.getClass().getName(), t.getMessage()));
             }
         } finally {
-            refresMetadataTask = new RefreshMetadataTask();
-            long nextRefreshDelay = nextRefresh.getMillis() - System.currentTimeMillis();
+            refresMetadataTask = new RefreshMetadataTask();//说明：算出下次调度间隔
+            long nextRefreshDelay = nextRefresh.getMillis() - System.currentTimeMillis();//说明：这样做是因为需要考虑抛异常和没抛异常两种情况
             taskTimer.schedule(refresMetadataTask, nextRefreshDelay);//说明：每次都会重新计算下次如何调度？
             log.info("Next refresh cycle for metadata provider '{}' will occur on '{}' ('{}' local time)",
                     new Object[] {mdId, nextRefresh, nextRefresh.toDateTime(DateTimeZone.getDefault()),});
@@ -331,7 +331,7 @@ public abstract class AbstractReloadingMetadataProvider extends AbstractObservab
         DateTime metadataExpirationTime =
                 SAML2Helper
                         .getEarliestExpiration(cachedMetadata, refreshStart.plus(getMaxRefreshDelay()), refreshStart);
-
+//说明：计算过期时间expirationTime和下次刷新时间nextRefresh
         expirationTime = metadataExpirationTime;
         long nextRefreshDelay = computeNextRefreshDelay(expirationTime);
         nextRefresh = new DateTime(ISOChronology.getInstanceUTC()).plus(nextRefreshDelay);
@@ -471,7 +471,7 @@ public abstract class AbstractReloadingMetadataProvider extends AbstractObservab
         if (refreshDelay < getMinRefreshDelay()) {
             refreshDelay = getMinRefreshDelay();
         }
-
+    //说明：为什么没限制最大过期时间?
         return refreshDelay;
     }
 
