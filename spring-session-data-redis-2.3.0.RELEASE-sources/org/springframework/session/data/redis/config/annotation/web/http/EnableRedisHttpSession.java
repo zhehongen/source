@@ -68,7 +68,7 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 @Configuration(proxyBeanMethods = false)
 public @interface EnableRedisHttpSession {
 
-	/**
+	/**会话超时（以秒为单位）。 默认情况下，它设置为1800秒（30分钟）。 这应该是一个非负整数。会话在过期前可以处于非活动状态的秒
 	 * The session timeout in seconds. By default, it is set to 1800 seconds (30 minutes).
 	 * This should be a non-negative integer.
 	 * @return the seconds a session can be inactive before expiring
