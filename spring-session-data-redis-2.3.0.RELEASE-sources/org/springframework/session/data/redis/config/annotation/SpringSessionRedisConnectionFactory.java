@@ -26,7 +26,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 
-/**
+/**要在RedisIndexedSessionRepository中注入的RedisConnectionFactory的限定符批注。
  * Qualifier annotation for a {@link RedisConnectionFactory} to be injected in
  * {@link RedisIndexedSessionRepository}.
  *
@@ -36,7 +36,7 @@ import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Qualifier
-public @interface SpringSessionRedisConnectionFactory {
+@Qualifier //说明：通过注解名称SpringSessionRedisConnectionFactory限定？坑爹
+public @interface SpringSessionRedisConnectionFactory {//说明：看不懂？有啥用？
 
 }

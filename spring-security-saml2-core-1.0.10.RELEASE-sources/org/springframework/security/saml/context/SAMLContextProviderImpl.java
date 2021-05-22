@@ -71,7 +71,7 @@ import java.util.Arrays;
  * @author Vladimir Schaefer
  */
 public class SAMLContextProviderImpl implements SAMLContextProvider, InitializingBean {
-
+//说明：Selection of the correct Service Provider instance based on URL is performed inside SAMLContextProviderImpl class.
     protected static final Logger log = LoggerFactory.getLogger(SAMLContextProviderImpl.class);
 
     // Way to obtain encrypted key info from XML Encryption从XML加密获取加密密钥信息的方法

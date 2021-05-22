@@ -45,7 +45,7 @@ import java.io.PrintWriter;
  * @author Vladimir Schäfer
  */
 public class MetadataDisplayFilter extends GenericFilterBean {//说明：就是下载元数据的过滤器
-
+//说明：这个过滤器只从内存读取相关元数据，然后签名后下载。并不依赖MetadataGeneratorFilter。
     /**
      * Class logger.
      */
@@ -110,7 +110,7 @@ public class MetadataDisplayFilter extends GenericFilterBean {//说明：就是�
      * @throws java.io.IOException            io error
      */
     protected void processMetadataDisplay(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        try {
+        try {//说明：传递一个/saml/metadata/alias/xxxx似乎也能下载出来一个正确的元数据文档，这个过滤器我可以使用
             SAMLMessageContext context = contextProvider.getLocalEntity(request, response);//说明：
             String entityId = context.getLocalEntityId();
             response.setContentType("application/samlmetadata+xml"); // SAML_Meta, 4.1.1 - line 1235
@@ -131,7 +131,7 @@ public class MetadataDisplayFilter extends GenericFilterBean {//说明：就是�
      */
     protected void displayMetadata(String spEntityName, PrintWriter writer) throws ServletException {
         try {
-            EntityDescriptor descriptor = manager.getEntityDescriptor(spEntityName);//说明：
+            EntityDescriptor descriptor = manager.getEntityDescriptor(spEntityName);//说明：spEntityName=entityID
             if (descriptor == null) {
                 throw new ServletException("Metadata entity with ID " + manager.getHostedSPName() + " wasn't found");
             } else {

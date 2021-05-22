@@ -22,7 +22,7 @@ import java.util.Map;
 import org.springframework.session.events.SessionDeletedEvent;
 import org.springframework.session.events.SessionExpiredEvent;
 
-/**
+/**由Map支持并使用MapSession的SessionRepository。 例如，注入的Map可以由像Hazelcast这样的分布式NoSQL存储支持。 请注意，提供的地图本身负责清除过期的会话。该实现不支持触发SessionDeletedEvent或SessionExpiredEvent。
  * A {@link SessionRepository} backed by a {@link java.util.Map} and that uses a
  * {@link MapSession}. The injected {@link java.util.Map} can be backed by a distributed
  * NoSQL store like Hazelcast, for instance. Note that the supplied map itself is

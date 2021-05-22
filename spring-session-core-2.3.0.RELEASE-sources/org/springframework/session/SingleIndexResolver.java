@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
  * @since 2.2.0
  */
 public abstract class SingleIndexResolver<S extends Session> implements IndexResolver<S> {
-
+//看过了
 	private final String indexName;
 
 	protected SingleIndexResolver(String indexName) {

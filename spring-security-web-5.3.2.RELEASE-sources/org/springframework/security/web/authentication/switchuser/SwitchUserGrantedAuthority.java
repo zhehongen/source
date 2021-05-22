@@ -21,7 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.util.Assert;
 
-/**
+/**SwitchUserFilter使用的自定义GrandAuthority存储了原始用户的身份验证对象，该对象将在从用户交换机中“退出”时稍后使用。
  * Custom {@code GrantedAuthority} used by
  * {@link org.springframework.security.web.authentication.switchuser.SwitchUserFilter}
  * <p>
@@ -38,7 +38,7 @@ public final class SwitchUserGrantedAuthority implements GrantedAuthority {
 
 	// ~ Instance fields
 	// ================================================================================================
-	private final String role;
+	private final String role;//说明：看不懂，为啥只有一个权限？因为它就是一个特殊的权限名字而已。这种设计可以借鉴
 	private final Authentication source;
 
 	// ~ Constructors

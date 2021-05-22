@@ -31,7 +31,7 @@ import org.springframework.session.Session;
 import org.springframework.session.SessionRepository;
 import org.springframework.util.Assert;
 
-/**
+/**实现SessionRepository <RedisSessionRepository.RedisSession>使用Spring Data的RedisOperations来存储会话的SessionRepository实现是Redis，该实现不支持发布会话事件。
  * A {@link SessionRepository} implementation that uses Spring Data's
  * {@link RedisOperations} to store sessions is Redis.
  * <p>

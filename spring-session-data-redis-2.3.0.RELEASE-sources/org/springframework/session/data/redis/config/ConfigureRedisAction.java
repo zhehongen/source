@@ -31,7 +31,7 @@ public interface ConfigureRedisAction {
 	/**
 	 * A do nothing implementation of {@link ConfigureRedisAction}.
 	 */
-	ConfigureRedisAction NO_OP = (connection) -> {
+	ConfigureRedisAction NO_OP = (connection) -> {//说明：奇葩的写法
 	};
 
 }

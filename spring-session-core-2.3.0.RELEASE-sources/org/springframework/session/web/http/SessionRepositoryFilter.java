@@ -216,7 +216,7 @@ public class SessionRepositoryFilter<S extends Session> extends OncePerRequestFi
 			HttpSessionWrapper wrappedSession = getCurrentSession();
 			if (wrappedSession == null) {
 				if (isInvalidateClientSession()) {
-					SessionRepositoryFilter.this.httpSessionIdResolver.expireSession(this, this.response);
+					SessionRepositoryFilter.this.httpSessionIdResolver.expireSession(this, this.response);//说明：
 				}
 			}
 			else {

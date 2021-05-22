@@ -99,18 +99,18 @@ public class RedisSessionProperties {
 		this.configureAction = configureAction;
 	}
 
-	/**
+	/**配置和验证Redis的策略。
 	 * Strategies for configuring and validating Redis.
 	 */
 	public enum ConfigureAction {
 
-		/**
+		/**确保已启用常规命令的Redis键空间事件和过期事件。
 		 * Ensure that Redis Keyspace events for Generic commands and Expired events are
 		 * enabled.
 		 */
 		NOTIFY_KEYSPACE_EVENTS,
 
-		/**
+		/**请勿尝试应用任何自定义Redis配置。
 		 * No not attempt to apply any custom Redis configuration.
 		 */
 		NONE

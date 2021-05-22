@@ -25,7 +25,7 @@
 
 package java.security;
 
-/**
+/**公钥。 该接口不包含任何方法或常量。 它仅用于对所有公共密钥接口进行分组（并提供类型安全性）。 注意：专用的公共密钥接口扩展了此接口。 例如，请参阅java.security.interfaces中的DSAPublicKey接口。
  * <p>A public key. This interface contains no methods or constants.
  * It merely serves to group (and provide type safety for) all public key
  * interfaces.

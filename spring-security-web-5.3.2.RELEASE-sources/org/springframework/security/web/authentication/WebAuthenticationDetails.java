@@ -22,7 +22,7 @@ import java.io.Serializable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-/**
+/**与Web身份验证请求相关的选定HTTP详细信息的持有者。
  * A holder of selected HTTP details related to a web authentication request.
  *
  * @author Ben Alex

@@ -36,11 +36,11 @@ import org.springframework.session.data.redis.RedisSessionRepository;
  * @see RedisSessionRepository#getSessionRedisOperations()
  * @see ReactiveRedisSessionRepository#getSessionRedisOperations()
  * @since 2.0.0
- */
+ */ //说明：注入redistemplate，怎么注入？
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Value("#{sessionRepository.sessionRedisOperations}")
-public @interface SpringSessionRedisOperations {
+@Value("#{sessionRepository.sessionRedisOperations}")//说明：奇葩，完全看不懂
+public @interface SpringSessionRedisOperations {//说明：快速
 
 }

@@ -29,7 +29,7 @@ public class AuthenticationSwitchUserEvent extends AbstractAuthenticationEvent {
 	// ~ Instance fields
 	// ================================================================================================
 
-	private final UserDetails targetUser;
+	private final UserDetails targetUser;//说明：新用户？是的，肉鸡
 
 	// ~ Constructors
 	// ===================================================================================================
@@ -42,7 +42,7 @@ public class AuthenticationSwitchUserEvent extends AbstractAuthenticationEvent {
 	 */
 	public AuthenticationSwitchUserEvent(Authentication authentication,
 			UserDetails targetUser) {
-		super(authentication);
+		super(authentication);//肉鸡的认证信息
 		this.targetUser = targetUser;
 	}
 

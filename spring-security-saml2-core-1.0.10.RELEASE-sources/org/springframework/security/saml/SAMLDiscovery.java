@@ -50,7 +50,7 @@ import java.util.List;
  * @author Vladimir Schaefer
  */
 public class SAMLDiscovery extends GenericFilterBean {
-
+//说明：
     protected static final Logger log = LoggerFactory.getLogger(SAMLDiscovery.class);
 
     /**用于将返回URL存储在转发的请求对象中。

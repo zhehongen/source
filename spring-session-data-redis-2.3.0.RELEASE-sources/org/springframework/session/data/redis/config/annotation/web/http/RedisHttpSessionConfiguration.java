@@ -16,15 +16,7 @@
 
 package org.springframework.session.data.redis.config.annotation.web.http;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.stream.Collectors;
-
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
@@ -50,11 +42,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
-import org.springframework.session.FlushMode;
-import org.springframework.session.IndexResolver;
-import org.springframework.session.MapSession;
-import org.springframework.session.SaveMode;
-import org.springframework.session.Session;
+import org.springframework.session.*;
 import org.springframework.session.config.SessionRepositoryCustomizer;
 import org.springframework.session.config.annotation.web.http.SpringHttpSessionConfiguration;
 import org.springframework.session.data.redis.RedisFlushMode;
@@ -68,7 +56,14 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.util.StringValueResolver;
 
-/**
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
+
+/**将SessionRepositoryFilter公开为名为springSessionRepositoryFilter的bean。 为了使用它，必须将单个RedisConnectionFactory作为Bean公开
  * Exposes the {@link SessionRepositoryFilter} as a bean named
  * {@code springSessionRepositoryFilter}. In order to use this a single
  * {@link RedisConnectionFactory} must be exposed as a Bean.
@@ -95,20 +90,20 @@ public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguratio
 
 	private String cleanupCron = DEFAULT_CLEANUP_CRON;
 
-	private ConfigureRedisAction configureRedisAction = new ConfigureNotifyKeyspaceEventsAction();
+	private ConfigureRedisAction configureRedisAction = new ConfigureNotifyKeyspaceEventsAction();//说明：自动注入
 
-	private RedisConnectionFactory redisConnectionFactory;
+	private RedisConnectionFactory redisConnectionFactory;//说明：自动注入
 
-	private IndexResolver<Session> indexResolver;
+	private IndexResolver<Session> indexResolver;//说明：自动注入
 
-	private RedisSerializer<Object> defaultRedisSerializer;
+	private RedisSerializer<Object> defaultRedisSerializer;//说明：自动注入
 
-	private ApplicationEventPublisher applicationEventPublisher;
+	private ApplicationEventPublisher applicationEventPublisher;//说明：自动注入
 
-	private Executor redisTaskExecutor;
+	private Executor redisTaskExecutor;//说明：自动注入
 
-	private Executor redisSubscriptionExecutor;
-
+	private Executor redisSubscriptionExecutor;//说明：自动注入
+	//说明：自动注入
 	private List<SessionRepositoryCustomizer<RedisIndexedSessionRepository>> sessionRepositoryCustomizers;
 
 	private ClassLoader classLoader;
@@ -159,7 +154,7 @@ public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguratio
 	}
 
 	@Bean
-	public InitializingBean enableRedisKeyspaceNotificationsInitializer() {
+	public InitializingBean enableRedisKeyspaceNotificationsInitializer() {//说明：目的就是对redis进行配置
 		return new EnableRedisKeyspaceNotificationsInitializer(this.redisConnectionFactory, this.configureRedisAction);
 	}
 
@@ -239,7 +234,7 @@ public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguratio
 		this.redisSubscriptionExecutor = redisSubscriptionExecutor;
 	}
 
-	@Autowired(required = false)
+	@Autowired(required = false)//说明：坑爹的写法，看不懂
 	public void setSessionRepositoryCustomizer(
 			ObjectProvider<SessionRepositoryCustomizer<RedisIndexedSessionRepository>> sessionRepositoryCustomizers) {
 		this.sessionRepositoryCustomizers = sessionRepositoryCustomizers.orderedStream().collect(Collectors.toList());
@@ -284,11 +279,11 @@ public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguratio
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 		if (this.defaultRedisSerializer != null) {
-			redisTemplate.setDefaultSerializer(this.defaultRedisSerializer);
+			redisTemplate.setDefaultSerializer(this.defaultRedisSerializer);//有必要自定义吗
 		}
 		redisTemplate.setConnectionFactory(this.redisConnectionFactory);
 		redisTemplate.setBeanClassLoader(this.classLoader);
-		redisTemplate.afterPropertiesSet();
+		redisTemplate.afterPropertiesSet();//可以借鉴
 		return redisTemplate;
 	}
 
@@ -304,7 +299,7 @@ public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguratio
 		return RedisIndexedSessionRepository.DEFAULT_DATABASE;
 	}
 
-	/**
+	/**确保将Redis配置为发送键空间通知。 这对于确保会话的过期和删除触发SessionDestroyedEvent是很重要的。 没有SessionDestroyedEvent，资源可能无法正确清理。 例如，可能无法清除Session到WebSocket连接的映射。
 	 * Ensures that Redis is configured to send keyspace notifications. This is important
 	 * to ensure that expiration and deletion of sessions trigger SessionDestroyedEvents.
 	 * Without the SessionDestroyedEvent resources may not get cleaned up properly. For
@@ -312,7 +307,7 @@ public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguratio
 	 * up.
 	 */
 	static class EnableRedisKeyspaceNotificationsInitializer implements InitializingBean {
-
+//说明：明白了
 		private final RedisConnectionFactory connectionFactory;
 
 		private ConfigureRedisAction configure;

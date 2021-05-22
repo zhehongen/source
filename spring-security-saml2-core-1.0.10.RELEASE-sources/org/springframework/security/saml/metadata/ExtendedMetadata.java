@@ -38,47 +38,47 @@ public class ExtendedMetadata implements Serializable, Cloneable {
      * Local alias of the entity used for construction of well-known metadata address and determining target
      * entity from incoming requests.唯一别名，用于根据使用的URL标识所选的本地服务提供商
      */
-    private String alias;
+    private String alias;//说明：本地
 
     /**当为真时，将在SSO之前调用IDP发现。 仅对本地实体有效。
      * When true IDP discovery will be invoked before SSO. Only valid for local entities.
      */
-    private boolean idpDiscoveryEnabled;
+    private boolean idpDiscoveryEnabled;//说明：本地
 
     /**应根据请求将IDP发现服务用户的URL重定向到，以确定要使用的IDP。 值可以覆盖本地SP元数据中的设置。 仅对本地实体有效。
      * URL of the IDP Discovery service user should be redirected to upon request to determine which IDP to use.
      * Value can override settings in the local SP metadata. Only valid for local entities.
      */
-    private String idpDiscoveryURL;
+    private String idpDiscoveryURL;//说明：本地
 
     /**发现服务应将响应发送回我们的发现请求的URL。 仅对本地实体有效。
      * URL where the discovery service should send back response to our discovery request. Only valid for local
      * entities.
      */
-    private String idpDiscoveryResponseURL;
+    private String idpDiscoveryResponseURL;//说明：本地
 
     /**指示是否应将增强型客户端/代理配置文件用于支持它的请求。 仅对本地实体有效。
      * Indicates whether Enhanced Client/Proxy profile should be used for requests which support it. Only valid for
      * local entities.
      */
-    private boolean ecpEnabled;
+    private boolean ecpEnabled;//说明：本地
 
     /**用于信任验证的配置文件，默认情况下为MetaIOP。 仅与本地实体相关。
      * Profile used for trust verification, MetaIOP by default. Only relevant for local entities.
      */
-    private String securityProfile = "metaiop";
+    private String securityProfile = "metaiop";//说明：本地
 
     /**用于SSL / TLS信任验证的配置文件，默认为PKIX。 仅与本地实体相关
      * Profile used for SSL/TLS trust verification, PKIX by default. Only relevant for local entities.
      */
-    private String sslSecurityProfile = "pkix";
+    private String sslSecurityProfile = "pkix";//说明：本地
 
     /**用于验证SSL连接的主机名验证程序，例如 用于ArtifactResolution。
      * Hostname verifier to use for verification of SSL connections, e.g. for ArtifactResolution.
      */
-    private String sslHostnameVerification = "default";
+    private String sslHostnameVerification = "default";//说明：本地
 
-    /**
+    /**密钥（存储在本地密钥库中），用于签署/验证从此实体发送/传入的消息的签名。 对于本地实体，必须有私钥，对于远程实体，仅需要公钥。
      * Key (stored in the local keystore) used for signing/verifying signature of messages sent/coming from this
      * entity. For local entities private key must be available, for remote entities only public key is required.
      */
@@ -88,18 +88,18 @@ public class ExtendedMetadata implements Serializable, Cloneable {
      * Algorithm used for creation of digital signatures of this entity. At the moment only used for metadata signatures.
      * Only valid for local entities.
      */
-    private String signingAlgorithm;
+    private String signingAlgorithm;//说明：本地
 
     /**
      * Flag indicating whether to sign metadata for this entity. Only valid for local entities.
      */
-    private boolean signMetadata;
+    private boolean signMetadata;//说明：本地
 
     /**
      * Name of generator for KeyInfo elements in metadata and signatures. At the moment only used for metadata signatures.
      * Only valid for local entities.
      */
-    private String keyInfoGeneratorName = SAMLConstants.SAML_METADATA_KEY_INFO_GENERATOR;
+    private String keyInfoGeneratorName = SAMLConstants.SAML_METADATA_KEY_INFO_GENERATOR;//说明：本地
 
     /**
      * Key (stored in the local keystore) used for encryption/decryption of messages coming/sent from this entity. For local entities
@@ -117,7 +117,7 @@ public class ExtendedMetadata implements Serializable, Cloneable {
      * Keys used as anchors for trust verification when PKIX mode is enabled for the local entity. In case value is null
      * all keys in the keyStore will be treated as trusted.
      */
-    private Set<String> trustedKeys;
+    private Set<String> trustedKeys;//说明：仅仅远程？
 
     /**
      * SAML specification mandates that incoming LogoutRequests must be authenticated.
@@ -138,13 +138,13 @@ public class ExtendedMetadata implements Serializable, Cloneable {
      * Flag indicating whether to support unsolicited responses (IDP-initialized SSO). Only valid for remote
      * entities.
      */
-    private boolean supportUnsolicitedResponse = true;
+    private boolean supportUnsolicitedResponse = true;//说明：仅仅远程
 
     /**
      * Algorithm used for creation of digest method of this entity. At the moment only used for metadata signatures.
      * Only valid for local entities.
      */
-    private String digestMethodAlgorithm;
+    private String digestMethodAlgorithm;//说明：本地
 
     /**
      * Security profile to use for this local entity - MetaIOP (default) or PKIX.

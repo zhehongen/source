@@ -40,7 +40,7 @@ import org.springframework.security.web.util.UrlUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-/**
+/**由ExceptionTranslationFilter用来通过UsernamePasswordAuthenticationFilter启动表单登录身份验证。将登录表单的位置保存在loginFormUrl属性中，并使用该位置构建指向登录页面的重定向URL。另外，也可以在此属性中设置一个绝对URL，该URL将专用于此。使用相对URL时，可以将forceHttps属性设置为true，以强制用于登录表单的协议为HTTPS，即使原始使用HTTP协议截取的资源请求。发生这种情况时，成功登录（通过HTTPS）后，仍将通过原始请求URL将原始资源作为HTTP访问。为了使强制HTTPS功能起作用，请咨询PortMapper以确定HTTP：HTTPS对。如果使用绝对URL，则forceHttps的值将无效。
  * Used by the {@link ExceptionTranslationFilter} to commence a form login authentication
  * via the {@link UsernamePasswordAuthenticationFilter}.
  * <p>

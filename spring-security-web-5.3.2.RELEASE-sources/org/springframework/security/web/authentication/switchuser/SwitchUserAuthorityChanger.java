@@ -21,7 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/**
+/**允许子类修改GrandedAuthority列表，当它们假定不同主体的标识时，该列表将分配给主体。该列表根据SwitchUserFilter配置。
  * Allows subclasses to modify the {@link GrantedAuthority} list that will be assigned to
  * the principal when they assume the identity of a different principal.
  *
@@ -39,7 +39,7 @@ public interface SwitchUserAuthorityChanger {
 	 *
 	 * @param targetUser the UserDetails representing the identity being switched to
 	 * @param currentAuthentication the current Authentication of the principal performing
-	 * the switching
+	 * the switching老的吗？
 	 * @param authoritiesToBeGranted all
 	 * {@link org.springframework.security.core.GrantedAuthority} instances to be granted
 	 * to the user, excluding the special "switch user" authority that is used internally

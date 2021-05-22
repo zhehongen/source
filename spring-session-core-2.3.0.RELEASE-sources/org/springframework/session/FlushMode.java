@@ -30,7 +30,7 @@ public enum FlushMode {
 	 * invoked. In a web environment this is typically done as soon as the HTTP response
 	 * is committed.
 	 */
-	ON_SAVE,
+	ON_SAVE,//说明：响应提交后才能查出来？
 
 	/**
 	 * Writes to session store as soon as possible. For example

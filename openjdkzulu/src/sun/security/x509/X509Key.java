@@ -41,7 +41,7 @@ import java.security.spec.X509EncodedKeySpec;
 import sun.misc.HexDumpEncoder;
 import sun.security.util.*;
 
-/**
+/**持有一个X.509密钥，例如在X.509证书中找到的公共密钥。 包括与密钥一起使用的算法的描述； 这些键通常用作“ SubjectPublicKeyInfo”。尽管此类可以表示任何种类的X.509密钥，但可能希望提供能够理解如何解析密钥数据的子类。 例如，RSA公共密钥有两个成员，一个用于公共模数，一个用于质数指数。 如果提供了此类，则在解析X.509密钥时将使用它。 如果未提供，则该密钥仍然可以正确解析。
  * Holds an X.509 key, for example a public key found in an X.509
  * certificate.  Includes a description of the algorithm to be used
  * with the key; these keys normally are used as

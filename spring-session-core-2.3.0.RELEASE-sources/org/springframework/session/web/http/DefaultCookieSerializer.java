@@ -94,7 +94,7 @@ public class DefaultCookieSerializer implements CookieSerializer {
 	 * servlet.http.HttpServletRequest)
 	 */
 	@Override
-	public List<String> readCookieValues(HttpServletRequest request) {
+	public List<String> readCookieValues(HttpServletRequest request) {//看过了
 		Cookie[] cookies = request.getCookies();
 		List<String> matchingCookieValues = new ArrayList<>();
 		if (cookies != null) {
@@ -183,9 +183,9 @@ public class DefaultCookieSerializer implements CookieSerializer {
 	 * @return the Base64 encoded value
 	 * @since 1.2.2
 	 */
-	private String base64Encode(String value) {
+	private String base64Encode(String value) {//说明：先获取到字节数组，再以6位为一个字节，组装成一个新的字节数组。
 		byte[] encodedCookieBytes = Base64.getEncoder().encode(value.getBytes());
-		return new String(encodedCookieBytes);
+		return new String(encodedCookieBytes);//说明：最后将新的字节数组转为字符串
 	}
 
 	private String getValue(CookieValue cookieValue) {
@@ -224,7 +224,7 @@ public class DefaultCookieSerializer implements CookieSerializer {
 				// the cookie is only written at time of session creation, so we rely on
 				// session expiration rather than cookie expiration if remember me is
 				// enabled
-				cookieValue.setCookieMaxAge(Integer.MAX_VALUE);
+				cookieValue.setCookieMaxAge(Integer.MAX_VALUE);//说明：很大？
 			}
 			else if (this.cookieMaxAge != null) {
 				cookieValue.setCookieMaxAge(this.cookieMaxAge);
@@ -321,14 +321,14 @@ public class DefaultCookieSerializer implements CookieSerializer {
 	 * @param domainName the name of the domain to use. (i.e. "example.com")
 	 * @throws IllegalStateException if the domainNamePattern is also set
 	 */
-	public void setDomainName(String domainName) {
+	public void setDomainName(String domainName) {//看过了
 		if (this.domainNamePattern != null) {
 			throw new IllegalStateException("Cannot set both domainName and domainNamePattern");
 		}
 		this.domainName = domainName;
 	}
 
-	/**
+	/**设置不区分大小写的模式，该模式用于从HttpServletRequest.getServerName（）中提取域名。该模式应提供一个单独的分组，该分组定义应匹配的值。用户应注意不要输出诸如换行之类的恶意字符，以防止发生诸如HTTP响应拆分之类的事情。如果模式不匹配，则不会设置任何域。这对于确保在开发期间未使用本地主机时未设置域是很有用的。
 	 * <p>
 	 * Sets a case insensitive pattern used to extract the domain name from the
 	 * {@link HttpServletRequest#getServerName()}. The pattern should provide a single
@@ -364,7 +364,8 @@ public class DefaultCookieSerializer implements CookieSerializer {
 		this.domainNamePattern = Pattern.compile(domainNamePattern, Pattern.CASE_INSENSITIVE);
 	}
 
-	/**
+	/**用于标识会话亲缘性要路由到哪个JVM。 对于某些实施方式（即Redis），这不会带来任何性能优势。 但是，这可以帮助跟踪特定用户的日志。 这将确保Cookie的值格式为
+	 sessionId +“。 jvmRoute。要使用此方法，请在每个JVM实例上设置自定义路由，并设置前端代理以根据该路由将所有请求转发到JVM。
 	 * <p>
 	 * Used to identify which JVM to route to for session affinity. With some
 	 * implementations (i.e. Redis) this provides no performance benefit. However, this
@@ -390,11 +391,11 @@ public class DefaultCookieSerializer implements CookieSerializer {
 	 * recommends using Base 64 encoding to the cookie value.
 	 * @param useBase64Encoding the flag to indicate whether to use Base64 encoding
 	 */
-	public void setUseBase64Encoding(boolean useBase64Encoding) {
+	public void setUseBase64Encoding(boolean useBase64Encoding) {//看过了
 		this.useBase64Encoding = useBase64Encoding;
 	}
 
-	/**
+	/**设置指示“记住我”登录的请求属性名称。 如果指定，则cookie将被写为Integer.MAX_VALUE。
 	 * Set the request attribute name that indicates remember-me login. If specified, the
 	 * cookie will be written as Integer.MAX_VALUE.
 	 * @param rememberMeRequestAttribute the remember-me request attribute name
@@ -424,7 +425,7 @@ public class DefaultCookieSerializer implements CookieSerializer {
 		if (this.domainNamePattern != null) {
 			Matcher matcher = this.domainNamePattern.matcher(request.getServerName());
 			if (matcher.matches()) {
-				return matcher.group(1);
+				return matcher.group(1);//说明：看不懂
 			}
 		}
 		return null;

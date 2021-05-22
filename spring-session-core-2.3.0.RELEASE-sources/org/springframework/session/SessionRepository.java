@@ -39,7 +39,7 @@ public interface SessionRepository<S extends Session> {
 	 */
 	S createSession();
 
-	/**
+	/**确保已保存由createSession（）创建的Session。某些实现可能选择保存，因为在Session更新时，它会返回一个可以立即保留所有更改的Session。 在这种情况下，此方法可能实际上不执行任何操作。
 	 * Ensures the {@link Session} created by
 	 * {@link org.springframework.session.SessionRepository#createSession()} is saved.
 	 *

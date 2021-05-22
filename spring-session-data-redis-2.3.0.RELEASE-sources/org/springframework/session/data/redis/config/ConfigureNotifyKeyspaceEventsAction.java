@@ -21,7 +21,7 @@ import java.util.Properties;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.redis.connection.RedisConnection;
 
-/**
+/**确保已启用通用命令的Redis键空间事件和过期事件。 例如，它可能会设置以下内容：
  * <p>
  * Ensures that Redis Keyspace events for Generic commands and Expired events are enabled.
  * For example, it might set the following:
@@ -30,7 +30,7 @@ import org.springframework.data.redis.connection.RedisConnection;
  * <pre>
  * config set notify-keyspace-events Egx
  * </pre>
- *
+ *如果已正确保护Redis实例，则此策略将不起作用。 相反，应该在外部配置Redis实例，并且应该公开类型为ConfigureRedisAction.NO_OP的Bean。
  * <p>
  * This strategy will not work if the Redis instance has been properly secured. Instead,
  * the Redis instance should be configured externally and a Bean of type

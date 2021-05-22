@@ -239,7 +239,7 @@ public class MetadataManager extends ChainingMetadataProvider implements Extende
      * are supported by them. Providers which fail during initialization are ignored for this refresh.
      */
     public void refreshMetadata() {
-
+//说明：只能全量刷新
         log.debug("Reloading metadata");
 
         try {

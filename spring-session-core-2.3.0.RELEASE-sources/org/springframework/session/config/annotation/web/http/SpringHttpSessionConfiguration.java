@@ -47,7 +47,7 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 
-/**
+/**配置在Web环境中设置Spring Session的基础。为了使用它，您必须提供一个SessionRepository。
  * Configures the basics for setting up Spring Session in a web environment. In order to
  * use it, you must provide a {@link SessionRepository}. For example:
  *
@@ -74,7 +74,7 @@ import org.springframework.util.ObjectUtils;
  * <p>
  * The following is provided for you with the base configuration:
  * </p>
- *
+ *重要的是要注意，没有为您配置开箱即用的会话过期基础结构。这是因为像会话到期这样的事情在很大程度上取决于实现。这意味着如果您需要清理过期的会话，则有责任清理过期的会话。基本配置为您提供了以下内容：SessionRepositoryFilter-负责使用由SessionRepository支持的HttpSession实现包装HttpServletRequest .SessionEventHttpSessionListenerAdapter-负责将Spring Session事件转换为HttpSessionEvent。为了使其正常工作，您提供的SessionRepository的实现必须支持SessionCreatedEvent和SessionDestroyedEvent。
  * <ul>
  * <li>SessionRepositoryFilter - is responsible for wrapping the HttpServletRequest with
  * an implementation of HttpSession that is backed by a SessionRepository</li>
@@ -99,16 +99,16 @@ public class SpringHttpSessionConfiguration implements ApplicationContextAware {
 
 	private boolean usesSpringSessionRememberMeServices;
 
-	private ServletContext servletContext;
+	private ServletContext servletContext;//说明：自动注入
 
-	private CookieSerializer cookieSerializer;
+	private CookieSerializer cookieSerializer;//说明：自动注入
 
-	private HttpSessionIdResolver httpSessionIdResolver = this.defaultHttpSessionIdResolver;
+	private HttpSessionIdResolver httpSessionIdResolver = this.defaultHttpSessionIdResolver;//说明：自动注入
 
-	private List<HttpSessionListener> httpSessionListeners = new ArrayList<>();
+	private List<HttpSessionListener> httpSessionListeners = new ArrayList<>();//说明：自动注入
 
 	@PostConstruct
-	public void init() {
+	public void init() {//说明：使用注入的cookieSerializer
 		CookieSerializer cookieSerializer = (this.cookieSerializer != null) ? this.cookieSerializer
 				: createDefaultCookieSerializer();
 		this.defaultHttpSessionIdResolver.setCookieSerializer(cookieSerializer);
@@ -134,7 +134,7 @@ public class SpringHttpSessionConfiguration implements ApplicationContextAware {
 					.isEmpty(applicationContext.getBeanNamesForType(SpringSessionRememberMeServices.class));
 		}
 	}
-
+//说明：自动注入
 	@Autowired(required = false)
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;

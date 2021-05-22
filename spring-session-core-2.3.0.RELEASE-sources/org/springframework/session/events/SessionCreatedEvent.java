@@ -27,7 +27,7 @@ import org.springframework.session.SessionRepository;
  * @since 1.0
  */
 @SuppressWarnings("serial")
-public class SessionCreatedEvent extends AbstractSessionEvent {
+public class SessionCreatedEvent extends AbstractSessionEvent {//说明：可以利用
 
 	/**
 	 * Create a new {@link SessionCreatedEvent}.

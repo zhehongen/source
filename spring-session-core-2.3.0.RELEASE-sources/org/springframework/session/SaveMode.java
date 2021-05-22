@@ -25,7 +25,7 @@ package org.springframework.session;
  */
 public enum SaveMode {
 
-	/**
+	/**仅保存对会话所做的更改，例如使用Session.setAttribute（String，Object）。 在高度并发的环境中，此模式最大程度地减少了在处理并行请求期间属性被覆盖的风险。
 	 * Save only changes made to session, for instance using
 	 * {@link Session#setAttribute(String, Object)}. In highly concurrent environments,
 	 * this mode minimizes the risk of attributes being overwritten during processing of
@@ -33,13 +33,13 @@ public enum SaveMode {
 	 */
 	ON_SET_ATTRIBUTE,
 
-	/**
+	/**与ON_SET_ATTRIBUTE相同，但添加了使用Session.getAttribute（String）读取的保存属性。
 	 * Same as {@link #ON_SET_ATTRIBUTE} with addition of saving attributes that have been
 	 * read using {@link Session#getAttribute(String)}.
 	 */
 	ON_GET_ATTRIBUTE,
 
-	/**
+	/**始终保存所有会话属性，无论与会话进行交互如何。 在高度并发的环境中，此模式增加了在处理并行请求期间属性被覆盖的风险。
 	 * Always save all session attributes, regardless of the interaction with the session.
 	 * In highly concurrent environments, this mode increases the risk of attributes being
 	 * overwritten during processing of parallel requests.

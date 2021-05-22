@@ -37,7 +37,7 @@ public interface CookieSerializer {
 	 */
 	void writeCookieValue(CookieValue cookieValue);
 
-	/**
+	/**从HttpServletRequest读取所有匹配的cookie。 结果是一个列表，因为单个请求中可以有多个具有匹配名称的Cookie。 例如，一个Cookie可能具有/的路径，而另一个cookie可能具有/ context的路径，但是该路径未在请求中传输。
 	 * Reads all the matching cookies from the {@link HttpServletRequest}. The result is a
 	 * List since there can be multiple {@link Cookie} in a single request with a matching
 	 * name. For example, one Cookie may have a path of / and another of /context, but the
@@ -100,7 +100,7 @@ public interface CookieSerializer {
 			return this.response;
 		}
 
-		/**
+		/**要写入的值。 CookieSerializer可以在将此值写入Cookie之前对其进行修改。 但是，读回时，该值必须与原始值相同。
 		 * The value to be written. This value may be modified by the
 		 * {@link CookieSerializer} before written to the cookie. However, the value must
 		 * be the same as the original when it is read back in.
@@ -117,7 +117,7 @@ public interface CookieSerializer {
 		 */
 		public int getCookieMaxAge() {
 			return this.cookieMaxAge;
-		}
+		}//看过了
 
 		/**
 		 * Set the cookie max age.

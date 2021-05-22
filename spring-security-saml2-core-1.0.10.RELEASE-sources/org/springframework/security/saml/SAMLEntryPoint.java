@@ -61,7 +61,7 @@ import java.util.List;
  * @author Vladimir Schaefer
  */
 public class SAMLEntryPoint extends GenericFilterBean implements AuthenticationEntryPoint {
-
+//说明：
     protected static final Logger log = LoggerFactory.getLogger(SAMLEntryPoint.class);
 
     protected WebSSOProfileOptions defaultOptions;//说明：设置的。可以影响到AuthnRequest。
@@ -316,7 +316,7 @@ public class SAMLEntryPoint extends GenericFilterBean implements AuthenticationE
      */
     protected boolean isDiscovery(SAMLMessageContext context) {
         return !context.isPeerUserSelected() && context.getLocalExtendedMetadata().isIdpDiscoveryEnabled() && !isDiscoResponse(context);
-    }
+    }//说明：idp=****就代表是用户选择的idp。不是用户选择的才走idp发现。所以增加参数及可禁用发现功能。很容易实现
 
     /**确定是否应初始化ECP配置文件。默认情况下，当请求声明对ECP的支持并且当前服务提供者允许ECP时，使用ECP。如果启用了ECP，但未设置WebsProfileECP，则会记录警告，并且不使用ECP。
      * Determines whether ECP profile should get initialized. By default ECP is used when request declares supports for ECP

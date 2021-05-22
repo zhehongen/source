@@ -55,7 +55,7 @@ public class ReferenceQueue<T> {
     private Lock lock = new Lock();
     private volatile Reference<? extends T> head = null;
     private long queueLength = 0;
-
+//说明：新加入的元素，放入链表的头部
     boolean enqueue(Reference<? extends T> r) { /* Called only by Reference class */
         synchronized (lock) {
             // Check that since getting the lock this reference hasn't already been
@@ -66,8 +66,8 @@ public class ReferenceQueue<T> {
             }
             assert queue == this;
             r.queue = ENQUEUED;
-            r.next = (head == null) ? r : head;
-            head = r;
+            r.next = (head == null) ? r : head;//将r加入队列的头部
+            head = r;//将r变为新的head
             queueLength++;
             if (r instanceof FinalReference) {
                 sun.misc.VM.addFinalRefCount(1);

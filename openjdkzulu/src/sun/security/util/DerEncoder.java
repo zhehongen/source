@@ -28,7 +28,7 @@ package sun.security.util;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
+/**与知道如何将自己的DER编码写入输出流的对象的接口。
  * Interface to an object that knows how to write its own DER
  * encoding to an output stream.
  *

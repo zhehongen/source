@@ -446,11 +446,11 @@ public class RedisIndexedSessionRepository
 			return null;
 		}
 		RedisSession result = new RedisSession(loaded, false);
-		result.originalLastAccessTime = loaded.getLastAccessedTime();
+		result.originalLastAccessTime = loaded.getLastAccessedTime();//为啥要单独设置
 		return result;
 	}
 
-	private MapSession loadSession(String id, Map<Object, Object> entries) {
+	private MapSession loadSession(String id, Map<Object, Object> entries) {//看过了
 		MapSession loaded = new MapSession(id);
 		for (Map.Entry<Object, Object> entry : entries.entrySet()) {
 			String key = (String) entry.getKey();
@@ -477,13 +477,13 @@ public class RedisIndexedSessionRepository
 			return;
 		}
 
-		cleanupPrincipalIndex(session);
-		this.expirationPolicy.onDelete(session);
+		cleanupPrincipalIndex(session);//清理某个用户多个session中的一个
+		this.expirationPolicy.onDelete(session);//清理在某个时间点过期(expirations)的session中的一个
 
 		String expireKey = getExpiredKey(session.getId());
-		this.sessionRedisOperations.delete(expireKey);
+		this.sessionRedisOperations.delete(expireKey);//删除过期(expire)key
 
-		session.setMaxInactiveInterval(Duration.ZERO);
+		session.setMaxInactiveInterval(Duration.ZERO);//?
 		save(session);
 	}
 
@@ -505,16 +505,16 @@ public class RedisIndexedSessionRepository
 
 		String channel = new String(messageChannel);
 
-		if (channel.startsWith(this.sessionCreatedChannelPrefix)) {
+		if (channel.startsWith(this.sessionCreatedChannelPrefix)) {//说明：完全不理解，session创建为啥通知我？难道是广播？
 			// TODO: is this thread safe?
 			@SuppressWarnings("unchecked")
 			Map<Object, Object> loaded = (Map<Object, Object>) this.defaultSerializer.deserialize(message.getBody());
-			handleCreated(loaded, channel);
+			handleCreated(loaded, channel);//简单
 			return;
 		}
 
 		String body = new String(messageBody);
-		if (!body.startsWith(getExpiredKeyPrefix())) {
+		if (!body.startsWith(getExpiredKeyPrefix())) {//只处理expires?
 			return;
 		}
 
@@ -535,7 +535,7 @@ public class RedisIndexedSessionRepository
 				logger.debug("Publishing SessionDestroyedEvent for session " + sessionId);
 			}
 
-			cleanupPrincipalIndex(session);
+			cleanupPrincipalIndex(session);//看过了
 
 			if (isDeleted) {
 				handleDeleted(session);
@@ -551,12 +551,12 @@ public class RedisIndexedSessionRepository
 		Map<String, String> indexes = RedisIndexedSessionRepository.this.indexResolver.resolveIndexesFor(session);
 		String principal = indexes.get(PRINCIPAL_NAME_INDEX_NAME);
 		if (principal != null) {
-			this.sessionRedisOperations.boundSetOps(getPrincipalKey(principal)).remove(sessionId);
+			this.sessionRedisOperations.boundSetOps(getPrincipalKey(principal)).remove(sessionId);//说明：又是删除这一项，有何意义？
 		}
 	}
 
 	private void handleCreated(Map<Object, Object> loaded, String channel) {
-		String id = channel.substring(channel.lastIndexOf(":") + 1);
+		String id = channel.substring(channel.lastIndexOf(":") + 1);//sessionid?
 		Session session = loadSession(id, loaded);
 		publishEvent(new SessionCreatedEvent(this, session));
 	}
@@ -566,7 +566,7 @@ public class RedisIndexedSessionRepository
 	}
 
 	private void handleExpired(RedisSession session) {
-		publishEvent(new SessionExpiredEvent(this, session));
+		publishEvent(new SessionExpiredEvent(this, session));//说明：可以利用
 	}
 
 	private void publishEvent(ApplicationEvent event) {
@@ -591,14 +591,14 @@ public class RedisIndexedSessionRepository
 	 */
 	String getSessionKey(String sessionId) {
 		return this.namespace + "sessions:" + sessionId;
-	}
+	}//说明：这里面存储的是真正的session信息。比实际过期时间晚了5分钟
 
 	String getPrincipalKey(String principalName) {
 		return this.namespace + "index:" + FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME + ":"
-				+ principalName;
+				+ principalName;//说明：里面存储这个用户的所有sessionid。。集合 集合
 	}
 
-	String getExpirationsKey(long expiration) {//在某个时间点过期的所有sessionID,时间点精确到分钟
+	String getExpirationsKey(long expiration) {//在某个时间点过期的所有sessionID,时间点精确到分钟。set集合 集合
 		return this.namespace + "expirations:" + expiration;
 	}
 
@@ -612,7 +612,7 @@ public class RedisIndexedSessionRepository
 
 	private String getExpiredKeyPrefix() {
 		return this.namespace + "sessions:expires:";
-	}
+	}//说明：value为空。只有一个过期时间。它想干啥？因为删除他就代表session过期了。
 
 	/**
 	 * Gets the prefix for the channel that {@link SessionCreatedEvent}s are published to.
@@ -632,7 +632,7 @@ public class RedisIndexedSessionRepository
 		return this.sessionDeletedChannel;
 	}
 
-	/**
+	/**获取将SessionExpiredEvents发布到的通道的名称。
 	 * Gets the name of the channel that {@link SessionExpiredEvent}s are published to.
 	 * @return the name for the channel that {@link SessionExpiredEvent}s are published to
 	 */
@@ -655,7 +655,7 @@ public class RedisIndexedSessionRepository
 	 * @param attributeName the attribute name
 	 * @return the attribute key name
 	 */
-	static String getSessionAttrNameKey(String attributeName) {
+	static String getSessionAttrNameKey(String attributeName) {//看过了
 		return RedisSessionMapper.ATTRIBUTE_PREFIX + attributeName;
 	}
 
@@ -669,7 +669,7 @@ public class RedisIndexedSessionRepository
 	 */
 	final class RedisSession implements Session {
 
-		private final MapSession cached;
+		private final MapSession cached;//当前值。实时值
 
 		private Instant originalLastAccessTime;
 
@@ -681,7 +681,7 @@ public class RedisIndexedSessionRepository
 
 		private String originalSessionId;
 
-		RedisSession(MapSession cached, boolean isNew) {
+		RedisSession(MapSession cached, boolean isNew) {//看过了
 			this.cached = cached;
 			this.isNew = isNew;
 			this.originalSessionId = cached.getId();
@@ -754,7 +754,7 @@ public class RedisIndexedSessionRepository
 		}
 
 		@Override
-		public Set<String> getAttributeNames() {
+		public Set<String> getAttributeNames() {//看过了
 			return this.cached.getAttributeNames();
 		}
 
@@ -792,11 +792,11 @@ public class RedisIndexedSessionRepository
 				return;
 			}
 			String sessionId = getId();
-			getSessionBoundHashOperations(sessionId).putAll(this.delta);
+			getSessionBoundHashOperations(sessionId).putAll(this.delta);//重复key会被覆盖？应该会
 			String principalSessionKey = getSessionAttrNameKey(
-					FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME);
-			String securityPrincipalSessionKey = getSessionAttrNameKey(SPRING_SECURITY_CONTEXT);
-			if (this.delta.containsKey(principalSessionKey) || this.delta.containsKey(securityPrincipalSessionKey)) {
+					FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME);//一般都是空
+			String securityPrincipalSessionKey = getSessionAttrNameKey(SPRING_SECURITY_CONTEXT);//this.delta.containsKey(securityPrincipalSessionKey)一般不会有啊
+			if (this.delta.containsKey(principalSessionKey) || this.delta.containsKey(securityPrincipalSessionKey)) {//判断依据是啥
 				if (this.originalPrincipalName != null) {
 					String originalPrincipalRedisKey = getPrincipalKey(this.originalPrincipalName);
 					RedisIndexedSessionRepository.this.sessionRedisOperations.boundSetOps(originalPrincipalRedisKey)
@@ -829,7 +829,7 @@ public class RedisIndexedSessionRepository
 				String sessionIdKey = getSessionKey(sessionId);
 				try {
 					RedisIndexedSessionRepository.this.sessionRedisOperations.rename(originalSessionIdKey,
-							sessionIdKey);
+							sessionIdKey);//对sessionkey进行重新命名
 				}
 				catch (NonTransientDataAccessException ex) {
 					handleErrNoSuchKeyError(ex);
@@ -839,11 +839,11 @@ public class RedisIndexedSessionRepository
 				try {
 					RedisIndexedSessionRepository.this.sessionRedisOperations.rename(originalExpiredKey, expiredKey);
 				}
-				catch (NonTransientDataAccessException ex) {
+				catch (NonTransientDataAccessException ex) {//对expires进行重新命名
 					handleErrNoSuchKeyError(ex);
 				}
 			}
-			this.originalSessionId = sessionId;
+			this.originalSessionId = sessionId;//原始id被赋值为当前id
 		}
 
 		private void handleErrNoSuchKeyError(NonTransientDataAccessException ex) {

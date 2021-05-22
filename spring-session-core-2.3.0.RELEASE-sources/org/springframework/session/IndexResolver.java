@@ -34,6 +34,7 @@ public interface IndexResolver<S extends Session> {
 	 * @param session the session
 	 * @return a map of resolved indexes, never {@code null}
 	 */
-	Map<String, String> resolveIndexesFor(S session);
+	Map<String, String> resolveIndexesFor(S session);//说明：为啥会是个map?
+	// org.springframework.session.FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME-->username
 
 }

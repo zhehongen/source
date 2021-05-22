@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
  * @since 2.2.0
  */
 final class RedisSessionMapper implements Function<Map<String, Object>, MapSession> {
-
+//看过了
 	/**
 	 * The key in the hash representing {@link Session#getCreationTime()}.
 	 */
@@ -64,7 +64,7 @@ final class RedisSessionMapper implements Function<Map<String, Object>, MapSessi
 	}
 
 	@Override
-	public MapSession apply(Map<String, Object> map) {
+	public MapSession apply(Map<String, Object> map) {//说明：简单
 		Assert.notEmpty(map, "map must not be empty");
 		MapSession session = new MapSession(this.sessionId);
 		Long creationTime = (Long) map.get(CREATION_TIME_KEY);
@@ -83,7 +83,7 @@ final class RedisSessionMapper implements Function<Map<String, Object>, MapSessi
 		}
 		session.setMaxInactiveInterval(Duration.ofSeconds(maxInactiveInterval));
 		map.forEach((name, value) -> {
-			if (name.startsWith(ATTRIBUTE_PREFIX)) {
+			if (name.startsWith(ATTRIBUTE_PREFIX)) {//说明：吊
 				session.setAttribute(name.substring(ATTRIBUTE_PREFIX.length()), value);
 			}
 		});

@@ -51,7 +51,7 @@ public interface Session {
 	 * @return the Object associated with the specified name or null if no Object is
 	 * associated to that name
 	 */
-	<T> T getAttribute(String attributeName);
+	<T> T getAttribute(String attributeName);//看过了
 
 	/**
 	 * Return the session attribute value or if not present raise an
@@ -77,7 +77,7 @@ public interface Session {
 	 * @return the attribute value
 	 */
 	@SuppressWarnings("unchecked")
-	default <T> T getAttributeOrDefault(String name, T defaultValue) {
+	default <T> T getAttributeOrDefault(String name, T defaultValue) {//看过了
 		T result = getAttribute(name);
 		return (result != null) ? result : defaultValue;
 	}
@@ -99,7 +99,7 @@ public interface Session {
 	 * @param attributeValue the value of the attribute to set. If null, the attribute
 	 * will be removed.
 	 */
-	void setAttribute(String attributeName, Object attributeValue);
+	void setAttribute(String attributeName, Object attributeValue);//看过了
 
 	/**删除具有提供的属性名称的属性。
 	 * Removes the attribute with the provided attribute name.
@@ -111,7 +111,7 @@ public interface Session {
 	 * Gets the time when this session was created.
 	 * @return the time when this session was created.
 	 */
-	Instant getCreationTime();
+	Instant getCreationTime();//说明：固有属性
 
 	/**
 	 * Sets the last accessed time.
@@ -123,7 +123,7 @@ public interface Session {
 	 * Gets the last time this {@link Session} was accessed.
 	 * @return the last time the client sent a request associated with the session
 	 */
-	Instant getLastAccessedTime();
+	Instant getLastAccessedTime();//说明：固有属性
 
 	/**设置此会话将无效之前请求之间的最大非活动间隔。负时间表示会话永远不会超时。
 	 * Sets the maximum inactive interval between requests before this session will be
@@ -131,7 +131,7 @@ public interface Session {
 	 * @param interval the amount of time that the {@link Session} should be kept alive
 	 * between client requests.在客户端请求之间会话应保持活动状态的时间量。
 	 */
-	void setMaxInactiveInterval(Duration interval);
+	void setMaxInactiveInterval(Duration interval);//说明：固有属性
 
 	/**获取此会话将无效之前请求之间的最大非活动间隔。负时间表示会话永远不会超时。
 	 * Gets the maximum inactive interval between requests before this session will be

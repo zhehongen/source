@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.session.web.http.CookieSerializer.CookieValue;
 
-/**
+/**使用cookie从中获取会话的HttpSessionIdResolver。具体来说，此实现将允许使用setCookieSerializer（CookieSerializer）指定cookie序列化策略。默认的cookie名称是“ SESSION”。创建会话时，HTTP响应将包含一个具有指定Cookie名称和会话ID值的Cookie。该cookie将被标记为会话cookie，使用上下文路径作为cookie的路径，标记为HTTPOnly，并且如果HttpServletRequest.isSecure（）返回true，则该cookie将被标记为安全。
  * A {@link HttpSessionIdResolver} that uses a cookie to obtain the session from.
  * Specifically, this implementation will allow specifying a cookie serialization strategy
  * using {@link CookieHttpSessionIdResolver#setCookieSerializer(CookieSerializer)}. The
@@ -78,7 +78,7 @@ public final class CookieHttpSessionIdResolver implements HttpSessionIdResolver 
 		if (sessionId.equals(request.getAttribute(WRITTEN_SESSION_ID_ATTR))) {
 			return;
 		}
-		request.setAttribute(WRITTEN_SESSION_ID_ATTR, sessionId);
+		request.setAttribute(WRITTEN_SESSION_ID_ATTR, sessionId);//说明：为啥要放到request.attribute
 		this.cookieSerializer.writeCookieValue(new CookieValue(request, response, sessionId));
 	}
 
@@ -92,7 +92,7 @@ public final class CookieHttpSessionIdResolver implements HttpSessionIdResolver 
 	 * @param cookieSerializer the cookieSerializer to set. Cannot be null.
 	 */
 	public void setCookieSerializer(CookieSerializer cookieSerializer) {
-		if (cookieSerializer == null) {
+		if (cookieSerializer == null) {//说明：org.springframework.session.config.annotation.web.http.SpringHttpSessionConfiguration.init
 			throw new IllegalArgumentException("cookieSerializer cannot be null");
 		}
 		this.cookieSerializer = cookieSerializer;

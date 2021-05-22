@@ -30,7 +30,7 @@ import org.springframework.util.ObjectUtils;
  * @author Tommy Ludwig
  * @author Eddú Meléndez
  */
-final class SessionStoreMappings {
+final class SessionStoreMappings {//说明：
 
 	private static final Map<StoreType, Configurations> MAPPINGS;
 

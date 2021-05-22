@@ -46,7 +46,7 @@ import java.util.UUID;
  * @author Vedran Pavic
  * @since 1.0
  */
-public final class MapSession implements Session, Serializable {
+public final class MapSession implements Session, Serializable {//说明：拷贝构造函数？
 
 	/**
 	 * Default {@link #setMaxInactiveInterval(Duration)} (30 minutes).
@@ -57,9 +57,9 @@ public final class MapSession implements Session, Serializable {
 
 	private final String originalId;
 
-	private Map<String, Object> sessionAttrs = new HashMap<>();
+	private Map<String, Object> sessionAttrs = new HashMap<>();//说明：已经实例化了
 
-	private Instant creationTime = Instant.now();
+	private Instant creationTime = Instant.now();//说明：当前
 
 	private Instant lastAccessedTime = this.creationTime;
 
@@ -75,7 +75,7 @@ public final class MapSession implements Session, Serializable {
 		this(generateId());
 	}
 
-	/**
+	/**用指定的ID创建一个新实例。 当已知id时，此方法优于默认构造方法，以防止不必要的熵消耗，而这可能会很慢。
 	 * Creates a new instance with the specified id. This is preferred to the default
 	 * constructor when the id is known to prevent unnecessary consumption on entropy
 	 * which can be slow.
@@ -91,7 +91,7 @@ public final class MapSession implements Session, Serializable {
 	 * @param session the {@link Session} to initialize this {@link Session} with. Cannot
 	 * be null.
 	 */
-	public MapSession(Session session) {
+	public MapSession(Session session) {//看过了
 		if (session == null) {
 			throw new IllegalArgumentException("session cannot be null");
 		}
@@ -202,7 +202,7 @@ public final class MapSession implements Session, Serializable {
 		this.creationTime = creationTime;
 	}
 
-	/**
+	/**设置此会话的标识符。 id应该是一个安全的随机生成的值，以防止恶意用户猜测该值。 默认值为安全随机生成的标识符。
 	 * Sets the identifier for this {@link Session}. The id should be a secure random
 	 * generated value to prevent malicious users from guessing this value. The default is
 	 * a secure random generated identifier.

@@ -63,7 +63,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.util.UrlPathHelper;
 
-/**
+/**切换负责用户上下文切换的用户处理过滤器。此过滤器类似于Unix'su'，但适用于Spring Security管理的Web应用程序。此功能的一个常见用例是能够允许较高权限的用户（例如ROLE_ADMIN）切换为普通用户（例如ROLE_USER）。此过滤器假定执行切换的用户将被要求正常登录。 （即以ROLE_ADMIN用户身份）。然后，用户将访问一个页面/控制器，该页面/控制器使管理员能够指定他们希望成为谁（请参阅switchUserUrl）。注意：将要求此URL配置适当的安全性约束，以便只有该角色的用户才能访问它（例如ROLE_ADMIN）。在成功切换后，用户的SecurityContext将更新以反映指定的用户，并且还将包含一个包含原始用户的附加SwitchUserGrantedAuthority。在切换之前，将检查用户当前是否已经切换，并且将退出任何当前的切换以防止“嵌套”切换。要从用户上下文“退出”，用户需要访问URL（请参阅exitUserUrl） ），将切换回ROLE_PREVIOUS_ADMINISTRATOR标识的原始用户。要配置“切换用户处理”过滤器，请为“切换用户”处理过滤器创建一个bean定义，然后将其添加到filterChainProxy中。请注意，过滤器必须位于链中的FilterSecurityInteceptor之后，以便将正确的约束应用于switchUserUrl。例子：
  * Switch User processing filter responsible for user context switching.
  * <p>
  * This filter is similar to Unix 'su' however for Spring Security-managed web
@@ -107,7 +107,7 @@ import org.springframework.web.util.UrlPathHelper;
  *
  * @see SwitchUserGrantedAuthority
  */
-public class SwitchUserFilter extends GenericFilterBean
+public class SwitchUserFilter extends GenericFilterBean //说明：没有找到鉴权的地方？
 		implements ApplicationEventPublisherAware, MessageSourceAware {
 	// ~ Static fields/initializers
 	// =====================================================================================
@@ -127,7 +127,7 @@ public class SwitchUserFilter extends GenericFilterBean
 	private String switchFailureUrl;
 	private String usernameParameter = SPRING_SECURITY_SWITCH_USERNAME_KEY;
 	private String switchAuthorityRole = ROLE_PREVIOUS_ADMINISTRATOR;
-	private SwitchUserAuthorityChanger switchUserAuthorityChanger;
+	private SwitchUserAuthorityChanger switchUserAuthorityChanger;//说明：我应该不会更改权限，保持原有权限不动即可
 	private UserDetailsService userDetailsService;
 	private UserDetailsChecker userDetailsChecker = new AccountStatusUserDetailsChecker();
 	private AuthenticationSuccessHandler successHandler;
@@ -227,7 +227,7 @@ public class SwitchUserFilter extends GenericFilterBean
 			this.logger.debug("Attempt to switch to user [" + username + "]");
 		}
 
-		UserDetails targetUser = this.userDetailsService.loadUserByUsername(username);
+		UserDetails targetUser = this.userDetailsService.loadUserByUsername(username);//说明：肉鸡
 		this.userDetailsChecker.check(targetUser);
 
 		// OK, create the switch user token
@@ -272,7 +272,7 @@ public class SwitchUserFilter extends GenericFilterBean
 		// if so, get the original source user so we can switch back
 		Authentication original = getSourceAuthentication(current);
 
-		if (original == null) {
+		if (original == null) {//说明：如果之前没有切换过用户
 			this.logger.debug("Could not find original user Authentication object!");
 			throw new AuthenticationCredentialsNotFoundException(
 					this.messages.getMessage("SwitchUserFilter.noOriginalAuthentication",
@@ -284,13 +284,13 @@ public class SwitchUserFilter extends GenericFilterBean
 		Object obj = original.getPrincipal();
 
 		if ((obj != null) && obj instanceof UserDetails) {
-			originalUser = (UserDetails) obj;
+			originalUser = (UserDetails) obj;//说明：那不是可能为空吗？为securityUser
 		}
 
 		// publish event
 		if (this.eventPublisher != null) {
-			this.eventPublisher.publishEvent(
-					new AuthenticationSwitchUserEvent(current, originalUser));
+			this.eventPublisher.publishEvent(//说明：在这里就不是肉鸡了。奶奶的
+					new AuthenticationSwitchUserEvent(current, originalUser));//说明：被管理者的认证信息和管理者用户详情？
 		}
 
 		return original;
@@ -307,7 +307,7 @@ public class SwitchUserFilter extends GenericFilterBean
 	 *
 	 * @see SwitchUserGrantedAuthority
 	 */
-	private UsernamePasswordAuthenticationToken createSwitchUserToken(
+	private UsernamePasswordAuthenticationToken createSwitchUserToken(//说明：包含了原始的认证信息
 			HttpServletRequest request, UserDetails targetUser) {
 
 		UsernamePasswordAuthenticationToken targetUserRequest;
@@ -319,7 +319,7 @@ public class SwitchUserFilter extends GenericFilterBean
 
 		try {
 			// SEC-1763. Check first if we are already switched.
-			currentAuth = attemptExitUser(request);
+			currentAuth = attemptExitUser(request);//说明：
 		}
 		catch (AuthenticationCredentialsNotFoundException e) {
 			currentAuth = SecurityContextHolder.getContext().getAuthentication();
@@ -352,7 +352,7 @@ public class SwitchUserFilter extends GenericFilterBean
 		return targetUserRequest;
 	}
 
-	/**
+	/**从当前用户的授予权限中查找原始身份验证对象。 成功切换的用户应具有包含原始源用户Authentication对象的SwitchUserGrantedAuthority。
 	 * Find the original <code>Authentication</code> object from the current user's
 	 * granted authorities. A successfully switched user should have a
 	 * <code>SwitchUserGrantedAuthority</code> that contains the original source user
@@ -365,7 +365,7 @@ public class SwitchUserFilter extends GenericFilterBean
 	 */
 	private Authentication getSourceAuthentication(Authentication current) {
 		Authentication original = null;
-
+//说明：这个认证对象是被切换的用户的认证对象，即被管理者。他的权限列表里面有一个特殊的权限SwitchUserGrantedAuthority。里面存储了管理者的原始认证信息。
 		// iterate over granted authorities and find the 'switch user' authority
 		Collection<? extends GrantedAuthority> authorities = current.getAuthorities();
 
@@ -529,7 +529,7 @@ public class SwitchUserFilter extends GenericFilterBean
 		this.failureHandler = failureHandler;
 	}
 
-	/**
+	/**用于微调授予子类的权限（如果SwitchUserFilter不应该微调权限，则可以为null）
 	 * @param switchUserAuthorityChanger to use to fine-tune the authorities granted to
 	 * subclasses (may be null if SwitchUserFilter should not fine-tune the authorities)
 	 */
@@ -551,7 +551,7 @@ public class SwitchUserFilter extends GenericFilterBean
 		this.usernameParameter = usernameParameter;
 	}
 
-	/**
+	/**允许自定义switchAuthority的角色。
 	 * Allows the role of the switchAuthority to be customized.
 	 *
 	 * @param switchAuthorityRole the role name. Defaults to

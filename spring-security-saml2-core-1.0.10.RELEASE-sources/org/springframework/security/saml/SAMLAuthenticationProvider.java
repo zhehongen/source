@@ -129,7 +129,7 @@ public class SAMLAuthenticationProvider implements AuthenticationProvider, Initi
 
     }
 
-    /**
+    /**将用户数据从SAMLCredential填充到UserDetails对象中。 默认情况下，将调用提供的SAMLUserDetailsService的实现，并返回UserDetails类型的值。 鼓励用户提供此类的实现，并在其中包括getAuthorities方法的正确实现，该方法用于填充Authentication对象内的权利。如果未指定SAMLUserDetailsService，则返回null。
      * Populates user data from SAMLCredential into UserDetails object. By default supplied implementation of the
      * SAMLUserDetailsService is called and value of type UserDetails is returned. Users are encouraged to supply
      * implementation of this class and also include correct implementation of the getAuthorities method in it, which

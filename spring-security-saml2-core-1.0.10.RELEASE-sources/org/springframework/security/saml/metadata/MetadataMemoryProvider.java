@@ -25,7 +25,7 @@ import org.opensaml.xml.XMLObject;
  * @author Vladimir Schfer
  */
 public class MetadataMemoryProvider extends AbstractMetadataProvider {
-
+//说明：不管怎么刷新都不会变，只能删除
     /**
      * Preconfigured descriptor
      */

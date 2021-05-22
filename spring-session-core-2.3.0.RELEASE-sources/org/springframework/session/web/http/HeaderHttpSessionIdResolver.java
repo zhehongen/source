@@ -22,7 +22,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
+/**使用标头解析会话ID的HttpSessionIdResolver。具体来说，此实现将允许使用HeaderHttpSessionIdResolver（String）指定标头名称。也提供用于创建使用通用标头名称（例如“ X-Auth-Token”和“ Authentication-Info”）的实例的便捷工厂方法。创建会话时，HTTP响应将具有指定的响应标头名称和会话ID的值。
  * A {@link HttpSessionIdResolver} that uses a header to resolve the session id.
  * Specifically, this implementation will allow specifying a header name using
  * {@link #HeaderHttpSessionIdResolver(String)}. Convenience factory methods for creating
@@ -97,7 +97,7 @@ public class HeaderHttpSessionIdResolver implements HttpSessionIdResolver {
 
 	@Override
 	public List<String> resolveSessionIds(HttpServletRequest request) {
-		String headerValue = request.getHeader(this.headerName);
+		String headerValue = request.getHeader(this.headerName);//看过了
 		return (headerValue != null) ? Collections.singletonList(headerValue) : Collections.emptyList();
 	}
 

@@ -38,7 +38,7 @@ public interface FindByIndexNameSessionRepository<S extends Session> extends Ses
 	 * @since 1.1
 	 */
 	String PRINCIPAL_NAME_INDEX_NAME = FindByIndexNameSessionRepository.class.getName()//org.springframework.session.FindByIndexNameSessionRepository
-			.concat(".PRINCIPAL_NAME_INDEX_NAME");
+			.concat(".PRINCIPAL_NAME_INDEX_NAME");//看过了
 
 	/**
 	 * Find a {@link Map} of the session id to the {@link Session} of all sessions that
@@ -52,7 +52,7 @@ public interface FindByIndexNameSessionRepository<S extends Session> extends Ses
 	 */
 	Map<String, S> findByIndexNameAndIndexValue(String indexName, String indexValue);
 
-	/**
+	/**查找会话ID到所有包含名称为PRINCIPAL_NAME_INDEX_NAME的索引和指定的主体名称的所有会话的Session的映射。
 	 * Find a {@link Map} of the session id to the {@link Session} of all sessions that
 	 * contain the index with the name
 	 * {@link FindByIndexNameSessionRepository#PRINCIPAL_NAME_INDEX_NAME} and the
@@ -60,11 +60,11 @@ public interface FindByIndexNameSessionRepository<S extends Session> extends Ses
 	 * @param principalName the principal name
 	 * @return a {@code Map} (never {@code null}) of the session id to the {@code Session}
 	 * of all sessions that contain the specified principal name. If no results are found,
-	 * an empty {@code Map} is returned.
+	 * an empty {@code Map} is returned.会话ID到包含指定主体名称的所有会话的Session的映射（绝不为null）。 如果未找到结果，则返回一个空的Map。
 	 * @since 2.1.0
 	 */
 	default Map<String, S> findByPrincipalName(String principalName) {
-
+//说明：一个用户有多个session。sessionid->session的map
 		return findByIndexNameAndIndexValue(PRINCIPAL_NAME_INDEX_NAME, principalName);
 
 	}

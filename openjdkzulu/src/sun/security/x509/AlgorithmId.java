@@ -37,7 +37,7 @@ import sun.security.rsa.PSSParameters;
 import sun.security.util.*;
 
 
-/**
+/**此类标识诸如密码变换之类的算法，每个算法都可以与参数关联。当此运行时环境对算法类型没有特殊知识时，将使用此基类的实例，并且在其他情况下也可以使用该基类的实例。等效性是根据OID和（在相关的情况下）参数定义的。可以使用子类，例如，当算法ID具有某些参数（例如使用公共密钥的代码）需要解析的关联参数时。此类算法的两个示例是Diffie-Hellman密钥交换和数字签名标准算法（DSS / DSA）。此类中定义的OID常量对应于一些广泛使用的算法，并为其定义了常规的字符串名称。此类不是OID或此类字符串名称的常规存储库。请注意，算法ID和算法名称之间的映射不是一对一的。
  * This class identifies algorithms, such as cryptographic transforms, each
  * of which may be associated with parameters.  Instances of this base class
  * are used when this runtime environment has no special knowledge of the
