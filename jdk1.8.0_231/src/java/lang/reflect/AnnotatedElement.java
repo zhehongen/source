@@ -446,5 +446,5 @@ public interface AnnotatedElement {
      * @return annotations directly present on this element
      * @since 1.5
      */
-    Annotation[] getDeclaredAnnotations();
+    Annotation[] getDeclaredAnnotations();//
 }

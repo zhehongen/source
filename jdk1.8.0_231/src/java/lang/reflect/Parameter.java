@@ -187,7 +187,7 @@ public final class Parameter implements AnnotatedElement {
         return name;
     }
 
-    /**
+    /**返回一个Type对象，该对象标识此Parameter对象表示的参数的参数化类型
      * Returns a {@code Type} object that identifies the parameterized
      * type for the parameter represented by this {@code Parameter}
      * object.

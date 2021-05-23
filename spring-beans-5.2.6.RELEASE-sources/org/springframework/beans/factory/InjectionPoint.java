@@ -37,7 +37,7 @@ import org.springframework.util.ObjectUtils;
  * @see UnsatisfiedDependencyException#getInjectionPoint()
  * @see org.springframework.beans.factory.config.DependencyDescriptor
  */
-public class InjectionPoint {
+public class InjectionPoint {//
 
 	@Nullable
 	protected MethodParameter methodParameter;

@@ -254,7 +254,7 @@ public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguratio
 	@SuppressWarnings("deprecation")
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 		Map<String, Object> attributeMap = importMetadata
-				.getAnnotationAttributes(EnableRedisHttpSession.class.getName());
+				.getAnnotationAttributes(EnableRedisHttpSession.class.getName());//能猜出来
 		AnnotationAttributes attributes = AnnotationAttributes.fromMap(attributeMap);
 		this.maxInactiveIntervalInSeconds = attributes.getNumber("maxInactiveIntervalInSeconds");
 		String redisNamespaceValue = attributes.getString("redisNamespace");

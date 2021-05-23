@@ -488,7 +488,7 @@ public class RedisIndexedSessionRepository
 	}
 
 	@Override
-	public RedisSession createSession() {
+	public RedisSession createSession() {//看过了
 		MapSession cached = new MapSession();
 		if (this.defaultMaxInactiveInterval != null) {
 			cached.setMaxInactiveInterval(Duration.ofSeconds(this.defaultMaxInactiveInterval));
