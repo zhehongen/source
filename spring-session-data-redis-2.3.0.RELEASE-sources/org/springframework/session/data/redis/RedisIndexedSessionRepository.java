@@ -397,7 +397,7 @@ public class RedisIndexedSessionRepository
 	public void save(RedisSession session) {
 		session.save();
 		if (session.isNew) {
-			String sessionCreatedKey = getSessionCreatedChannel(session.getId());
+			String sessionCreatedKey = getSessionCreatedChannel(session.getId());//往其他实例同步
 			this.sessionRedisOperations.convertAndSend(sessionCreatedKey, session.delta);
 			session.isNew = false;
 		}
@@ -446,7 +446,7 @@ public class RedisIndexedSessionRepository
 			return null;
 		}
 		RedisSession result = new RedisSession(loaded, false);
-		result.originalLastAccessTime = loaded.getLastAccessedTime();//为啥要单独设置
+		result.originalLastAccessTime = loaded.getLastAccessedTime();//为啥要单独设置，因为创建时间，最大空闲间隔，都不会变，最后访问时间才会变
 		return result;
 	}
 
@@ -783,7 +783,7 @@ public class RedisIndexedSessionRepository
 			saveDelta();
 		}
 
-		/**
+		/**保存所有已更改的属性，并更新此会话的到期时间
 		 * Saves any attributes that have been changed and updates the expiration of this
 		 * session.
 		 */
@@ -795,12 +795,12 @@ public class RedisIndexedSessionRepository
 			getSessionBoundHashOperations(sessionId).putAll(this.delta);//重复key会被覆盖？应该会
 			String principalSessionKey = getSessionAttrNameKey(
 					FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME);//一般都是空
-			String securityPrincipalSessionKey = getSessionAttrNameKey(SPRING_SECURITY_CONTEXT);//this.delta.containsKey(securityPrincipalSessionKey)一般不会有啊
+			String securityPrincipalSessionKey = getSessionAttrNameKey(SPRING_SECURITY_CONTEXT);//this.delta.containsKey(securityPrincipalSessionKey)一般不会有啊,只有新增才有
 			if (this.delta.containsKey(principalSessionKey) || this.delta.containsKey(securityPrincipalSessionKey)) {//判断依据是啥
 				if (this.originalPrincipalName != null) {
 					String originalPrincipalRedisKey = getPrincipalKey(this.originalPrincipalName);
 					RedisIndexedSessionRepository.this.sessionRedisOperations.boundSetOps(originalPrincipalRedisKey)
-							.remove(sessionId);
+							.remove(sessionId);//应该进不来
 				}
 				Map<String, String> indexes = RedisIndexedSessionRepository.this.indexResolver.resolveIndexesFor(this);
 				String principal = indexes.get(PRINCIPAL_NAME_INDEX_NAME);
@@ -809,7 +809,7 @@ public class RedisIndexedSessionRepository
 					String principalRedisKey = getPrincipalKey(principal);
 					RedisIndexedSessionRepository.this.sessionRedisOperations.boundSetOps(principalRedisKey)
 							.add(sessionId);
-				}
+				}//需要调试一下
 			}
 
 			this.delta = new HashMap<>(this.delta.size());

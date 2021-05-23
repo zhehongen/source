@@ -29,7 +29,7 @@ import java.util.Map;
  */
 public interface FindByIndexNameSessionRepository<S extends Session> extends SessionRepository<S> {
 
-	/**
+	/**包含当前主体名称（即用户名）的会话索引。开发者有责任确保填充索引，因为Spring Session不知道所使用的身份验证机制
 	 * A session index that contains the current principal name (i.e. username).
 	 * <p>
 	 * It is the responsibility of the developer to ensure the index is populated since
