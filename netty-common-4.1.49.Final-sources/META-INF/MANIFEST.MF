@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: io.netty.netty-common.source
+Bundle-Name: Netty/Common
+Bundle-Version: 4.1.49.Final
+Bundle-ManifestVersion: 2
+Bundle-Vendor: The Netty Project
+Eclipse-SourceBundle: io.netty.netty-common;version="4.1.49.Final";roo
+ ts:="."
+Created-By: Maven Source Plugin 3.2.0
+
