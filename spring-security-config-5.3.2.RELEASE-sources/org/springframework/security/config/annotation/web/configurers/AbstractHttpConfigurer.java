@@ -21,7 +21,7 @@ import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.HttpSecurityBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.DefaultSecurityFilterChain;
-
+//为在HttpSecurity上运行的SecurityConfigurer实例添加一个方便的基类
 /**
  * Adds a convenient base class for {@link SecurityConfigurer} instances that operate on
  * {@link HttpSecurity}.

@@ -46,7 +46,7 @@ class LettuceResult<T, R> extends FutureResult<RedisCommand<?, T, ?>> {
 	LettuceResult(Future<T> resultHolder, boolean convertPipelineAndTxResults, @Nullable Converter<T, R> converter) {
 		this(resultHolder, () -> null, convertPipelineAndTxResults, converter);
 	}
-
+//说明：明明是future 怎么又变成RedisCommand了
 	@SuppressWarnings("unchecked")
 	LettuceResult(Future<T> resultHolder, Supplier<R> defaultReturnValue, boolean convertPipelineAndTxResults,
 			@Nullable Converter<T, R> converter) {

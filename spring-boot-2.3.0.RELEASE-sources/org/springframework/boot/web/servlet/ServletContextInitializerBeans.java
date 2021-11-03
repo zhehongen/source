@@ -128,7 +128,7 @@ public class ServletContextInitializerBeans extends AbstractCollection<ServletCo
 			ListableBeanFactory beanFactory, Object source) {
 		this.initializers.add(type, initializer);
 		if (source != null) {
-			// Mark the underlying source as seen in case it wraps an existing bean
+			// Mark the underlying source as seen in case it wraps an existing bean将底层源标记为所见，以防它包装现有的 bean
 			this.seen.add(source);
 		}
 		if (logger.isTraceEnabled()) {

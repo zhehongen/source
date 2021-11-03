@@ -26,7 +26,7 @@ import org.springframework.security.core.Authentication;
  * <p>
  * Typical use would be to make sure a session exists or to change the session Id to guard
  * against session-fixation attacks.
- * 通常的用途是确保会话存在或更改会话ID以防止会话固定攻击。
+ * 通常的用途是确保会话存在或更改会话ID以防止会话固定攻击。防止别人抓取到会话id进行攻击？
  * @author Luke Taylor
  * @since
  */

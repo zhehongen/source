@@ -151,7 +151,7 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 				MethodParameter methodParam = descriptor.getMethodParameter();
 				if (methodParam != null) {
 					Method method = methodParam.getMethod();
-					if (method == null || void.class == method.getReturnType()) {
+					if (method == null || void.class == method.getReturnType()) {//看不懂？？
 						match = checkQualifiers(bdHolder, methodParam.getMethodAnnotations());
 					}
 				}
@@ -168,16 +168,16 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 			return true;
 		}
 		SimpleTypeConverter typeConverter = new SimpleTypeConverter();
-		for (Annotation annotation : annotationsToSearch) {
+		for (Annotation annotation : annotationsToSearch) {//说明：每一个注解都需要匹配
 			Class<? extends Annotation> type = annotation.annotationType();
 			boolean checkMeta = true;
 			boolean fallbackToMeta = false;
 			if (isQualifier(type)) {
-				if (!checkQualifier(bdHolder, annotation, typeConverter)) {
-					fallbackToMeta = true;
+				if (!checkQualifier(bdHolder, annotation, typeConverter)) {//说明：检查是否是qualifier
+					fallbackToMeta = true;//不是qualifier
 				}
 				else {
-					checkMeta = false;
+					checkMeta = false;//是qualifier。不再检查元数据
 				}
 			}
 			if (checkMeta) {
@@ -185,7 +185,7 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 				for (Annotation metaAnn : type.getAnnotations()) {
 					Class<? extends Annotation> metaType = metaAnn.annotationType();
 					if (isQualifier(metaType)) {
-						foundMeta = true;
+						foundMeta = true;//如果@Qualifier 注释具有值，才接受回退匹配，否则它只是自定义限定符注释的标记
 						// Only accept fallback match if @Qualifier annotation has a value...
 						// Otherwise it is just a marker for a custom qualifier annotation.
 						if ((fallbackToMeta && StringUtils.isEmpty(AnnotationUtils.getValue(metaAnn))) ||
@@ -262,9 +262,9 @@ public class QualifierAnnotationAutowireCandidateResolver extends GenericTypeAwa
 			}
 		}
 
-		Map<String, Object> attributes = AnnotationUtils.getAnnotationAttributes(annotation);
+		Map<String, Object> attributes = AnnotationUtils.getAnnotationAttributes(annotation);//说明：获取注解的属性
 		if (attributes.isEmpty() && qualifier == null) {
-			// If no attributes, the qualifier must be present
+			// If no attributes, the qualifier must be present 如果没有属性，则必须存在限定符
 			return false;
 		}
 		for (Map.Entry<String, Object> entry : attributes.entrySet()) {

@@ -119,7 +119,7 @@ public final class SpringFactoriesLoader {
 	 */
 	public static List<String> loadFactoryNames(Class<?> factoryType, @Nullable ClassLoader classLoader) {
 		String factoryTypeName = factoryType.getName();
-		return loadSpringFactories(classLoader).getOrDefault(factoryTypeName, Collections.emptyList());
+		return loadSpringFactories(classLoader).getOrDefault(factoryTypeName, Collections.emptyList());//有没有可能重名？
 	}
 
 	private static Map<String, List<String>> loadSpringFactories(@Nullable ClassLoader classLoader) {
@@ -131,7 +131,7 @@ public final class SpringFactoriesLoader {
 		try {
 			Enumeration<URL> urls = (classLoader != null ?
 					classLoader.getResources(FACTORIES_RESOURCE_LOCATION) :
-					ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));
+					ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));//查找具有给定名称的所有资源的URL
 			result = new LinkedMultiValueMap<>();
 			while (urls.hasMoreElements()) {
 				URL url = urls.nextElement();

@@ -82,7 +82,7 @@ public final class WebSecurity extends
 	private final Log logger = LogFactory.getLog(getClass());
 
 	private final List<RequestMatcher> ignoredRequests = new ArrayList<>();
-
+//HttpSecurity
 	private final List<SecurityBuilder<? extends SecurityFilterChain>> securityFilterChainBuilders = new ArrayList<>();
 
 	private IgnoredRequestConfigurer ignoredRequestRegistry;

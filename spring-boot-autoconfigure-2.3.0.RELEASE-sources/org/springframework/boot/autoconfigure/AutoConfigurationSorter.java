@@ -63,7 +63,7 @@ class AutoConfigurationSorter {
 			int i1 = classes.get(o1).getOrder();
 			int i2 = classes.get(o2).getOrder();
 			return Integer.compare(i1, i2);
-		});
+		});//然后尊重@AutoConfigureBefore @AutoConfigureAfter
 		// Then respect @AutoConfigureBefore @AutoConfigureAfter
 		orderedClassNames = sortByAnnotation(classes, orderedClassNames);
 		return orderedClassNames;
@@ -71,7 +71,7 @@ class AutoConfigurationSorter {
 
 	private List<String> sortByAnnotation(AutoConfigurationClasses classes, List<String> classNames) {
 		List<String> toSort = new ArrayList<>(classNames);
-		toSort.addAll(classes.getAllNames());
+		toSort.addAll(classes.getAllNames());//加入干啥？
 		Set<String> sorted = new LinkedHashSet<>();
 		Set<String> processing = new LinkedHashSet<>();
 		while (!toSort.isEmpty()) {
@@ -80,7 +80,7 @@ class AutoConfigurationSorter {
 		sorted.retainAll(classNames);
 		return new ArrayList<>(sorted);
 	}
-
+//深度优先递归。我要是在他们之后才能被自动配置，那么他们都应该在我前面被加入。
 	private void doSortByAfterAnnotation(AutoConfigurationClasses classes, List<String> toSort, Set<String> sorted,
 			Set<String> processing, String current) {
 		if (current == null) {
@@ -98,7 +98,7 @@ class AutoConfigurationSorter {
 		sorted.add(current);
 	}
 
-	private static class AutoConfigurationClasses {
+	private static class AutoConfigurationClasses {//说明：包装类AutoConfigurationClass
 
 		private final Map<String, AutoConfigurationClass> classes = new HashMap<>();
 
@@ -134,7 +134,7 @@ class AutoConfigurationSorter {
 		AutoConfigurationClass get(String className) {
 			return this.classes.get(className);
 		}
-
+	//说明：先找的在我后面的。再找出他们的前面是我的。两者合并。应该会有重复项吧？有。但是用的set
 		Set<String> getClassesRequestedAfter(String className) {
 			Set<String> classesRequestedAfter = new LinkedHashSet<>(get(className).getAfter());
 			this.classes.forEach((name, autoConfigurationClass) -> {
@@ -147,13 +147,13 @@ class AutoConfigurationSorter {
 
 	}
 
-	private static class AutoConfigurationClass {
+	private static class AutoConfigurationClass {//这个自动配置类在一些类的前面配置，一些类的后面配置
 
 		private final String className;
 
 		private final MetadataReaderFactory metadataReaderFactory;
 
-		private final AutoConfigurationMetadata autoConfigurationMetadata;
+		private final AutoConfigurationMetadata autoConfigurationMetadata;//PropertiesAutoConfigurationMetadata
 
 		private volatile AnnotationMetadata annotationMetadata;
 
@@ -189,7 +189,7 @@ class AutoConfigurationSorter {
 		}
 
 		Set<String> getAfter() {
-			if (this.after == null) {
+			if (this.after == null) {//说明：className.AutoConfigureAfter的拼接。比如org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration.AutoConfigureAfter
 				this.after = (wasProcessed() ? this.autoConfigurationMetadata.getSet(this.className,
 						"AutoConfigureAfter", Collections.emptySet()) : getAnnotationValue(AutoConfigureAfter.class));
 			}

@@ -66,9 +66,9 @@ import org.springframework.web.util.UriComponents.UriTemplateVariables;
  */
 public class UriComponentsBuilder implements UriBuilder, Cloneable {
 
-	private static final Pattern QUERY_PARAM_PATTERN = Pattern.compile("([^&=]+)(=?)([^&]+)?");
+	private static final Pattern QUERY_PARAM_PATTERN = Pattern.compile("([^&=]+)(=?)([^&]+)?");//name=lisi。前面至少一个字符
 
-	private static final String SCHEME_PATTERN = "([^:/?#]+):";
+	private static final String SCHEME_PATTERN = "([^:/?#]+):";//说明：http:
 
 	private static final String HTTP_PATTERN = "(?i)(http|https):";
 

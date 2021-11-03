@@ -47,7 +47,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
 
 	/** Map from alias to canonical name. */
 	private final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);
-
+//说明：key不能重复
 
 	@Override
 	public void registerAlias(String name, String alias) {
@@ -158,9 +158,9 @@ public class SimpleAliasRegistry implements AliasRegistry {
 				String resolvedAlias = valueResolver.resolveStringValue(alias);
 				String resolvedName = valueResolver.resolveStringValue(registeredName);
 				if (resolvedAlias == null || resolvedName == null || resolvedAlias.equals(resolvedName)) {
-					this.aliasMap.remove(alias);
+					this.aliasMap.remove(alias);//说明：不理解。解出来的真实值为空或相等
 				}
-				else if (!resolvedAlias.equals(alias)) {
+				else if (!resolvedAlias.equals(alias)) {//alias有占位符
 					String existingName = this.aliasMap.get(resolvedAlias);
 					if (existingName != null) {
 						if (existingName.equals(resolvedName)) {
@@ -175,9 +175,9 @@ public class SimpleAliasRegistry implements AliasRegistry {
 					}
 					checkForAliasCircle(resolvedName, resolvedAlias);
 					this.aliasMap.remove(alias);
-					this.aliasMap.put(resolvedAlias, resolvedName);
+					this.aliasMap.put(resolvedAlias, resolvedName);//可以理解
 				}
-				else if (!registeredName.equals(resolvedName)) {
+				else if (!registeredName.equals(resolvedName)) {//name有占位符
 					this.aliasMap.put(alias, resolvedName);
 				}
 			});
@@ -216,7 +216,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
 				canonicalName = resolvedName;
 			}
 		}
-		while (resolvedName != null);
+		while (resolvedName != null);//别名链
 		return canonicalName;
 	}
 

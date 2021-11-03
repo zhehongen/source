@@ -105,7 +105,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 		return this::shouldExclude;
 	}
 
-	private boolean shouldExclude(String configurationClassName) {
+	private boolean shouldExclude(String configurationClassName) {//为空。则应该排除
 		return getConfigurationClassFilter().filter(Collections.singletonList(configurationClassName)).isEmpty();
 	}
 
@@ -126,7 +126,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 		checkExcludedClasses(configurations, exclusions);
 		configurations.removeAll(exclusions);
 		configurations = getConfigurationClassFilter().filter(configurations);
-		fireAutoConfigurationImportEvents(configurations, exclusions);
+		fireAutoConfigurationImportEvents(configurations, exclusions);//触发事件
 		return new AutoConfigurationEntry(configurations, exclusions);
 	}
 
@@ -193,7 +193,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 
 	private void checkExcludedClasses(List<String> configurations, Set<String> exclusions) {
 		List<String> invalidExcludes = new ArrayList<>(exclusions.size());
-		for (String exclusion : exclusions) {
+		for (String exclusion : exclusions) {//这个类存在。并且不是自动配置类。就抛出异常
 			if (ClassUtils.isPresent(exclusion, getClass().getClassLoader()) && !configurations.contains(exclusion)) {
 				invalidExcludes.add(exclusion);
 			}
@@ -227,7 +227,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 	 */
 	protected Set<String> getExclusions(AnnotationMetadata metadata, AnnotationAttributes attributes) {
 		Set<String> excluded = new LinkedHashSet<>();
-		excluded.addAll(asList(attributes, "exclude"));
+		excluded.addAll(asList(attributes, "exclude"));//两个地方用两个写法。奇葩
 		excluded.addAll(Arrays.asList(attributes.getStringArray("excludeName")));
 		excluded.addAll(getExcludeAutoConfigurationsProperty());
 		return excluded;
@@ -263,7 +263,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 	}
 
 	protected final List<String> asList(AnnotationAttributes attributes, String name) {
-		String[] value = attributes.getStringArray(name);
+		String[] value = attributes.getStringArray(name);//说明：奇葩的写法
 		return Arrays.asList(value);
 	}
 
@@ -273,7 +273,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 			AutoConfigurationImportEvent event = new AutoConfigurationImportEvent(this, configurations, exclusions);
 			for (AutoConfigurationImportListener listener : listeners) {
 				invokeAwareMethods(listener);
-				listener.onAutoConfigurationImportEvent(event);
+				listener.onAutoConfigurationImportEvent(event);//看过了
 			}
 		}
 	}
@@ -386,7 +386,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 
 	private static class AutoConfigurationGroup
 			implements DeferredImportSelector.Group, BeanClassLoaderAware, BeanFactoryAware, ResourceLoaderAware {
-
+		//自动配置类名和配置元数据的映射。配置元数据为什么都是一样的？
 		private final Map<String, AnnotationMetadata> entries = new LinkedHashMap<>();
 
 		private final List<AutoConfigurationEntry> autoConfigurationEntries = new ArrayList<>();
@@ -429,7 +429,7 @@ public class AutoConfigurationImportSelector implements DeferredImportSelector, 
 		}
 
 		@Override
-		public Iterable<Entry> selectImports() {
+		public Iterable<Entry> selectImports() {//说明：
 			if (this.autoConfigurationEntries.isEmpty()) {
 				return Collections.emptyList();
 			}

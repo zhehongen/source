@@ -112,7 +112,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	// (as the container might be running but w/o listeners, it won't use any resources)
 	private volatile boolean listening = false;
 
-	private volatile boolean manageExecutor = false;
+	private volatile boolean manageExecutor = false;//?
 
 	// lookup maps
 	// to avoid creation of hashes for each message, the maps use raw byte arrays (wrapped to respect the equals/hashcode
@@ -127,7 +127,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 
 	private final SubscriptionTask subscriptionTask = new SubscriptionTask();
 
-	private volatile RedisSerializer<String> serializer = RedisSerializer.string();
+	private volatile RedisSerializer<String> serializer = RedisSerializer.string();//说明：string
 
 	private long recoveryInterval = DEFAULT_RECOVERY_INTERVAL;
 
@@ -156,7 +156,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	 */
 	protected TaskExecutor createDefaultTaskExecutor() {
 		String threadNamePrefix = (beanName != null ? beanName + "-" : DEFAULT_THREAD_NAME_PREFIX);
-		return new SimpleAsyncTaskExecutor(threadNamePrefix);
+		return new SimpleAsyncTaskExecutor(threadNamePrefix);//
 	}
 
 	public void destroy() throws Exception {
@@ -834,7 +834,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 
 			int index = 0;
 			for (ByteArrayWrapper arrayHolder : holders) {
-				unwrapped[index++] = arrayHolder.getArray();
+				unwrapped[index++] = arrayHolder.getArray();//看过了,可以这样干？
 			}
 
 			return unwrapped;
@@ -958,7 +958,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	 *
 	 * @author Costin Leau
 	 */
-	private class DispatchMessageListener implements MessageListener {
+	private class DispatchMessageListener implements MessageListener {//看过了
 
 		@Override
 		public void onMessage(Message message, @Nullable byte[] pattern) {
@@ -980,7 +980,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	}
 
 	private void dispatchMessage(Collection<MessageListener> listeners, final Message message, final byte[] pattern) {
-		final byte[] source = (pattern != null ? pattern.clone() : message.getChannel());
+		final byte[] source = (pattern != null ? pattern.clone() : message.getChannel());//什么叫源
 
 		for (final MessageListener messageListener : listeners) {
 			taskExecutor.execute(() -> processMessage(messageListener, message, source));
@@ -1029,7 +1029,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 			long startTime = System.currentTimeMillis();
 
 			try {
-				while (!timedOut(startTime, timeout)) {
+				while (!timedOut(startTime, timeout)) {//似乎很简单
 					if (condition.passes()) {
 						return true;
 					}

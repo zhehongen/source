@@ -439,7 +439,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		public ImportAwareBeanPostProcessor(BeanFactory beanFactory) {
 			this.beanFactory = beanFactory;
 		}
-
+//在 AutowiredAnnotationBeanPostProcessor 的 postProcessProperties 方法尝试自动装配其他配置 bean 之前注入 BeanFactory。
 		@Override
 		public PropertyValues postProcessProperties(@Nullable PropertyValues pvs, Object bean, String beanName) {
 			// Inject the BeanFactory before AutowiredAnnotationBeanPostProcessor's

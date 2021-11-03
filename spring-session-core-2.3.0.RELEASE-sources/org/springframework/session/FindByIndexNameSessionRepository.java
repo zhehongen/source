@@ -64,7 +64,7 @@ public interface FindByIndexNameSessionRepository<S extends Session> extends Ses
 	 * @since 2.1.0
 	 */
 	default Map<String, S> findByPrincipalName(String principalName) {
-//说明：一个用户有多个session。sessionid->session的map
+		//说明：一个用户有多个session。sessionid->session的map
 		return findByIndexNameAndIndexValue(PRINCIPAL_NAME_INDEX_NAME, principalName);
 
 	}

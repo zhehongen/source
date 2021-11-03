@@ -72,7 +72,7 @@ public interface DeferredImportSelector extends ImportSelector {
 		 * An entry that holds the {@link AnnotationMetadata} of the importing
 		 * {@link Configuration} class and the class name to import.
 		 */
-		class Entry {
+		class Entry {//条目
 
 			private final AnnotationMetadata metadata;
 

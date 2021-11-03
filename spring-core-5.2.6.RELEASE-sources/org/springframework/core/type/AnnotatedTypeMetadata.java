@@ -140,10 +140,12 @@ public interface AnnotatedTypeMetadata {
 
 		Adapt[] adaptations = Adapt.values(classValuesAsString, true);
 		return getAnnotations().stream(annotationName)
-				.filter(MergedAnnotationPredicates.unique(MergedAnnotation::getMetaTypes))
-				.map(MergedAnnotation::withNonMergedAttributes)
+				.filter(MergedAnnotationPredicates.unique(MergedAnnotation::getMetaTypes))//1、
+				.map(MergedAnnotation::withNonMergedAttributes)//看不懂
 				.collect(MergedAnnotationCollectors.toMultiValueMap(map ->
 						map.isEmpty() ? null : map, adaptations));
-	}
-
-}
+	}//1、实在看不懂，完全匹配不上。只要有返回值都叫function？错误。在流中。这是一种特殊的写法。入参就是流中的单个元素即MergedAnnotation。
+//返回值就是List<Class<? extends Annotation>> 。
+}//MergedAnnotation::getMetaTypes这种写法本质上就是mergedAnnotation->mergedAnnotation.getMetaTypes()。自然是一个function
+//MergedAnnotationPredicates.unique(MergedAnnotation::getMetaTypes)。所有filter执行的都是同一个lambda。这点很关键
+//

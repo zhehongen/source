@@ -139,7 +139,7 @@ public class SAMLEntryPoint extends GenericFilterBean implements AuthenticationE
      * @throws ServletException error initializing SAML protocol
      */
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
-//说明：该机制的首要任务是确定要使用的IDP
+        //说明：该机制的首要任务是确定要使用的IDP
         try {
 
             SAMLMessageContext context = contextProvider.getLocalAndPeerEntity(request, response);

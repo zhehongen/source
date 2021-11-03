@@ -46,7 +46,7 @@ import org.springframework.util.Assert;
  */
 public class RegisterSessionAuthenticationStrategy implements
 		SessionAuthenticationStrategy {
-	private final SessionRegistry sessionRegistry;
+	private final SessionRegistry sessionRegistry;//说明：应该是spring session的registry
 
 	/**
 	 * @param sessionRegistry the session registry which should be updated when the

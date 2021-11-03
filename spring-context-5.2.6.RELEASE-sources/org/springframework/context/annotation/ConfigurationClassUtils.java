@@ -53,10 +53,10 @@ abstract class ConfigurationClassUtils {
 	public static final String CONFIGURATION_CLASS_FULL = "full";
 
 	public static final String CONFIGURATION_CLASS_LITE = "lite";
-
+	//即值：org.springframework.context.annotation.ConfigurationClassPostProcessor.configurationClass作为属性配置类型标记属性的key
 	public static final String CONFIGURATION_CLASS_ATTRIBUTE =
 			Conventions.getQualifiedAttributeName(ConfigurationClassPostProcessor.class, "configurationClass");
-
+	//即值：org.springframework.context.annotation.ConfigurationClassPostProcessor.order配置属性配置类排序的属性key
 	private static final String ORDER_ATTRIBUTE =
 			Conventions.getQualifiedAttributeName(ConfigurationClassPostProcessor.class, "order");
 
@@ -85,7 +85,7 @@ abstract class ConfigurationClassUtils {
 			BeanDefinition beanDef, MetadataReaderFactory metadataReaderFactory) {
 
 		String className = beanDef.getBeanClassName();
-		if (className == null || beanDef.getFactoryMethodName() != null) {
+		if (className == null || beanDef.getFactoryMethodName() != null) {//看不懂
 			return false;
 		}
 

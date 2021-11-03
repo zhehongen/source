@@ -127,12 +127,12 @@ abstract class AutowireUtils {
 	 * @param requiredType the type to assign the result to
 	 * @return the resolved value
 	 */
-	public static Object resolveAutowiringValue(Object autowiringValue, Class<?> requiredType) {
+	public static Object resolveAutowiringValue(Object autowiringValue, Class<?> requiredType) {//说明：
 		if (autowiringValue instanceof ObjectFactory && !requiredType.isInstance(autowiringValue)) {
 			ObjectFactory<?> factory = (ObjectFactory<?>) autowiringValue;
 			if (autowiringValue instanceof Serializable && requiredType.isInterface()) {
 				autowiringValue = Proxy.newProxyInstance(requiredType.getClassLoader(),
-						new Class<?>[] {requiredType}, new ObjectFactoryDelegatingInvocationHandler(factory));
+						new Class<?>[] {requiredType}, new ObjectFactoryDelegatingInvocationHandler(factory));//说明：jdk动态代理
 			}
 			else {
 				return factory.getObject();

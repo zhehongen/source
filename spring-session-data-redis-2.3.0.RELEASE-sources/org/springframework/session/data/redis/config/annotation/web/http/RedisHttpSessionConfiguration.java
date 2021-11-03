@@ -16,7 +16,15 @@
 
 package org.springframework.session.data.redis.config.annotation.web.http;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
+
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
@@ -42,7 +50,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
-import org.springframework.session.*;
+import org.springframework.session.FlushMode;
+import org.springframework.session.IndexResolver;
+import org.springframework.session.MapSession;
+import org.springframework.session.SaveMode;
+import org.springframework.session.Session;
 import org.springframework.session.config.SessionRepositoryCustomizer;
 import org.springframework.session.config.annotation.web.http.SpringHttpSessionConfiguration;
 import org.springframework.session.data.redis.RedisFlushMode;
@@ -55,13 +67,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.util.StringValueResolver;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.stream.Collectors;
 
 /**将SessionRepositoryFilter公开为名为springSessionRepositoryFilter的bean。 为了使用它，必须将单个RedisConnectionFactory作为Bean公开
  * Exposes the {@link SessionRepositoryFilter} as a bean named
@@ -131,7 +136,7 @@ public class RedisHttpSessionConfiguration extends SpringHttpSessionConfiguratio
 		sessionRepository.setDatabase(database);
 		this.sessionRepositoryCustomizers
 				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
-		return sessionRepository;
+		return sessionRepository;//看过了
 	}
 
 	@Bean

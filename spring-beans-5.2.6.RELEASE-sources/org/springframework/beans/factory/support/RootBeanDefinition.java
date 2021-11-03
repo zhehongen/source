@@ -65,7 +65,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 
 	boolean allowCaching = true;
 
-	boolean isFactoryMethodUnique = false;
+	boolean isFactoryMethodUnique = false;///说明：工厂方法不唯一？
 
 	@Nullable
 	volatile ResolvableType targetType;
@@ -83,7 +83,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	volatile ResolvableType factoryMethodReturnType;
 
 	/** Package-visible field for caching a unique factory method candidate for introspection. */
-	@Nullable
+	@Nullable //说明：用于缓存唯一工厂方法候选者的包可见字段以供自省。什么叫自省？
 	volatile Method factoryMethodToIntrospect;
 
 	/** Common lock for the four constructor fields below. */
@@ -406,7 +406,7 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 * @since 5.2
 	 */
 	public void setResolvedFactoryMethod(@Nullable Method method) {
-		this.factoryMethodToIntrospect = method;
+		this.factoryMethodToIntrospect = method;//说明：为这个 bean 定义的工厂方法设置一个已解析的 Java 方法
 	}
 
 	/**

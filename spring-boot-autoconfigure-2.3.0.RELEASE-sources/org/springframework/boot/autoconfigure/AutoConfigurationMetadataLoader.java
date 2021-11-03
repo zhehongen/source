@@ -65,7 +65,7 @@ final class AutoConfigurationMetadataLoader {
 	 * {@link AutoConfigurationMetadata} implementation backed by a properties file.
 	 */
 	private static class PropertiesAutoConfigurationMetadata implements AutoConfigurationMetadata {
-
+	//说明：META-INF/spring-autoconfigure-metadata.properties
 		private final Properties properties;
 
 		PropertiesAutoConfigurationMetadata(Properties properties) {
@@ -74,7 +74,7 @@ final class AutoConfigurationMetadataLoader {
 
 		@Override
 		public boolean wasProcessed(String className) {
-			return this.properties.containsKey(className);
+			return this.properties.containsKey(className);//不理解，为啥包含就认为已经处理了？不是一开始就全部从文件读进去了吗？
 		}
 
 		@Override

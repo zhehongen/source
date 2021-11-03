@@ -70,7 +70,7 @@ import org.springframework.util.Assert;
 public class ConcurrentSessionControlAuthenticationStrategy implements
 		MessageSourceAware, SessionAuthenticationStrategy {
 	protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
-	private final SessionRegistry sessionRegistry;
+	private final SessionRegistry sessionRegistry;//说明：应该用到spring session的repository
 	private boolean exceptionIfMaximumExceeded = false;
 	private int maximumSessions = 1;
 
@@ -111,7 +111,7 @@ public class ConcurrentSessionControlAuthenticationStrategy implements
 
 			if (session != null) {
 				// Only permit it though if this request is associated with one of the
-				// already registered sessions
+				// already registered sessions如果此请求与已注册的会话之一相关联，则仅允许它
 				for (SessionInformation si : sessions) {
 					if (si.getSessionId().equals(session.getId())) {
 						return;
@@ -119,7 +119,7 @@ public class ConcurrentSessionControlAuthenticationStrategy implements
 				}
 			}
 			// If the session is null, a new one will be created by the parent class,
-			// exceeding the allowed number
+			// exceeding the allowed number如果会话为空，则父类将创建一个新会话，超过允许数量...
 		}
 
 		allowableSessionsExceeded(sessions, allowedSessions, sessionRegistry);

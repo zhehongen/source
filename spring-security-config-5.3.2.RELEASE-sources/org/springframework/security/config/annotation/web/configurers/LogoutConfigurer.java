@@ -68,9 +68,9 @@ import org.springframework.util.Assert;
 public final class LogoutConfigurer<H extends HttpSecurityBuilder<H>> extends
 		AbstractHttpConfigurer<LogoutConfigurer<H>, H> {
 	private List<LogoutHandler> logoutHandlers = new ArrayList<>();
-	private SecurityContextLogoutHandler contextLogoutHandler = new SecurityContextLogoutHandler();
+	private SecurityContextLogoutHandler contextLogoutHandler = new SecurityContextLogoutHandler();//处理登出
 	private String logoutSuccessUrl = "/login?logout";
-	private LogoutSuccessHandler logoutSuccessHandler;
+	private LogoutSuccessHandler logoutSuccessHandler;//登出成功
 	private String logoutUrl = "/logout";
 	private RequestMatcher logoutRequestMatcher;
 	private boolean permitAll;

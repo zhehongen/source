@@ -318,7 +318,7 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 	 * Helper class for maintaining a group of Lifecycle beans that should be started
 	 * and stopped together based on their 'phase' value (or the default value of 0).
 	 */
-	private class LifecycleGroup {
+	private class LifecycleGroup {//根据阶段进行分组
 
 		private final int phase;
 
@@ -378,7 +378,7 @@ public class DefaultLifecycleProcessor implements LifecycleProcessor, BeanFactor
 				}
 				else if (member.bean instanceof SmartLifecycle) {
 					// Already removed: must have been a dependent bean from another phase
-					latch.countDown();
+					latch.countDown();//已移除：必须是另一个阶段的依赖 bean
 				}
 			}
 			try {

@@ -219,7 +219,7 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 	private org.springframework.boot.web.servlet.ServletContextInitializer getSelfInitializer() {
 		return this::selfInitialize;
 	}
-
+	//@FunctionalInterface 看中的是方法签名。方法名称不重要。他已经本质上是一个ServletContextInitializer接口的实现类了
 	private void selfInitialize(ServletContext servletContext) throws ServletException {
 		prepareWebApplicationContext(servletContext);
 		registerApplicationScope(servletContext);

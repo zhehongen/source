@@ -74,7 +74,7 @@ public class MethodParameter {
 
 	/** Map from Integer level to Integer type index. */
 	@Nullable
-	Map<Integer, Integer> typeIndexesPerLevel;
+	Map<Integer, Integer> typeIndexesPerLevel;//说明：干啥?
 
 	/** The containing class. Could also be supplied by overriding {@link #getContainingClass()} */
 	@Nullable

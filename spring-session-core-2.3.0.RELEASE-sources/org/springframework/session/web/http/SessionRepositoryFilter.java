@@ -281,7 +281,7 @@ public class SessionRepositoryFilter<S extends Session> extends OncePerRequestFi
 		}
 
 		@Override
-		public HttpSessionWrapper getSession(boolean create) {
+		public HttpSessionWrapper getSession(boolean create) {//说明：
 			HttpSessionWrapper currentSession = getCurrentSession();
 			if (currentSession != null) {
 				return currentSession;

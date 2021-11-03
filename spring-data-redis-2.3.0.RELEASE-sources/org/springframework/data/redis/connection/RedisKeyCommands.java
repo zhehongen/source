@@ -59,7 +59,7 @@ public interface RedisKeyCommands {
 	 * @since 2.1
 	 */
 	@Nullable
-	Long exists(byte[]... keys);
+	Long exists(byte[]... keys);//说明：奇葩
 
 	/**
 	 * Delete given {@code keys}.
@@ -334,7 +334,7 @@ public interface RedisKeyCommands {
 
 	/**
 	 * Get the {@link Duration} since the object stored at the given {@code key} is idle.
-	 * 
+	 *
 	 * @param key must not be {@literal null}.
 	 * @return {@literal null} if key does not exist or when used in pipeline / transaction.
 	 * @throws IllegalArgumentException if {@code key} is {@literal null}.

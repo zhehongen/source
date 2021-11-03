@@ -54,16 +54,16 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBuilder<O>>
 		extends AbstractSecurityBuilder<O> {
 	private final Log logger = LogFactory.getLog(getClass());
-
+	// 所要应用到当前 SecurityBuilder 上的所有的 SecurityConfigurer
 	private final LinkedHashMap<Class<? extends SecurityConfigurer<O, B>>, List<SecurityConfigurer<O, B>>> configurers = new LinkedHashMap<>();
 	private final List<SecurityConfigurer<O, B>> configurersAddedInInitializing = new ArrayList<>();
+	//  用于记录在初始化期间添加进来的 SecurityConfigurer
+	private final Map<Class<?>, Object> sharedObjects = new HashMap<>();// 共享对象
 
-	private final Map<Class<?>, Object> sharedObjects = new HashMap<>();
-
-	private final boolean allowConfigurersOfSameType;
+	private final boolean allowConfigurersOfSameType;//默认一种configure类型的只有一个？
 
 	private BuildState buildState = BuildState.UNBUILT;
-
+	// 对象后置处理器，一般用于对象的初始化或者确保对象的销毁方法能够被调用到
 	private ObjectPostProcessor<Object> objectPostProcessor;
 
 	/***
@@ -131,7 +131,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 		configurer.addObjectPostProcessor(objectPostProcessor);
 		configurer.setBuilder((B) this);
 		add(configurer);
-		return configurer;
+		return configurer;//和下面孙子啥区别？
 	}
 
 	/**
@@ -371,7 +371,7 @@ public abstract class AbstractConfiguredSecurityBuilder<O, B extends SecurityBui
 		}
 
 		for (SecurityConfigurer<O, B> configurer : configurersAddedInInitializing) {
-			configurer.init((B) this);
+			configurer.init((B) this);//真无法理解，居然初始化两次？
 		}
 	}
 

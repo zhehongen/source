@@ -64,7 +64,7 @@ public class MessageProperties implements Serializable {
 
 	public static final MessageDeliveryMode DEFAULT_DELIVERY_MODE = MessageDeliveryMode.PERSISTENT;
 
-	public static final Integer DEFAULT_PRIORITY = 0;
+	public static final Integer DEFAULT_PRIORITY = 0;//优先级
 
 	private final Map<String, Object> headers = new HashMap<>();
 
@@ -80,7 +80,7 @@ public class MessageProperties implements Serializable {
 
 	private String type;
 
-	private String correlationId;
+	private String correlationId;//相关
 
 	private String replyTo;
 
@@ -90,7 +90,7 @@ public class MessageProperties implements Serializable {
 
 	private long contentLength;
 
-	private boolean contentLengthSet;
+	private boolean contentLengthSet;//???
 
 	private MessageDeliveryMode deliveryMode = DEFAULT_DELIVERY_MODE;
 
@@ -108,7 +108,7 @@ public class MessageProperties implements Serializable {
 
 	private long deliveryTag;
 
-	private boolean deliveryTagSet;
+	private boolean deliveryTagSet;//???
 
 	private Integer messageCount;
 
@@ -128,7 +128,7 @@ public class MessageProperties implements Serializable {
 
 	private boolean lastInBatch;
 
-	private transient Type inferredArgumentType;
+	private transient Type inferredArgumentType;//推断的参数类型
 
 	private transient Method targetMethod;
 
@@ -157,16 +157,16 @@ public class MessageProperties implements Serializable {
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp; //NOSONAR
 	}
-
+	//注意qpid java时间戳很长，想必可以转成Date
 	// NOTE qpid java timestamp is long, presumably can convert to Date.
 	public Date getTimestamp() {
 		return this.timestamp; //NOSONAR
 	}
 
-	// NOTE Not forward compatible with qpid 1.0 .NET
+	// NOTE Not forward compatible with qpid 1.0 .NET注意与 qpid 1.0 .NET 不向前兼容
 	// qpid 0.8 .NET/Java: is a string
-	// qpid 1.0 .NET: MessageId property on class MessageProperties and is UUID
-	// There is an 'ID' stored IMessage class and is an int.
+	// qpid 1.0 .NET: MessageId property on class MessageProperties and is UUID..MessageProperties 类上的 MessageId 属性并且是 UUID
+	// There is an 'ID' stored IMessage class and is an int.有一个“ID”存储的 IMessage 类并且是一个整数
 	public void setMessageId(String messageId) {
 		this.messageId = messageId;
 	}
@@ -368,7 +368,7 @@ public class MessageProperties implements Serializable {
 		return this.redelivered;
 	}
 
-	/*
+	/*额外的访问器，因为它不是布尔类型的标准
 	 * Additional accessor because is* is not standard for type Boolean
 	 */
 	public Boolean getRedelivered() {

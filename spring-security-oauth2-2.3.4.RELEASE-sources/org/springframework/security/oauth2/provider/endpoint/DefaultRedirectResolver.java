@@ -142,7 +142,7 @@ public class DefaultRedirectResolver implements RedirectResolver {
 	 */
 	protected boolean hostMatches(String registered, String requested) {
 		if (matchSubdomains) {
-			return registered.equals(requested) || requested.endsWith("." + registered);
+			return registered.equals(requested) || requested.endsWith("." + registered);//说明：传递进来的已经是host了？
 		}
 		return registered.equals(requested);
 	}
@@ -159,7 +159,7 @@ public class DefaultRedirectResolver implements RedirectResolver {
 		Assert.notEmpty(redirectUris, "Redirect URIs cannot be empty");
 
 		if (redirectUris.size() == 1 && requestedRedirect == null) {
-			return redirectUris.iterator().next();
+			return redirectUris.iterator().next();//说明：只注册了一个，却又没有请求，则就用注册的
 		}
 		for (String redirectUri : redirectUris) {
 			if (requestedRedirect != null && redirectMatches(requestedRedirect, redirectUri)) {

@@ -681,7 +681,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 		private volatile boolean cached = false;
 
 		@Nullable
-		private volatile Object[] cachedMethodArguments;
+		private volatile Object[] cachedMethodArguments;//缓存下来有何意义？
 
 		public AutowiredMethodElement(Method method, boolean required, @Nullable PropertyDescriptor pd) {
 			super(method, pd);
@@ -709,7 +709,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 				for (int i = 0; i < arguments.length; i++) {
 					MethodParameter methodParam = new MethodParameter(method, i);
 					DependencyDescriptor currDesc = new DependencyDescriptor(methodParam, this.required);
-					currDesc.setContainingClass(bean.getClass());
+					currDesc.setContainingClass(bean.getClass());//运行时类
 					descriptors[i] = currDesc;
 					try {
 						Object arg = beanFactory.resolveDependency(currDesc, beanName, autowiredBeans, typeConverter);
@@ -727,7 +727,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 					if (!this.cached) {
 						if (arguments != null) {
 							DependencyDescriptor[] cachedMethodArguments = Arrays.copyOf(descriptors, arguments.length);
-							registerDependentBeans(beanName, autowiredBeans);
+							registerDependentBeans(beanName, autowiredBeans);//记录一下依赖map
 							if (autowiredBeans.size() == argumentCount) {
 								Iterator<String> it = autowiredBeans.iterator();
 								Class<?>[] paramTypes = method.getParameterTypes();

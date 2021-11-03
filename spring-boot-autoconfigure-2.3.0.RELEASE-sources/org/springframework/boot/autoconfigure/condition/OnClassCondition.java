@@ -42,7 +42,7 @@ import org.springframework.util.StringUtils;
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 class OnClassCondition extends FilteringSpringBootCondition {
-
+//如果有多个处理器可用，则拆分工作并在后台线程中执行一半。使用单个附加线程似乎可以提供最佳性能。更多的线程使事情变得更糟。
 	@Override
 	protected final ConditionOutcome[] getOutcomes(String[] autoConfigurationClasses,
 			AutoConfigurationMetadata autoConfigurationMetadata) {

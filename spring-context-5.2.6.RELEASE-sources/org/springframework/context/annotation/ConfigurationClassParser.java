@@ -242,7 +242,7 @@ class ConfigurationClassParser {
 				this.knownSuperclasses.values().removeIf(configClass::equals);
 			}
 		}
-
+		//递归处理配置类及其超类层次结构
 		// Recursively process the configuration class and its superclass hierarchy.
 		SourceClass sourceClass = asSourceClass(configClass, filter);
 		do {
@@ -591,7 +591,7 @@ class ConfigurationClassParser {
 										this.environment, this.resourceLoader, this.registry);
 						configClass.addImportBeanDefinitionRegistrar(registrar, currentSourceClass.getMetadata());
 					}
-					else {
+					else {//候选类不是 ImportSelector 或 ImportBeanDefinitionRegistrar -> 将其作为 @Configuration 类处理
 						// Candidate class not an ImportSelector or ImportBeanDefinitionRegistrar ->
 						// process it as an @Configuration class
 						this.importStack.registerImport(
@@ -651,7 +651,7 @@ class ConfigurationClassParser {
 		if (classType == null || filter.test(classType.getName())) {
 			return this.objectSourceClass;
 		}
-		try {
+		try {//健全性测试，我们可以反射性地读取注释，包括类属性；如果不是 -> 回退到 ASM
 			// Sanity test that we can reflectively read annotations,
 			// including Class attributes; if not -> fall back to ASM
 			for (Annotation ann : classType.getDeclaredAnnotations()) {
@@ -660,7 +660,7 @@ class ConfigurationClassParser {
 			return new SourceClass(classType);
 		}
 		catch (Throwable ex) {
-			// Enforce ASM via class name resolution
+			// Enforce ASM via class name resolution通过类名解析强制执行 ASM
 			return asSourceClass(classType.getName(), filter);
 		}
 	}
@@ -768,7 +768,7 @@ class ConfigurationClassParser {
 			}
 		}
 
-		public void process() {
+		public void process() {//此处正确的理解是：deferredImports指向了this.deferredImportSelectors所指向的堆内存。然后让this.deferredImportSelectors谁也不指向了。但是deferredImports还是指向这一块的堆内存的。那什么情况下才会受影响呢？
 			List<DeferredImportSelectorHolder> deferredImports = this.deferredImportSelectors;
 			this.deferredImportSelectors = null;
 			try {

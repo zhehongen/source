@@ -36,7 +36,7 @@ import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Qualifier //说明：通过注解名称SpringSessionRedisConnectionFactory限定？坑爹
-public @interface SpringSessionRedisConnectionFactory {//说明：看不懂？有啥用？
+@Qualifier
+public @interface SpringSessionRedisConnectionFactory {
 
 }

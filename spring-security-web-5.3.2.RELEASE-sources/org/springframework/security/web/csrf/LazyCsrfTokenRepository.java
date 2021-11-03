@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.util.Assert;
-
+//无法理解的神奇
 /**
  * A {@link CsrfTokenRepository} that delays saving new {@link CsrfToken} until the
  * attributes of the {@link CsrfToken} that were generated are accessed.

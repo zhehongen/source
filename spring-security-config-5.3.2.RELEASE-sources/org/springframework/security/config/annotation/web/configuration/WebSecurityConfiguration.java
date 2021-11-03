@@ -99,7 +99,7 @@ public class WebSecurityConfiguration implements ImportAware, BeanClassLoaderAwa
 			WebSecurityConfigurerAdapter adapter = objectObjectPostProcessor
 					.postProcess(new WebSecurityConfigurerAdapter() {
 					});
-			webSecurity.apply(adapter);
+			webSecurity.apply(adapter);//将configure加入builder中
 		}
 		return webSecurity.build();
 	}
@@ -153,7 +153,7 @@ public class WebSecurityConfiguration implements ImportAware, BeanClassLoaderAwa
 			previousConfig = config;
 		}
 		for (SecurityConfigurer<Filter, WebSecurity> webSecurityConfigurer : webSecurityConfigurers) {
-			webSecurity.apply(webSecurityConfigurer);
+			webSecurity.apply(webSecurityConfigurer);//将configure加入builder中
 		}
 		this.webSecurityConfigurers = webSecurityConfigurers;
 	}
@@ -213,7 +213,7 @@ public class WebSecurityConfiguration implements ImportAware, BeanClassLoaderAwa
 				.fromMap(enableWebSecurityAttrMap);
 		debugEnabled = enableWebSecurityAttrs.getBoolean("debug");
 		if (webSecurity != null) {
-			webSecurity.debug(debugEnabled);
+			webSecurity.debug(debugEnabled);//牛逼
 		}
 	}
 

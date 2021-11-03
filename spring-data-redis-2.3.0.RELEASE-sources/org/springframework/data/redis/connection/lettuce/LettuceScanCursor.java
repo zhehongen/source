@@ -45,7 +45,7 @@ abstract class LettuceScanCursor<T> extends ScanCursor<T> {
 		super(options);
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.springframework.data.redis.core.ScanCursor#doScan(long, org.springframework.data.redis.core.ScanOptions)
 	 */
@@ -67,12 +67,12 @@ abstract class LettuceScanCursor<T> extends ScanCursor<T> {
 				state != null ? state.getCursor() : "(none)", cursorId));
 	}
 
-	/* 
+	/*
 	 * (non-Javadoc)
 	 * @see org.springframework.data.redis.core.ScanCursor#isFinished(long)
 	 */
 	@Override
-	protected boolean isFinished(long cursorId) {
+	protected boolean isFinished(long cursorId) {//说明：奇葩的比较
 		return state != null && isMatchingCursor(cursorId) ? state.isFinished() : super.isFinished(cursorId);
 	}
 

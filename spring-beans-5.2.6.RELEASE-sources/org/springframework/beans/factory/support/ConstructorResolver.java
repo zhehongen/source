@@ -79,7 +79,7 @@ import org.springframework.util.StringUtils;
  * @see #instantiateUsingFactoryMethod
  * @see AbstractAutowireCapableBeanFactory
  */
-class ConstructorResolver {
+class ConstructorResolver {//说明：theadlocal
 
 	private static final Object[] EMPTY_ARGS = new Object[0];
 
@@ -452,7 +452,7 @@ class ConstructorResolver {
 			// Need to determine the factory method...
 			// Try all methods with this name to see if they match the given arguments.
 			factoryClass = ClassUtils.getUserClass(factoryClass);
-
+			//需要确定工厂方法... 尝试使用此名称的所有方法，看看它们是否与给定的参数匹配。
 			List<Method> candidates = null;
 			if (mbd.isFactoryMethodUnique) {
 				if (factoryMethodToUse == null) {
@@ -775,7 +775,7 @@ class ConstructorResolver {
 				args.arguments[paramIndex] = convertedValue;
 				args.rawArguments[paramIndex] = originalValue;
 			}
-			else {
+			else {//未找到显式匹配：我们要么应该自动装配，要么必须为给定的构造函数创建参数数组失败。
 				MethodParameter methodParam = MethodParameter.forExecutable(executable, paramIndex);
 				// No explicit match found: we're either supposed to autowire or
 				// have to fail creating an argument array for the given constructor.

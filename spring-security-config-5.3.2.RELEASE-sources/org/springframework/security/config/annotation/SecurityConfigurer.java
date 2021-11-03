@@ -39,7 +39,7 @@ public interface SecurityConfigurer<O, B extends SecurityBuilder<O>> {
 	 * @param builder
 	 * @throws Exception
 	 */
-	void init(B builder) throws Exception;
+	void init(B builder) throws Exception;//全部调用之后才调用configure方法
 
 	/**
 	 * Configure the {@link SecurityBuilder} by setting the necessary properties on the

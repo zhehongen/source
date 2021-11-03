@@ -38,13 +38,13 @@ import org.springframework.util.ObjectUtils;
  * @see org.springframework.beans.factory.config.DependencyDescriptor
  */
 public class InjectionPoint {//
-
+	// 包装函数参数时用于保存所包装的函数参数，内含该参数的注解信息
 	@Nullable
 	protected MethodParameter methodParameter;
-
+	// 包装成员属性时用于保存所包装的成员属性
 	@Nullable
 	protected Field field;
-
+	// 包装成员属性时用于保存所包装的成员属性的注解信息
 	@Nullable
 	private volatile Annotation[] fieldAnnotations;
 
@@ -73,7 +73,7 @@ public class InjectionPoint {//
 	 */
 	protected InjectionPoint(InjectionPoint original) {
 		this.methodParameter = (original.methodParameter != null ?
-				new MethodParameter(original.methodParameter) : null);
+				new MethodParameter(original.methodParameter) : null);//说明：拷贝
 		this.field = original.field;
 		this.fieldAnnotations = original.fieldAnnotations;
 	}
@@ -122,7 +122,7 @@ public class InjectionPoint {//
 	public Annotation[] getAnnotations() {
 		if (this.field != null) {
 			Annotation[] fieldAnnotations = this.fieldAnnotations;
-			if (fieldAnnotations == null) {
+			if (fieldAnnotations == null) {//说明：奇葩的写法
 				fieldAnnotations = this.field.getAnnotations();
 				this.fieldAnnotations = fieldAnnotations;
 			}

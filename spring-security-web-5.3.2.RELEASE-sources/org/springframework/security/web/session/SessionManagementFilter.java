@@ -87,13 +87,13 @@ public class SessionManagementFilter extends GenericFilterBean {
 
 		request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
 
-		if (!securityContextRepository.containsContext(request)) {
+		if (!securityContextRepository.containsContext(request)) {//说明：????
 			Authentication authentication = SecurityContextHolder.getContext()
 					.getAuthentication();
 
 			if (authentication != null && !trustResolver.isAnonymous(authentication)) {
 				// The user has been authenticated during the current request, so call the
-				// session strategy
+				// session strategy用户在当前请求期间已经通过身份验证，因此调用会话策略
 				try {
 					sessionAuthenticationStrategy.onAuthentication(authentication,
 							request, response);
@@ -109,7 +109,7 @@ public class SessionManagementFilter extends GenericFilterBean {
 					return;
 				}
 				// Eagerly save the security context to make it available for any possible
-				// re-entrant
+				// re-entrant急切地保存安全上下文以使其可用于任何可能的重入
 				// requests which may occur before the current request completes.
 				// SEC-1396.
 				securityContextRepository.saveContext(SecurityContextHolder.getContext(),

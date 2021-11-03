@@ -165,7 +165,7 @@ public abstract class AbstractSubscription implements Subscription {
 		}
 
 		// shortcut for unsubscribing all patterns
-		if (ObjectUtils.isEmpty(patts)) {
+		if (ObjectUtils.isEmpty(patts)) {//说明：空
 			if (!this.patterns.isEmpty()) {
 				synchronized (this.patterns) {
 					patts = getPatterns().toArray(new byte[this.patterns.size()][]);
@@ -186,7 +186,7 @@ public abstract class AbstractSubscription implements Subscription {
 		closeIfUnsubscribed();
 	}
 
-	public void unsubscribe(@Nullable byte[]... chans) {
+	public void unsubscribe(@Nullable byte[]... chans) {//说明：一个熊样
 		if (!isAlive()) {
 			return;
 		}
@@ -241,7 +241,7 @@ public abstract class AbstractSubscription implements Subscription {
 	private static void add(Collection<ByteArrayWrapper> col, @Nullable byte[]... bytes) {
 		if (!ObjectUtils.isEmpty(bytes)) {
 			for (byte[] bs : bytes) {
-				col.add(new ByteArrayWrapper(bs));
+				col.add(new ByteArrayWrapper(bs));//看过了
 			}
 		}
 	}

@@ -175,7 +175,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	/** Environment used by this context. */
 	@Nullable
 	private ConfigurableEnvironment environment;
-
+	//bean factory的后处理器
 	/** BeanFactoryPostProcessors to apply on refresh. */
 	private final List<BeanFactoryPostProcessor> beanFactoryPostProcessors = new ArrayList<>();
 
@@ -524,13 +524,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			// Prepare the bean factory for use in this context.
 			prepareBeanFactory(beanFactory);
 
-			try {
+			try {//允许在上下文子类中对 bean 工厂进行后处理。
 				// Allows post-processing of the bean factory in context subclasses.
 				postProcessBeanFactory(beanFactory);
-
+				//调用在上下文中注册为 bean 的工厂处理器。
 				// Invoke factory processors registered as beans in the context.
 				invokeBeanFactoryPostProcessors(beanFactory);
-
+				//注册拦截 bean 创建的 bean 处理器。
 				// Register bean processors that intercept bean creation.
 				registerBeanPostProcessors(beanFactory);
 

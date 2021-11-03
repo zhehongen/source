@@ -36,7 +36,7 @@ import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
-
+//用来记录自动化配置过程中条件匹配的详细信息及日志信息
 /**
  * Records condition evaluation details for reporting and logging.
  *
@@ -47,20 +47,20 @@ import org.springframework.util.ObjectUtils;
  * @author Stephane Nicoll
  * @since 1.0.0
  */
-public final class ConditionEvaluationReport {
+public final class ConditionEvaluationReport {//单例
 
 	private static final String BEAN_NAME = "autoConfigurationReport";
 
 	private static final AncestorsMatchedCondition ANCESTOR_CONDITION = new AncestorsMatchedCondition();
-
+	//存放类名或方法名（key）,条件评估输出对象（value）
 	private final SortedMap<String, ConditionAndOutcomes> outcomes = new TreeMap<>();
-
-	private boolean addedAncestorOutcomes;
+	//是否是原始条件匹配对象
+	private boolean addedAncestorOutcomes;//是否增加祖先输出
 
 	private ConditionEvaluationReport parent;
-
+	//记录已经从条件评估中排除的类名称
 	private final List<String> exclusions = new ArrayList<>();
-
+	//记录作为条件评估的候选类名称
 	private final Set<String> unconditionalClasses = new HashSet<>();
 
 	/**
@@ -114,7 +114,7 @@ public final class ConditionEvaluationReport {
 	public Map<String, ConditionAndOutcomes> getConditionAndOutcomesBySource() {
 		if (!this.addedAncestorOutcomes) {
 			this.outcomes.forEach((source, sourceOutcomes) -> {
-				if (!sourceOutcomes.isFullMatch()) {
+				if (!sourceOutcomes.isFullMatch()) {//不是全部匹配
 					addNoMatchOutcomeToAncestors(source);
 				}
 			});
@@ -126,10 +126,10 @@ public final class ConditionEvaluationReport {
 	private void addNoMatchOutcomeToAncestors(String source) {
 		String prefix = source + "$";
 		this.outcomes.forEach((candidateSource, sourceOutcomes) -> {
-			if (candidateSource.startsWith(prefix)) {
+			if (candidateSource.startsWith(prefix)) {//看不懂
 				ConditionOutcome outcome = ConditionOutcome
 						.noMatch(ConditionMessage.forCondition("Ancestor " + source).because("did not match"));
-				sourceOutcomes.add(ANCESTOR_CONDITION, outcome);
+				sourceOutcomes.add(ANCESTOR_CONDITION, outcome);//原有输出结果增加一条新的输出结果
 			}
 		});
 	}
@@ -192,7 +192,7 @@ public final class ConditionEvaluationReport {
 			return report;
 		}
 	}
-
+	//说明：父容器和子容器各有一个相同名字的bean
 	private static void locateParent(BeanFactory beanFactory, ConditionEvaluationReport report) {
 		if (beanFactory != null && report.parent == null && beanFactory.containsBean(BEAN_NAME)) {
 			report.parent = beanFactory.getBean(BEAN_NAME, ConditionEvaluationReport.class);
@@ -209,7 +209,7 @@ public final class ConditionEvaluationReport {
 			}
 		});
 		List<String> newExclusions = new ArrayList<>(this.exclusions);
-		newExclusions.removeAll(previousReport.getExclusions());
+		newExclusions.removeAll(previousReport.getExclusions());//移除老的之后保留下来的才是delta
 		delta.recordExclusions(newExclusions);
 		List<String> newUnconditionalClasses = new ArrayList<>(this.unconditionalClasses);
 		newUnconditionalClasses.removeAll(previousReport.unconditionalClasses);
@@ -294,7 +294,7 @@ public final class ConditionEvaluationReport {
 		}
 
 	}
-
+	//想干啥？
 	private static class AncestorsMatchedCondition implements Condition {
 
 		@Override

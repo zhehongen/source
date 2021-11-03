@@ -83,7 +83,7 @@ public abstract class BeanFactoryUtils {
 		if (!name.startsWith(BeanFactory.FACTORY_BEAN_PREFIX)) {
 			return name;
 		}
-		return transformedBeanNameCache.computeIfAbsent(name, beanName -> {
+		return transformedBeanNameCache.computeIfAbsent(name, beanName -> {//说明：不断脱皮并存储起来
 			do {
 				beanName = beanName.substring(BeanFactory.FACTORY_BEAN_PREFIX.length());
 			}

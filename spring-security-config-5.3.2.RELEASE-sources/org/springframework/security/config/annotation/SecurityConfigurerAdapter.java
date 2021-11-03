@@ -20,7 +20,7 @@ import java.util.List;
 
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
-
+//它还提供了一种使用SecurityConfigurer的机制，并在完成后获得对正在配置的SecurityBuilder访问权限。
 /**
  * A base class for {@link SecurityConfigurer} that allows subclasses to only implement
  * the methods they are interested in. It also provides a mechanism for using the
@@ -98,7 +98,7 @@ public abstract class SecurityConfigurerAdapter<O, B extends SecurityBuilder<O>>
 	 *
 	 * @param builder the {@link SecurityBuilder} to set
 	 */
-	public void setBuilder(B builder) {
+	public void setBuilder(B builder) {//居然可以设置，看不懂
 		this.securityBuilder = builder;
 	}
 
@@ -117,7 +117,7 @@ public abstract class SecurityConfigurerAdapter<O, B extends SecurityBuilder<O>>
 			for (ObjectPostProcessor opp : postProcessors) {
 				Class<?> oppClass = opp.getClass();
 				Class<?> oppType = GenericTypeResolver.resolveTypeArgument(oppClass,
-						ObjectPostProcessor.class);
+						ObjectPostProcessor.class);//大概明白。泛型呗
 				if (oppType == null || oppType.isAssignableFrom(object.getClass())) {
 					object = opp.postProcess(object);
 				}

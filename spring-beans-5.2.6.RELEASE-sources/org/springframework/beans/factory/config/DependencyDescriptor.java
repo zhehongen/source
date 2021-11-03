@@ -51,34 +51,34 @@ import org.springframework.util.ObjectUtils;
  */
 @SuppressWarnings("serial")
 public class DependencyDescriptor extends InjectionPoint implements Serializable {
-
+	//依赖所在的声明类
 	private final Class<?> declaringClass;
-
+	//如果依赖是成员方法的某个参数，则这里记录该成员方法的名称
 	@Nullable
 	private String methodName;
-
+	//如果包装的是成员方法的某个参数，则这里记录该参数的类型。。。。数组，请注意
 	@Nullable
 	private Class<?>[] parameterTypes;
-
-	private int parameterIndex;
-
+	//如果包装的是成员方法的某个参数，则这里记录该参数在该函数参数列表中的索引
+	private int parameterIndex;//依赖是方法参数。参数所在的方法，参数类型，参数在方法中的索引。可以理解
+	//成员属性的名称
 	@Nullable
-	private String fieldName;
-
+	private String fieldName;//依赖是属性或者也叫字段
+	//是否必要依赖
 	private final boolean required;
-
+	//是否需要饥饿加载
 	private final boolean eager;
-
+	//嵌套级别
 	private int nestingLevel = 1;
-
+	//依赖的包含者类，通常和声明类是同一个
 	@Nullable
 	private Class<?> containingClass;
 
 	@Nullable
-	private transient volatile ResolvableType resolvableType;
+	private transient volatile ResolvableType resolvableType;//干啥？
 
 	@Nullable
-	private transient volatile TypeDescriptor typeDescriptor;
+	private transient volatile TypeDescriptor typeDescriptor;//干啥？
 
 
 	/**
@@ -88,7 +88,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	 * @param required whether the dependency is required
 	 */
 	public DependencyDescriptor(MethodParameter methodParameter, boolean required) {
-		this(methodParameter, required, true);
+		this(methodParameter, required, true);//参数
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	 */
 	public DependencyDescriptor(MethodParameter methodParameter, boolean required, boolean eager) {
 		super(methodParameter);
-
+//说明：可以理解
 		this.declaringClass = methodParameter.getDeclaringClass();
 		if (methodParameter.getMethod() != null) {
 			this.methodName = methodParameter.getMethod().getName();
@@ -119,7 +119,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	 * @param required whether the dependency is required
 	 */
 	public DependencyDescriptor(Field field, boolean required) {
-		this(field, required, true);
+		this(field, required, true);//字段
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	 */
 	public DependencyDescriptor(Field field, boolean required, boolean eager) {
 		super(field);
-
+//说明：可以理解
 		this.declaringClass = field.getDeclaringClass();
 		this.fieldName = field.getName();
 		this.required = required;
@@ -294,7 +294,7 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	 * it may be a subclass thereof, potentially substituting type variables.
 	 * @since 4.0
 	 */
-	public void setContainingClass(Class<?> containingClass) {
+	public void setContainingClass(Class<?> containingClass) {//完全看不懂
 		this.containingClass = containingClass;
 		this.resolvableType = null;
 		if (this.methodParameter != null) {
@@ -385,11 +385,11 @@ public class DependencyDescriptor extends InjectionPoint implements Serializable
 	public Class<?> getDependencyType() {
 		if (this.field != null) {
 			if (this.nestingLevel > 1) {
-				Type type = this.field.getGenericType();
+				Type type = this.field.getGenericType();//说明：哪一层？
 				for (int i = 2; i <= this.nestingLevel; i++) {
 					if (type instanceof ParameterizedType) {
 						Type[] args = ((ParameterizedType) type).getActualTypeArguments();
-						type = args[args.length - 1];
+						type = args[args.length - 1];//说明：真他奶奶神奇
 					}
 				}
 				if (type instanceof Class) {

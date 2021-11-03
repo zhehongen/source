@@ -59,7 +59,7 @@ public interface HttpSecurityBuilder<H extends HttpSecurityBuilder<H>> extends
 	 * @param clazz the Class of the {@link SecurityConfigurer} to attempt to get.
 	 */
 	<C extends SecurityConfigurer<DefaultSecurityFilterChain, H>> C getConfigurer(
-			Class<C> clazz);
+			Class<C> clazz);//只允许一种类型？
 
 	/**
 	 * Removes the {@link SecurityConfigurer} by its class name or <code>null</code> if

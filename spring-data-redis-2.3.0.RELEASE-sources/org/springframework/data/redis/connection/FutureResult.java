@@ -34,7 +34,7 @@ public abstract class FutureResult<T> {
 	private T resultHolder;
 	private final Supplier<?> defaultConversionResult;
 
-	private boolean status = false;
+	private boolean status = false;//说明：?
 
 	@SuppressWarnings("rawtypes") //
 	protected Converter converter;

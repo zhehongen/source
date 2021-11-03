@@ -28,7 +28,7 @@ import org.springframework.security.config.annotation.SecurityConfigurer;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.util.Assert;
-
+//为啥是从应用上下文中获取？因为所有webSecurityConfigurer都添加了@configure注解，肯定都在容器中
 /**
  * A class used to get all the {@link WebSecurityConfigurer} instances from the current
  * {@link ApplicationContext} but ignoring the parent.

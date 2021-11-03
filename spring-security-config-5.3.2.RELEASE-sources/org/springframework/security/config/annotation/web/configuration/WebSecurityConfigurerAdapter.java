@@ -480,7 +480,7 @@ public abstract class WebSecurityConfigurerAdapter implements
 			return delegate.loadUserByUsername(username);
 		}
 	}
-
+//延迟使用来自AuthenticationManagerBuilder的AuthenticationManager构建以确保它已完全配置。
 	/**
 	 * Delays the use of the {@link AuthenticationManager} build from the
 	 * {@link AuthenticationManagerBuilder} to ensure that it has been fully configured.
@@ -530,7 +530,7 @@ public abstract class WebSecurityConfigurerAdapter implements
 							AuthenticationManager.class);
 			return new HashSet<>(Arrays.asList(beanNamesForType));
 		}
-
+//如何验证循环依赖
 		private static void validateBeanCycle(Object auth, Set<String> beanNames) {
 			if (auth != null && !beanNames.isEmpty()) {
 				if (auth instanceof Advised) {

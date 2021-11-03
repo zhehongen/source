@@ -43,16 +43,16 @@ final class AutowireBeanFactoryObjectPostProcessor
 	private final AutowireCapableBeanFactory autowireBeanFactory;
 	private final List<DisposableBean> disposableBeans = new ArrayList<>();
 	private final List<SmartInitializingSingleton> smartSingletons = new ArrayList<>();
-
+	// 使用指定的 autowireBeanFactory 构造对象,autowireBeanFactory 通常是 Spring bean 容器
 	AutowireBeanFactoryObjectPostProcessor(
 			AutowireCapableBeanFactory autowireBeanFactory) {
 		Assert.notNull(autowireBeanFactory, "autowireBeanFactory cannot be null");
 		this.autowireBeanFactory = autowireBeanFactory;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 *
+	//对某个刚刚创建的对象 object 执行这里所谓的 post-process 流程 :1. 使用指定的 autowireBeanFactory 对该对象 object 执行初始化过程;
+	/*2. 使用指定的 autowireBeanFactory 对该对象 object 执行依赖注入过程;
+	 * (non-Javadoc)3. 如果该对象 object 是一个 DisposableBean , 则将它记录下来，在当前对象的destroy()被调用时，它们的 destroy() 方法也都会被调用;
+	 *4. 如果该对象 object 是一个 SmartInitializingSingleton , 则将它记录下来，在当前对象的 afterSingletonsInstantiated () 被调用时，它们的 afterSingletonsInstantiated() 方法也都会被调用;
 	 * @see
 	 * org.springframework.security.config.annotation.web.Initializer#initialize(java.
 	 * lang.Object)
@@ -63,25 +63,25 @@ final class AutowireBeanFactoryObjectPostProcessor
 			return null;
 		}
 		T result = null;
-		try {
+		try {// 使用容器autowireBeanFactory标准初始化方法initializeBean()初始化对象 object
 			result = (T) this.autowireBeanFactory.initializeBean(object,
-					object.toString());
+					object.toString());//本质就是调用对象实现的InitializingBean.afterPropertiesSet的方法
 		}
 		catch (RuntimeException e) {
 			Class<?> type = object.getClass();
 			throw new RuntimeException(
 					"Could not postProcess " + object + " of type " + type, e);
-		}
-		this.autowireBeanFactory.autowireBean(object);
-		if (result instanceof DisposableBean) {
+		}// 使用容器autowireBeanFactory标准依赖注入方法autowireBean()处理 object对象的依赖注入
+		this.autowireBeanFactory.autowireBean(object);//真的是依赖注入吗。确实是的。可以注入一些东西
+		if (result instanceof DisposableBean) {// 记录一个 DisposableBean 对象
 			this.disposableBeans.add((DisposableBean) result);
 		}
-		if (result instanceof SmartInitializingSingleton) {
+		if (result instanceof SmartInitializingSingleton) {// 记录一个 SmartInitializingSingleton 对象
 			this.smartSingletons.add((SmartInitializingSingleton) result);
 		}
 		return result;
 	}
-
+	// SmartInitializingSingleton 接口定义的生命周期方法，在被调用时也回调用被记录的实现了SmartInitializingSingleton 接口的那些对象的方法 afterSingletonsInstantiated()
 	/* (non-Javadoc)
 	 * @see org.springframework.beans.factory.SmartInitializingSingleton#afterSingletonsInstantiated()
 	 */
