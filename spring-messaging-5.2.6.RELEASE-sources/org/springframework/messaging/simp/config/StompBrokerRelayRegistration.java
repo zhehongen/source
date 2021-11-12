@@ -22,7 +22,7 @@ import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.simp.stomp.StompBrokerRelayMessageHandler;
 import org.springframework.messaging.tcp.TcpOperations;
 import org.springframework.util.Assert;
-
+//看过了
 /**
  * Registration class for configuring a {@link StompBrokerRelayMessageHandler}.
  *

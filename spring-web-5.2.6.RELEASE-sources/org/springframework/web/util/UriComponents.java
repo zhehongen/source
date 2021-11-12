@@ -307,7 +307,7 @@ public abstract class UriComponents implements Serializable {
 	 * @see HierarchicalUriComponents#expand
 	 */
 	public interface UriTemplateVariables {
-
+//看不懂
 		/**
 		 * Constant for a value that indicates a URI variable name should be
 		 * ignored and left as is. This is useful for partial expanding of some

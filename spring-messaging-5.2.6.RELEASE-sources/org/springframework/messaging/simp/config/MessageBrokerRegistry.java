@@ -208,7 +208,7 @@ public class MessageBrokerRegistry {
 	protected PathMatcher getPathMatcher() {
 		return this.pathMatcher;
 	}
-
+//配置缓存限制以向代理申请注册。这目前仅适用于订阅注册表中的目标缓存。 默认缓存限制为 1024
 	/**
 	 * Configure the cache limit to apply for registrations with the broker.
 	 * <p>This is currently only applied for the destination cache in the
@@ -220,7 +220,7 @@ public class MessageBrokerRegistry {
 		this.cacheLimit = cacheLimit;
 		return this;
 	}
-
+//客户端是否必须按照发布的顺序接收消息。如何保证顺序？
 	/**
 	 * Whether the client must receive messages in the order of publication.
 	 * <p>By default messages sent to the {@code "clientOutboundChannel"} may

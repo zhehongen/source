@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
-
+//与其他一些语言不同，Java 对 JSON 没有原生理解。 为了让 JSON 能够在 Vert.x 代码中轻松使用，我们使用这个类来封装 JSON 对象的概念。 该实现遵循RFC-7493 以支持时间数据类型以及二进制数据
 /**
  * A representation of a <a href="http://json.org/">JSON</a> object in Java.
  * <p>

@@ -156,7 +156,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 		}
 		return this.clientInboundChannelRegistration;
 	}
-
+	//子类的钩子，用于自定义来自 WebSocket 客户端的入站消息的消息通道。
 	/**
 	 * A hook for subclasses to customize the message channel for inbound messages
 	 * from WebSocket clients.
@@ -192,7 +192,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 		}
 		return this.clientOutboundChannelRegistration;
 	}
-
+	//子类的挂钩，用于自定义从应用程序或消息代理到 WebSocket 客户端的消息的消息通道
 	/**
 	 * A hook for subclasses to customize the message channel for messages from
 	 * the application or message broker to WebSocket clients.
@@ -228,7 +228,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 		executor.setThreadNamePrefix("brokerChannel-");
 		return executor;
 	}
-
+//MessageBrokerRegistry的访问器，通过configureMessageBroker(MessageBrokerRegistry)确保其一次性创建和初始化
 	/**
 	 * An accessor for the {@link MessageBrokerRegistry} that ensures its one-time creation
 	 * and initialization through {@link #configureMessageBroker(MessageBrokerRegistry)}.
@@ -236,19 +236,19 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 	protected final MessageBrokerRegistry getBrokerRegistry() {
 		if (this.brokerRegistry == null) {
 			MessageBrokerRegistry registry = new MessageBrokerRegistry(clientInboundChannel(), clientOutboundChannel());
-			configureMessageBroker(registry);
+			configureMessageBroker(registry);//
 			this.brokerRegistry = registry;
 		}
 		return this.brokerRegistry;
 	}
-
+//子类通过提供的MessageBrokerRegistry实例自定义消息代理配置的钩子。
 	/**
 	 * A hook for subclasses to customize message broker configuration through the
 	 * provided {@link MessageBrokerRegistry} instance.
 	 */
 	protected void configureMessageBroker(MessageBrokerRegistry registry) {
 	}
-
+//提供对已配置 PatchMatcher 的访问，以便从其他配置类进行访问。
 	/**
 	 * Provide access to the configured PatchMatcher for access from other
 	 * configuration classes.
@@ -266,7 +266,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 		handler.setValidator(simpValidator());
 
 		List<HandlerMethodArgumentResolver> argumentResolvers = new ArrayList<>();
-		addArgumentResolvers(argumentResolvers);
+		addArgumentResolvers(argumentResolvers);//
 		handler.setCustomArgumentResolvers(argumentResolvers);
 
 		List<HandlerMethodReturnValueHandler> returnValueHandlers = new ArrayList<>();
@@ -279,7 +279,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 		}
 		return handler;
 	}
-
+//用于插入SimpAnnotationMethodMessageHandler的自定义子类的受保护方法。
 	/**
 	 * Protected method for plugging in a custom subclass of
 	 * {@link org.springframework.messaging.simp.annotation.support.SimpAnnotationMethodMessageHandler
@@ -290,7 +290,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 		return new SimpAnnotationMethodMessageHandler(clientInboundChannel(),
 				clientOutboundChannel(), brokerMessagingTemplate());
 	}
-
+	//
 	protected void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 	}
 
@@ -382,7 +382,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 	}
 
 	@Bean
-	public CompositeMessageConverter brokerMessageConverter() {
+	public CompositeMessageConverter brokerMessageConverter() {//看过了
 		List<MessageConverter> converters = new ArrayList<>();
 		boolean registerDefaults = configureMessageConverters(converters);
 		if (registerDefaults) {
@@ -424,7 +424,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 	}
 
 	@Bean
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")//抑制
 	public SimpUserRegistry userRegistry() {
 		SimpUserRegistry registry = createLocalUserRegistry();
 		if (registry == null) {
@@ -443,7 +443,7 @@ public abstract class AbstractMessageBrokerConfiguration implements ApplicationC
 	protected SimpUserRegistry createLocalUserRegistry() {
 		return null;
 	}
-
+	//创建为本地用户提供访问权限的用户注册表。
 	/**
 	 * Create the user registry that provides access to local users.
 	 * @param order the order to use as a {@link SmartApplicationListener}.

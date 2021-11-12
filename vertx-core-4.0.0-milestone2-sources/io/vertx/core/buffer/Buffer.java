@@ -48,7 +48,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
   static Buffer buffer() {
     return factory.buffer();
   }//又他妈工厂模式
-
+//给定初始大小提示创建一个新缓冲区。如果您知道缓冲区需要特定大小，则提供提示可以防止在写入缓冲区和调整缓冲区大小时进行不必要的重新分配。
   /**
    * Create a new buffer given the initial size hint.
    * <p>
@@ -61,7 +61,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
   static Buffer buffer(int initialSizeHint) {
     return factory.buffer(initialSizeHint);
   }
-
+//从字符串创建一个新缓冲区。 该字符串将被 UTF-8 编码到缓冲区中。
   /**
    * Create a new buffer from a string. The string will be UTF-8 encoded into the buffer.
    *
@@ -71,7 +71,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
   static Buffer buffer(String string) {
     return factory.buffer(string);
   }
-
+//从字符串并使用指定的编码创建一个新缓冲区。 字符串将使用指定的编码编码到缓冲区中。
   /**
    * Create a new buffer from a string and using the specified encoding.
    * The string will be encoded into the buffer using the specified encoding.
@@ -93,7 +93,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
   static Buffer buffer(byte[] bytes) {
     return factory.buffer(bytes);
   }
-
+//从 Netty ByteBuf创建一个新缓冲区。 请注意，返回的缓冲区由给定的 Netty ByteBuf 支持，因此返回的缓冲区中的更改反映在给定的 Netty ByteBuf 中，反之亦然
   /**
    * <p>
    * Create a new buffer from a Netty {@code ByteBuf}.
@@ -141,7 +141,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    * Returns a Json array representation of the Buffer.
    */
   JsonArray toJsonArray();
-
+//一个 JSON 元素，可以是JsonArray 、 JsonObject 、 String等，如果缓冲区包含数组、对象、字符串等
   /**
    * Returns a Json representation of the Buffer.
    *
@@ -150,28 +150,28 @@ public interface Buffer extends ClusterSerializable, Shareable {
   default Object toJson() {
     return Json.decodeValue(this);
   }
-
+//返回缓冲区中位置pos处的byte 。
   /**
    * Returns the {@code byte} at position {@code pos} in the Buffer.
    *
    * @throws IndexOutOfBoundsException if the specified {@code pos} is less than {@code 0} or {@code pos + 1} is greater than the length of the Buffer.
    */
   byte getByte(int pos);
-
+//返回缓冲区中位置pos处的无符号byte ，作为一个short 。
   /**
    * Returns the unsigned {@code byte} at position {@code pos} in the Buffer, as a {@code short}.
    *
    * @throws IndexOutOfBoundsException if the specified {@code pos} is less than {@code 0} or {@code pos + 1} is greater than the length of the Buffer.
    */
-  short getUnsignedByte(int pos);
-
+  short getUnsignedByte(int pos);//如何实现？
+//返回缓冲区中位置pos处的int 。
   /**
    * Returns the {@code int} at position {@code pos} in the Buffer.
    *
    * @throws IndexOutOfBoundsException if the specified {@code pos} is less than {@code 0} or {@code pos + 4} is greater than the length of the Buffer.
    */
   int getInt(int pos);
-
+//使用 Little Endian Byte Order 获取此缓冲区中指定绝对index处的 32 位整数。
   /**
    * Gets a 32-bit integer at the specified absolute {@code index} in this buffer with Little Endian Byte Order.
    *
@@ -248,7 +248,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    * @throws IndexOutOfBoundsException if the specified {@code index} is less than {@code 0} or {@code index + 2} is greater than the length of the Buffer.
    */
   int getUnsignedShortLE(int pos);
-
+//获取此缓冲区中指定绝对index处的 24 位中整数。
   /**
    * Gets a 24-bit medium integer at the specified absolute {@code index} in this buffer.
    *
@@ -289,7 +289,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    */
   @GenIgnore(GenIgnore.PERMITTED_TYPE)
   byte[] getBytes(int start, int end);
-
+//将 Buffer 的内容传输到byte[] 。
   /**
    * Transfers the content of the Buffer into a {@code byte[]}.
    *
@@ -309,7 +309,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
   @GenIgnore(GenIgnore.PERMITTED_TYPE)
   @Fluent
   Buffer getBytes(byte[] dst, int dstIndex);
-
+//将从位置start到位置end - 1结束的 Buffer 内容传输到byte[]
   /**
    * Transfers the content of the Buffer starting at position {@code start} and ending at position {@code end - 1}
    * into a {@code byte[]}.
@@ -349,7 +349,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    * and ending at position {@code end - 1} interpreted as a String in UTF-8 encoding
    */
   String getString(int start, int end);
-
+  //将指定的Buffer附加到此 Buffer 的末尾。 缓冲区将根据需要扩展以容纳写入的任何字节。
   /**
    * Appends the specified {@code Buffer} to the end of this Buffer. The buffer will expand as necessary to accommodate
    * any bytes written.<p>
@@ -389,7 +389,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    */
   @Fluent
   Buffer appendByte(byte b);
-
+//将指定的无符号byte附加到缓冲区的末尾。 缓冲区将根据需要扩展以容纳写入的任何字节。
   /**
    * Appends the specified unsigned {@code byte} to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.<p>
    * Returns a reference to {@code this} so multiple operations can be appended together.
@@ -409,7 +409,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    * Returns a reference to {@code this} so multiple operations can be appended together.
    */
   @Fluent
-  Buffer appendIntLE(int i);
+  Buffer appendIntLE(int i);//小字节放在小地址？
 
   /**
    * Appends the specified unsigned {@code int} to the end of the Buffer. The buffer will expand as necessary to accommodate any bytes written.<p>
@@ -523,7 +523,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    * The buffer will expand as necessary to accommodate any value written.
    */
   @Fluent
-  Buffer setUnsignedByte(int pos, short b);
+  Buffer setUnsignedByte(int pos, short b);//什么意思？
 
   /**
    * Sets the {@code int} at position {@code pos} in the Buffer to the value {@code i}.<p>
@@ -622,7 +622,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    */
   @Fluent
   Buffer setUnsignedShortLE(int pos, int s);
-
+//将 Buffer 中位置pos的字节设置为Buffer b表示的字节。
   /**
    * Sets the bytes at position {@code pos} in the Buffer to the bytes represented by the {@code Buffer b}.<p>
    * The buffer will expand as necessary to accommodate any value written.
@@ -691,7 +691,7 @@ public interface Buffer extends ClusterSerializable, Shareable {
    * of the returned buffer or this buffer affects each other's content
    * while they maintain separate indexes and marks.
    */
-  Buffer slice();
+  Buffer slice();//什么切片？
 
   /**
    * Returns a slice of this buffer. Modifying the content

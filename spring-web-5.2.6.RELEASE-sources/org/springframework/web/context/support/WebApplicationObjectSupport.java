@@ -27,7 +27,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.WebUtils;
-
+//在WebApplicationContext运行的应用程序对象的便捷超类。 提供getWebApplicationContext() 、 getServletContext()和getTempDir()访问器。
 /**
  * Convenient superclass for application objects running in a {@link WebApplicationContext}.
  * Provides {@code getWebApplicationContext()}, {@code getServletContext()}, and
@@ -42,7 +42,7 @@ import org.springframework.web.util.WebUtils;
  * @see SpringBeanAutowiringSupport
  */
 public abstract class WebApplicationObjectSupport extends ApplicationObjectSupport implements ServletContextAware {
-
+//注意：对于实际需要的回调，通常建议使用单独的回调接口。 这个广泛的基类主要用于框架内，在通常需要ServletContext访问等的情况下。
 	@Nullable
 	private ServletContext servletContext;
 

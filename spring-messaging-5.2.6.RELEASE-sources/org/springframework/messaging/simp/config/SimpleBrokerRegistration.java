@@ -37,7 +37,7 @@ public class SimpleBrokerRegistration extends AbstractBrokerRegistration {
 	private long[] heartbeat;
 
 	@Nullable
-	private String selectorHeaderName = "selector";
+	private String selectorHeaderName = "selector";//??什么？
 
 
 	public SimpleBrokerRegistration(SubscribableChannel inChannel, MessageChannel outChannel, String[] prefixes) {
@@ -89,7 +89,7 @@ public class SimpleBrokerRegistration extends AbstractBrokerRegistration {
 		this.selectorHeaderName = selectorHeaderName;
 	}
 
-
+//神奇，为啥是protected
 	@Override
 	protected SimpleBrokerMessageHandler getMessageHandler(SubscribableChannel brokerChannel) {
 		SimpleBrokerMessageHandler handler = new SimpleBrokerMessageHandler(getClientInboundChannel(),
