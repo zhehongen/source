@@ -41,7 +41,7 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
  */
 @Configuration(proxyBeanMethods = false)
 public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
-
+//说明：老套路
 	private final WebMvcConfigurerComposite configurers = new WebMvcConfigurerComposite();
 
 

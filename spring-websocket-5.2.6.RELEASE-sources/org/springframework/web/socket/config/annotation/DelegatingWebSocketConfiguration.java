@@ -22,7 +22,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.CollectionUtils;
-
+//WebSocketConfigurationSupport一种变体，它检测 Spring 配置中WebSocketConfigurer实现并调用它们以配置 WebSocket 请求处理。
 /**
  * A variation of {@link WebSocketConfigurationSupport} that detects implementations of
  * {@link WebSocketConfigurer} in Spring configuration and invokes them in order to
@@ -33,7 +33,7 @@ import org.springframework.util.CollectionUtils;
  */
 @Configuration
 public class DelegatingWebSocketConfiguration extends WebSocketConfigurationSupport {
-
+//说明：老套路
 	private final List<WebSocketConfigurer> configurers = new ArrayList<>();
 
 

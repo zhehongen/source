@@ -28,7 +28,7 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 import org.springframework.web.socket.server.support.WebSocketHttpRequestHandler;
 import org.springframework.web.socket.sockjs.SockJsService;
 import org.springframework.web.socket.sockjs.support.SockJsHttpRequestHandler;
-
+//用于配置WebSocketHandler请求处理的辅助类，包括 SockJS 回退选项。
 /**
  * A helper class for configuring {@link WebSocketHandler} request handling
  * including SockJS fallback options.
@@ -52,7 +52,7 @@ public class ServletWebSocketHandlerRegistration
 		SockJsHttpRequestHandler httpHandler = new SockJsHttpRequestHandler(sockJsService, handler);
 		mappings.add(httpHandler, pathPattern);
 	}
-
+//看过了
 	@Override
 	protected void addWebSocketHandlerMapping(MultiValueMap<HttpRequestHandler, String> mappings,
 			WebSocketHandler webSocketHandler, HandshakeHandler handshakeHandler,
