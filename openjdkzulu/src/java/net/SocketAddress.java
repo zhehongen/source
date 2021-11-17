@@ -23,8 +23,8 @@
  * questions.
  */
 package java.net;
-
-
+//此类表示没有协议附件的套接字地址。 作为一个抽象类，它意味着用特定的、依赖于协议的实现进行子类化。
+//它提供了一个由套接字用于绑定、连接或作为返回值的不可变对象。
 /**
  *
  * This class represents a Socket Address with no protocol attachment.

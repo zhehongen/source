@@ -36,7 +36,7 @@ import java.nio.channels.ClosedChannelException;
 import java.nio.channels.NotYetConnectedException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
-
+//骨架Channel实现。
 /**
  * A skeletal {@link Channel} implementation.
  */

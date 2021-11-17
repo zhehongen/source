@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: io.netty.netty-handler.source
+Bundle-Name: Netty/Handler
+Bundle-Version: 4.1.51.Final
+Bundle-ManifestVersion: 2
+Bundle-Vendor: The Netty Project
+Eclipse-SourceBundle: io.netty.netty-handler;version="4.1.51.Final";ro
+ ots:="."
+Created-By: Maven Source Plugin 3.2.0
+
